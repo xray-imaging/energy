@@ -27,6 +27,23 @@ To set the beamline energy to 20 keV::
 
     $ dmm mono --energy 20 
 
+
+If the selected elergy is not included in the pre-calibrated energy list, **dmm** will interpolate all motor positions using the values
+of the closest calibrated energies.
+
+
+
+Save energy
+-----------
+
+To save the beamline motor positions and associated them to an energy to be used at a later time::
+
+    $ dmm save --energy 28.32
+
+The above will add 28.32 to the pre-calibrated energy list. To restore it::
+
+    $ dmm mono --energy 28.32 
+
 to list of all available options::
 
     $ energy -h
