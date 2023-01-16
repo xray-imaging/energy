@@ -28,7 +28,7 @@ To set the beamline energy to 20 keV::
     $ dmm mono --energy 20 
 
 
-If the selected elergy is not included in the pre-calibrated energy list, **dmm** will interpolate all motor positions using the values
+If the selected energy is not included in the pre-calibrated energy list, **dmm** will interpolate all motor positions using the values
 of the closest calibrated energies.
 
 
@@ -36,7 +36,7 @@ of the closest calibrated energies.
 Save energy
 -----------
 
-To save the beamline motor positions and associated them to an energy to be used at a later time::
+To save the beamline motor positions and associate them to an energy to be used at a later time::
 
     $ dmm save --energy 28.32
 
@@ -63,21 +63,23 @@ to list of all available options::
         save         Associate the current beamline positions to an energy value
         status       Show status
 
-Configuration File
-------------------
-
-The dmm status is stored in **~logs/dmm.conf**. You can create a template with::
-
-    $ dmm init
-
-**~logs/dmm.conf** is constantly updated to keep track of the last stored parameters, as initalized by **init** or modified by setting a new option value. For example to set the beamline to the last energy configuration ::
-
-    $ dmm mono
-
 to list of all **dmm save** options::
 
     $ dmm save -h
-    
+
+
+Configuration File
+------------------
+
+The dmm status is stored in **~/logs/dmm.conf**. You can create a template with::
+
+    $ dmm init
+
+**~/logs/dmm.conf** is constantly updated to keep track of the last stored parameters, as initalized by **init** or modified by setting a new option value. For example to set the beamline to the last energy configuration ::
+
+    $ dmm mono
+
+
 If the beamline has been manually optimized after setting a preset energy configuration, you can save the current beamline status with::  
 
     $ dmm save --energy 27
