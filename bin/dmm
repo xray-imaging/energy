@@ -18,11 +18,11 @@ from dmm2bm import config
 from dmm2bm import __version__
 from dmm2bm import log
 from dmm2bm import util
+from dmm2bm import dataio
+
 
 from importlib.resources import files
 
-data_path = pathlib.Path(__file__).parent
-# data_path = files('data')
 
 def init(args):
 
@@ -39,13 +39,7 @@ def run_mono(args):
 
     energy_select = np.around(args.energy, decimals=2) 
 
-    print(data_path.joinpath('dmm.json'))
-    print(os.path.join(sys.prefix))
-    print(files('dmm2bm.data').joinpath('dmm.json').read_text())
-    return
-    with open(data_path.joinpath('dmm.json')) as json_file:
-        energy_lookup = json.load(json_file)
-    # print(energy_lookup['Mono'])
+    energy_lookup = dataio.load_preset()
 
     energy_list = []
 
@@ -64,9 +58,7 @@ def run_mono(args):
         energy_calibrated = util.find_nearest(energies_flt, energy_select)
         
         log.info('   ***   Selected energy %s; Nearest calibrated: %s ' % (energy_select, energy_calibrated))
-        print(energies_str)
-        print(str(energy_calibrated))
-        return
+
         energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
 
         if energy_select >= float(energy_calibrated):
@@ -76,9 +68,21 @@ def run_mono(args):
             energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=2)
             energy_high = np.around(float(energies_str[energy_closer_index]), decimals=2)
            
+        n_steps = int(100*(energy_high-energy_low))
         log.info("   ***   Calibrated range [%4.2f, %4.2f]" % (energy_low, energy_high))
-        n = int(100*(energy_high-energy_low))
-        interp_energies = np.linspace(energy_low, energy_high, n).round(decimals=2)
+        log.info("   ***   Interpolation steps: %d" % n_steps)
+
+        interp_energies = np.linspace(energy_low, energy_high, n_steps).round(decimals=2)
+
+        pos_energy_start = {}
+        pos_energy_end = {}
+        pos_energy_start["{:.2f}".format(energy_low)] = energy_lookup['Mono']["{:.2f}".format(energy_low)]
+        pos_energy_end["{:.2f}".format(energy_high)] = energy_lookup['Mono']["{:.2f}".format(energy_high)]
+        pos_dmm_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
+        interp_dmm_positions = util.interpolate(energy_select, pos_dmm_start_end_energies, n_steps)
+        for key in  interp_dmm_positions:
+            if str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))) == str('{0:.2f}'.format(np.around(float(key), decimals=2))):
+                print(str('{0:.2f}'.format(np.around(float(key), decimals=2))), interp_dmm_positions[key])
 
     else:
         log.error('Error: energy selected %4.2f is outside the calibrated range [%4.2f, %4.2f]' %(energy_select, energy_min, energy_max))
