@@ -21,8 +21,8 @@ from dmm2bm import util
 
 from importlib.resources import files
 
-# data_path = pathlib.Path(__file__).parent
-data_path = files('data')
+data_path = pathlib.Path(__file__).parent
+# data_path = files('data')
 
 def init(args):
 
@@ -39,6 +39,10 @@ def run_mono(args):
 
     energy_select = np.around(args.energy, decimals=2) 
 
+    print(data_path.joinpath('dmm.json'))
+    print(os.path.join(sys.prefix))
+    print(files('dmm2bm.data').joinpath('dmm.json').read_text())
+    return
     with open(data_path.joinpath('dmm.json')) as json_file:
         energy_lookup = json.load(json_file)
     # print(energy_lookup['Mono'])
