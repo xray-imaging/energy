@@ -213,21 +213,21 @@ def save_params_to_config(args):
     
 def save_current_positions_to_config(args):
 
-    energy_change_PVs = epics.init_energy_change_PVs(args)
+    epics_pvs = epics.init_epics_pvs(args)
     log.warning('save current beamline positions to config')
-    args.mirror_angle               = energy_change_PVs['mirror_angle'].get()            
-    args.mirror_vertical_position   = energy_change_PVs['mirror_vertical_position'].get()
-    args.dmm_usy_ob                 = energy_change_PVs['dmm_usy_ob'].get()              
-    args.dmm_usy_ib                 = energy_change_PVs['dmm_usy_ib'].get()              
-    args.dmm_dsy                    = energy_change_PVs['dmm_dsy'].get()                 
-    args.dmm_us_arm                 = energy_change_PVs['dmm_us_arm'].get()              
-    args.dmm_ds_arm                 = energy_change_PVs['dmm_ds_arm'].get()              
-    args.dmm_m2y                    = energy_change_PVs['dmm_m2y'].get()                 
-    args.dmm_usx                    = energy_change_PVs['dmm_usx'].get()                 
-    args.dmm_dsx                    = energy_change_PVs['dmm_dsx'].get()                 
-    args.filter                     = energy_change_PVs['filter'].get()  
-    args.table_y                    = energy_change_PVs['table_y'].get()  
-    args.flag                       = energy_change_PVs['flag'].get()  
+    args.mirror_angle               = epics_pvs['mirror_angle'].get()            
+    args.mirror_vertical_position   = epics_pvs['mirror_vertical_position'].get()
+    args.dmm_usy_ob                 = epics_pvs['dmm_usy_ob'].get()              
+    args.dmm_usy_ib                 = epics_pvs['dmm_usy_ib'].get()              
+    args.dmm_dsy                    = epics_pvs['dmm_dsy'].get()                 
+    args.dmm_us_arm                 = epics_pvs['dmm_us_arm'].get()              
+    args.dmm_ds_arm                 = epics_pvs['dmm_ds_arm'].get()              
+    args.dmm_m2y                    = epics_pvs['dmm_m2y'].get()                 
+    args.dmm_usx                    = epics_pvs['dmm_usx'].get()                 
+    args.dmm_dsx                    = epics_pvs['dmm_dsx'].get()                 
+    args.filter                     = epics_pvs['filter'].get()  
+    args.table_y                    = epics_pvs['table_y'].get()  
+    args.flag                       = epics_pvs['flag'].get()  
 
     # Store status in a unique config file for later re-use. 
     # The unique file name is:

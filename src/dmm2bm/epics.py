@@ -11,8 +11,9 @@ ShutterB_Open_Value  = 1
 ShutterB_Close_Value = 0
 
 
-def move(params):
+def move(pos_dmm_energy_select, params):
 
+    log.info('Moving DMM to: %s' % pos_dmm_energy_select)
     if params.force:
         pass
     else:
@@ -23,77 +24,79 @@ def move(params):
 
     log.info('move motors')
 
-    energy_change_PVs = epics.init_energy_change_PVs(params)
+    epics_pvs = init_epics_pvs(params)
     
-    epics.close_shutters(energy_change_PVs, params)
-    epics.move_filter(energy_change_PVs, params)
-    epics.move_mirror(energy_change_PVs, params)
+    close_shutters(epics_pvs, params)
+    move_filter(epics_pvs, params)
+    move_mirror(epics_pvs, params)
 
     if(params.mode=="Mono"):
-        epics.move_dmm_y(energy_change_PVs, params)
-        epics.move_dmm_arms(energy_change_PVs, params)
-        epics.move_dmm_m2y(energy_change_PVs, params)
-        epics.move_dmm_x(energy_change_PVs, params)
+        move_dmm_y(epics_pvs, params)
+        move_dmm_arms(epics_pvs, params)
+        move_dmm_m2y(epics_pvs, params)
+        move_dmm_x(epics_pvs, params)
     elif(params.mode=="Pink" or params.mode=="White"):            
-        epics.move_dmm_x(energy_change_PVs, params)
-        epics.move_dmm_y(energy_change_PVs, params)        
+        move_dmm_x(epics_pvs, params)
+        move_dmm_y(epics_pvs, params)        
 
-    epics.move_table(energy_change_PVs, params)
-    epics.move_flag(energy_change_PVs, params)
+    move_table(epics_pvs, params)
+    move_flag(epics_pvs, params)
 
-    epics.energy_pv(energy_change_PVs, params)
+    energy_pv(epics_pvs, params)
 
     log.info(' ')
     log.info('   *** Change Energy: Done!  *** ')
     return True
     
 
-def init_energy_change_PVs(params):
+def init_epics_pvs(params):
 
-    energy_change_PVs = {}
+    epics_pvs = {}
 
     log.info('     *** testing mode:  set PVs')
-    log.warning('     *** energy PVs: %s' % (params.energyioc_prefix + 'Energy.VAL'))
-    log.warning('     *** energy PVs: %s' % (params.energyioc_prefix + 'EnergyMode.VAL'))
+    log.warning('     *** energy PV: %s' % (params.energyioc_prefix + 'Energy.VAL'))
+    log.warning('     *** energy Mode PV: %s' % (params.energyioc_prefix + 'EnergyMode.VAL'))
     
     # 2-BM EPICS PVs
-    energy_change_PVs['ShutterA_Open']            = PV('2bma:A_shutter:open.VAL')
-    energy_change_PVs['ShutterA_Close']           = PV('2bma:A_shutter:close.VAL')
-    energy_change_PVs['ShutterA_Move_Status']     = PV('PA:02BM:STA_A_FES_OPEN_PL')
-    energy_change_PVs['ShutterB_Open']            = PV('2bma:B_shutter:open.VAL')
-    energy_change_PVs['ShutterB_Close']           = PV('2bma:B_shutter:close.VAL')
-    energy_change_PVs['ShutterB_Move_Status']     = PV('PA:02BM:STA_B_SBS_OPEN_PL')
+    epics_pvs['ShutterA_Open']            = PV('2bma:A_shutter:open.VAL')
+    epics_pvs['ShutterA_Close']           = PV('2bma:A_shutter:close.VAL')
+    epics_pvs['ShutterA_Move_Status']     = PV('PA:02BM:STA_A_FES_OPEN_PL')
+    epics_pvs['ShutterB_Open']            = PV('2bma:B_shutter:open.VAL')
+    epics_pvs['ShutterB_Close']           = PV('2bma:B_shutter:close.VAL')
+    epics_pvs['ShutterB_Move_Status']     = PV('PA:02BM:STA_B_SBS_OPEN_PL')
 
-    energy_change_PVs['filter']                   = PV('2bma:fltr1:select.VAL')
-    energy_change_PVs['mirror_angle']             = PV('2bma:M1angl.VAL')
-    energy_change_PVs['mirror_vertical_position'] = PV('2bma:M1avg.VAL')
+    epics_pvs['filter']                   = PV('2bma:fltr1:select.VAL')
+    epics_pvs['mirror_angle']             = PV('2bma:M1angl.VAL')
+    epics_pvs['mirror_vertical_position'] = PV('2bma:M1avg.VAL')
     
-    energy_change_PVs['dmm_usx']                  = PV('2bma:m25.VAL')
-    energy_change_PVs['dmm_dsx']                  = PV('2bma:m28.VAL')
-    energy_change_PVs['dmm_usy_ob']               = PV('2bma:m26.VAL')
-    energy_change_PVs['dmm_usy_ib']               = PV('2bma:m27.VAL')
-    energy_change_PVs['dmm_dsy']                  = PV('2bma:m29.VAL')
-    energy_change_PVs['dmm_us_arm']               = PV('2bma:m30.VAL')
-    energy_change_PVs['dmm_ds_arm']               = PV('2bma:m31.VAL')
-    energy_change_PVs['dmm_m2y']                  = PV('2bma:m32.VAL')
+    epics_pvs['dmm_usx']                  = PV('2bma:m25.VAL')
+    epics_pvs['dmm_dsx']                  = PV('2bma:m28.VAL')
+    epics_pvs['dmm_usy_ob']               = PV('2bma:m26.VAL')
+    epics_pvs['dmm_usy_ib']               = PV('2bma:m27.VAL')
+    epics_pvs['dmm_dsy']                  = PV('2bma:m29.VAL')
+    epics_pvs['dmm_us_arm']               = PV('2bma:m30.VAL')
+    epics_pvs['dmm_ds_arm']               = PV('2bma:m31.VAL')
+    epics_pvs['dmm_m2y']                  = PV('2bma:m32.VAL')
 
-    energy_change_PVs['table_y']                  = PV('2bmb:table3.Y')            
-    energy_change_PVs['flag']                     = PV('2bma:m44.VAL')
+    epics_pvs['table_y']                  = PV('2bmb:table3.Y')            
+    epics_pvs['flag']                     = PV('2bma:m44.VAL')
 
-    energy_change_PVs['Energy']                   = PV(params.energyioc_prefix + 'Energy.VAL')
-    energy_change_PVs['Energy_Mode']              = PV(params.energyioc_prefix + 'EnergyMode.VAL')
+    epics_pvs['Energy']                   = PV(params.energyioc_prefix + 'Energy.VAL')
+    epics_pvs['Energy_Mode']              = PV(params.energyioc_prefix + 'EnergyMode.VAL')
  
-    return energy_change_PVs
+    return epics_pvs
 
-def energy_pv(energy_change_PVs, params):
+def energy_pv(epics_pvs, params):
 
     if params.testing:
-        log.info('     *** testing mode:  set tomoScan energy and mode PVs')
+        log.info('     *** testing mode:  set %s energy and mode PVs to %s - %s' % (params.energyioc_prefix, params.mode, params.energy))
     else:
-        energy_change_PVs['Energy_Mode'].put(params.mode, wait=True)
-        energy_change_PVs['Energy'].put(params.energy_value, wait=True)
+        log.info('     *** Set %s energy and mode PVs to %s - %s' % (params.energyioc_prefix, params.mode, params.energy))
 
-def move_filter(energy_change_PVs, params):
+        epics_pvs['Energy_Mode'].put(mode, wait=True)
+        epics_pvs['Energy'].put(params.energy, wait=True)
+
+def move_filter(epics_pvs, params):
 
     log.info(' ')
     log.info('     *** moving filters')
@@ -102,9 +105,9 @@ def move_filter(energy_change_PVs, params):
         log.warning('     *** testing mode:  set filter:  %s ' % params.filter)
     else:
         log.info('     *** Set filter:  %s ' % params.filter)
-        energy_change_PVs['filter'].put(params.filter, wait=True)
+        epics_pvs['filter'].put(params.filter, wait=True)
 
-def move_mirror(energy_change_PVs, params):
+def move_mirror(epics_pvs, params):
 
     log.info(' ')
     log.info('     *** moving mirror')
@@ -114,13 +117,13 @@ def move_mirror(energy_change_PVs, params):
         log.warning('     *** testing mode:  set mirror angle %s mrad' % params.mirror_angle)
     else:
         log.info('     *** mirror_vertical_position %s mm' % params.mirror_vertical_position)
-        energy_change_PVs['mirror_vertical_position'].put(params.mirror_vertical_position, wait=True)
+        epics_pvs['mirror_vertical_position'].put(params.mirror_vertical_position, wait=True)
         time.sleep(1) 
         log.info('     *** mirror_angle %s mrad' % params.mirror_angle)
-        energy_change_PVs['mirror_angle'].put(params.mirror_angle, wait=True)
+        epics_pvs['mirror_angle'].put(params.mirror_angle, wait=True)
         time.sleep(1) 
 
-def move_dmm_y(energy_change_PVs, params):
+def move_dmm_y(epics_pvs, params):
 
     log.info(' ')
     log.info('     *** moving dmm y')
@@ -131,14 +134,14 @@ def move_dmm_y(energy_change_PVs, params):
         log.warning('     *** testing mode:  set dmm dsy %s mm' % params.dmm_dsy)        
     else:
         log.info('     *** dmm usy ob %s mm' % params.dmm_usy_ob) 
-        energy_change_PVs['dmm_usy_ob'].put(params.dmm_usy_ob, wait=False)
+        epics_pvs['dmm_usy_ob'].put(params.dmm_usy_ob, wait=False)
         log.info('     *** dmm usy ib %s mm' % params.dmm_usy_ib)    
-        energy_change_PVs['dmm_usy_ib'].put(params.dmm_usy_ib, wait=False)
+        epics_pvs['dmm_usy_ib'].put(params.dmm_usy_ib, wait=False)
         log.info('     *** dmm_dsy %s mm' % params.dmm_dsy)        
-        energy_change_PVs['dmm_dsy'].put(params.dmm_dsy, wait=True)
+        epics_pvs['dmm_dsy'].put(params.dmm_dsy, wait=True)
         time.sleep(3) 
 
-def move_dmm_arms(energy_change_PVs, params):
+def move_dmm_arms(epics_pvs, params):
 
     log.info(' ')
     log.info('     *** moving dmm arms')
@@ -148,12 +151,12 @@ def move_dmm_arms(energy_change_PVs, params):
         log.warning('     *** testing mode:  set DMM dmm_ds_arm %s mm' % params.dmm_ds_arm) 
     else:    
         log.info('     *** moving dmm us arm %s mm' % params.dmm_us_arm) 
-        energy_change_PVs['dmm_us_arm'].put(params.dmm_us_arm, wait=False, timeout=1000.0)
+        epics_pvs['dmm_us_arm'].put(params.dmm_us_arm, wait=False, timeout=1000.0)
         log.info('     *** moving dmm ds arm %s mm' % params.dmm_ds_arm) 
-        energy_change_PVs['dmm_ds_arm'].put(params.dmm_ds_arm, wait=True, timeout=1000.0)
+        epics_pvs['dmm_ds_arm'].put(params.dmm_ds_arm, wait=True, timeout=1000.0)
         time.sleep(3)
 
-def move_dmm_m2y(energy_change_PVs, params):    
+def move_dmm_m2y(epics_pvs, params):    
 
     log.info(' ')
     log.info('     *** moving dmm m2y')
@@ -162,9 +165,9 @@ def move_dmm_m2y(energy_change_PVs, params):
         log.warning('     *** testing mode:  set dmm m2y %s mm' % params.dmm_m2y) 
     else:
         log.info('     *** moving  dmm m2y %s mm' % params.dmm_m2y) 
-        energy_change_PVs['dmm_m2y'].put(params.dmm_m2y, wait=True, timeout=1000.0)
+        epics_pvs['dmm_m2y'].put(params.dmm_m2y, wait=True, timeout=1000.0)
 
-def move_dmm_x(energy_change_PVs, params):
+def move_dmm_x(epics_pvs, params):
 
     log.info(' ')
     log.info('     *** moving dmm x')
@@ -174,12 +177,12 @@ def move_dmm_x(energy_change_PVs, params):
         log.warning('     *** testing mode:  set dmm dsx %s mm' % params.dmm_dsx)
     else:
         log.info('     *** moving dmm usx %s mm' % params.dmm_usx)
-        energy_change_PVs['dmm_usx'].put(params.dmm_usx, wait=False)
+        epics_pvs['dmm_usx'].put(params.dmm_usx, wait=False)
         log.info('     *** moving dmm dsx %s mm' % params.dmm_dsx)
-        energy_change_PVs['dmm_dsx'].put(params.dmm_dsx, wait=True)
+        epics_pvs['dmm_dsx'].put(params.dmm_dsx, wait=True)
         time.sleep(3) 
 
-def move_table(energy_change_PVs, params):
+def move_table(epics_pvs, params):
 
     log.info(' ')
     log.info('     *** moving Table Y')
@@ -192,9 +195,9 @@ def move_table(energy_change_PVs, params):
             return
 
         log.info('     *** moving Table Y in station B  %s mm' % params.table_y) 
-        energy_change_PVs['table_y'].put(params.table_y, wait=True)
+        epics_pvs['table_y'].put(params.table_y, wait=True)
 
-def move_flag(energy_change_PVs, params):
+def move_flag(epics_pvs, params):
 
     log.info(' ')
     log.info('     *** moving Flag')
@@ -207,9 +210,9 @@ def move_flag(energy_change_PVs, params):
             return
 
         log.info('     *** moving Flag %s mm'  % params.flag) 
-        energy_change_PVs['flag'].put(params.flag, wait=True)
+        epics_pvs['flag'].put(params.flag, wait=True)
 
-def close_shutters(energy_change_PVs, params):
+def close_shutters(epics_pvs, params):
 
     log.info(' ')
     log.info('     *** close_shutters')
@@ -217,7 +220,7 @@ def close_shutters(energy_change_PVs, params):
         log.warning('     *** testing mode - A-shutter will be closed during energy change')
     else:
         log.warning('     *** closing A-shutter')
-        energy_change_PVs['ShutterA_Close'].put(1, wait=True)
+        epics_pvs['ShutterA_Close'].put(1, wait=True)
         # uncomment and test with beam:
-        # util.wait_pv(energy_change_PVs['ShutterA_Move_Status'], ShutterA_Close_Value)
+        # util.wait_pv(epics_pvs['ShutterA_Move_Status'], ShutterA_Close_Value)
         log.info('     *** close_shutter A: Done!')

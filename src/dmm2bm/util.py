@@ -71,7 +71,6 @@ def interpolate(energy_select, energies, n_steps):
     interp_table_y                  = np.linspace(float(energies[keys[0]]['table_y']),                  float(energies[keys[1]]['table_y']),                  n_steps)
     interp_flag                     = np.linspace(float(energies[keys[0]]['flag']),                     float(energies[keys[1]]['flag']),                     n_steps) 
 
-
     i = 0
     for energy in interp_energies:
         temp_dict = {}

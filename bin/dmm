@@ -19,6 +19,7 @@ from dmm2bm import __version__
 from dmm2bm import log
 from dmm2bm import util
 from dmm2bm import dataio
+from dmm2bm import epics
 
 
 from importlib.resources import files
@@ -36,64 +37,72 @@ def run_status(args):
 
 def run_mono(args):
     config.log_values(args)
-
+    args.mode = "Mono"
     energy_select = np.around(args.energy, decimals=2) 
-
     energy_lookup = dataio.load_preset()
-
     energy_list = []
 
     for key in energy_lookup['Mono']:
         energy_list.append(key)
 
     log.info('Selected energy: %4.2f keV'  %  energy_select)
-    log.info('Pre-calibrated energies: %s' %  energy_list)
+    log.info('Pre-calibrated energies: %s keV' %  energy_list)
 
-    energies_str = np.array(energy_list)
-    energies_flt = [float(i) for i in  energies_str]
-    energy_max = np.max(energies_flt)
-    energy_min = np.min(energies_flt)
+    pos_dmm_energy_select = {}
 
-    if energy_select < energy_max and energy_select >= energy_min:
-        energy_calibrated = util.find_nearest(energies_flt, energy_select)
-        
-        log.info('   ***   Selected energy %s; Nearest calibrated: %s ' % (energy_select, energy_calibrated))
-
-        energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
-
-        if energy_select >= float(energy_calibrated):
-            energy_low  = np.around(float(energies_str[energy_closer_index]), decimals=2)
-            energy_high = np.around(float(energies_str[energy_closer_index+1]), decimals=2)
-        else:
-            energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=2)
-            energy_high = np.around(float(energies_str[energy_closer_index]), decimals=2)
-           
-        n_steps = int(100*(energy_high-energy_low))
-        log.info("   ***   Calibrated range [%4.2f, %4.2f]" % (energy_low, energy_high))
-        log.info("   ***   Interpolation steps: %d" % n_steps)
-
-        interp_energies = np.linspace(energy_low, energy_high, n_steps).round(decimals=2)
-
-        pos_energy_start = {}
-        pos_energy_end = {}
-        pos_energy_start["{:.2f}".format(energy_low)] = energy_lookup['Mono']["{:.2f}".format(energy_low)]
-        pos_energy_end["{:.2f}".format(energy_high)] = energy_lookup['Mono']["{:.2f}".format(energy_high)]
-        pos_dmm_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
-        interp_dmm_positions = util.interpolate(energy_select, pos_dmm_start_end_energies, n_steps)
-        for key in  interp_dmm_positions:
-            if str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))) == str('{0:.2f}'.format(np.around(float(key), decimals=2))):
-                print(str('{0:.2f}'.format(np.around(float(key), decimals=2))), interp_dmm_positions[key])
-
+    if "{:.2f}".format(energy_select) in energy_list:
+        pos_dmm_energy_select["{:.2f}".format(energy_select)] = energy_lookup['Mono']["{:.2f}".format(energy_select)]
+        log.info('Energy %s keV is a pre-calibrated energy, using lookup table positions' % energy_select)
+        epics.move(pos_dmm_energy_select, args)
     else:
-        log.error('Error: energy selected %4.2f is outside the calibrated range [%4.2f, %4.2f]' %(energy_select, energy_min, energy_max))
+        log.warning('Energy %s keV is not a pre-calibrated energy, using interpolation' % energy_select)
+        energies_str = np.array(energy_list)
+        energies_flt = [float(i) for i in  energies_str]
+        energy_max = np.max(energies_flt)
+        energy_min = np.min(energies_flt)
+
+        if energy_select < energy_max and energy_select >= energy_min:
+            energy_calibrated = util.find_nearest(energies_flt, energy_select)
+            
+            log.info('   ***   Selected energy %s keV; Nearest calibrated: %s keV' % (energy_select, energy_calibrated))
+
+            energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
+
+            if energy_select >= float(energy_calibrated):
+                energy_low  = np.around(float(energies_str[energy_closer_index]), decimals=2)
+                energy_high = np.around(float(energies_str[energy_closer_index+1]), decimals=2)
+            else:
+                energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=2)
+                energy_high = np.around(float(energies_str[energy_closer_index]), decimals=2)
+               
+            n_steps = int(100*(energy_high-energy_low))
+            log.info("   ***   Calibrated range [%4.2f, %4.2f] keV" % (energy_low, energy_high))
+            log.info("   ***   Interpolation steps: %d" % n_steps)
+
+            interp_energies = np.linspace(energy_low, energy_high, n_steps).round(decimals=2)
+
+            pos_energy_start = {}
+            pos_energy_end = {}
+            pos_energy_start["{:.2f}".format(energy_low)] = energy_lookup['Mono']["{:.2f}".format(energy_low)]
+            pos_energy_end["{:.2f}".format(energy_high)] = energy_lookup['Mono']["{:.2f}".format(energy_high)]
+            pos_dmm_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
+            interp_dmm_positions = util.interpolate(energy_select, pos_dmm_start_end_energies, n_steps)
+            
+            for key in  interp_dmm_positions:
+                if str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))) == str('{0:.2f}'.format(np.around(float(key), decimals=2))):
+                    pos_dmm_energy_select[str('{0:.2f}'.format(np.around(float(key), decimals=2)))] = interp_dmm_positions[key]
+            epics.move(pos_dmm_energy_select, args)
+        else:
+            log.error('Error: energy selected %4.2f is outside the calibrated range [%4.2f, %4.2f]' %(energy_select, energy_min, energy_max))
 
     # if (config.CONFIG_FILE_NAME == args.config):
     #     config.set_default_config(args)            
     # if(epics.move(args)):    
-    # config.save_params_to_config(args)
+        # config.save_params_to_config(args)
 
 def run_pink(args):
     config.log_values(args)
+    args.mode = "Pink"
     # if (config.CONFIG_FILE_NAME == args.config):
     #     config.set_default_config(args)            
     # if(epics.move(args)):    
