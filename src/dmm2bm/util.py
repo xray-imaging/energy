@@ -57,8 +57,23 @@ def interpolate(energy_select, energies, n_steps):
 
     keys = list(energies.keys())
 
+
+    # print(keys[0],                                                keys[1])                                    
+    # print(energies[keys[0]]['mirror_angle'],             energies[keys[1]]['mirror_angle'])        
+    # print(energies[keys[0]]['mirror_vertical_position'], energies[keys[1]]['mirror_vertical_position'])
+    # print(energies[keys[0]]['dmm_usy_ob'],               energies[keys[1]]['dmm_usy_ob'])              
+    # print(energies[keys[0]]['dmm_usy_ib'],               energies[keys[1]]['dmm_usy_ib'])              
+    # print(energies[keys[0]]['dmm_dsy'],                  energies[keys[1]]['dmm_dsy'])                 
+    # print(energies[keys[0]]['dmm_us_arm'],               energies[keys[1]]['dmm_us_arm'])              
+    # print(energies[keys[0]]['dmm_ds_arm'],               energies[keys[1]]['dmm_ds_arm'])              
+    # print(energies[keys[0]]['dmm_m2y'],                  energies[keys[1]]['dmm_m2y'])                 
+    # print(energies[keys[0]]['dmm_usx'],                  energies[keys[1]]['dmm_usx'])                
+    # print(energies[keys[0]]['dmm_dsx'],                  energies[keys[1]]['dmm_dsx'])                 
+    # print(energies[keys[0]]['table_y'],                  energies[keys[1]]['table_y'])               
+    # print(energies[keys[0]]['flag'],                     energies[keys[1]]['flag'])                   
+
     interp_energies                 = np.linspace(float(keys[0]),                                       float(keys[1]),                                       n_steps)
-    interp_mirror_angle             = np.linspace(float(energies[keys[0]]['mirror_angle']),             float(energies[keys[0]]['mirror_angle']),             n_steps)
+    interp_mirror_angle             = np.linspace(float(energies[keys[0]]['mirror_angle']),             float(energies[keys[1]]['mirror_angle']),             n_steps)
     interp_mirror_vertical_position = np.linspace(float(energies[keys[0]]['mirror_vertical_position']), float(energies[keys[1]]['mirror_vertical_position']), n_steps)
     interp_dmm_usy_ob               = np.linspace(float(energies[keys[0]]['dmm_usy_ob']),               float(energies[keys[1]]['dmm_usy_ob']),               n_steps)
     interp_dmm_usy_ib               = np.linspace(float(energies[keys[0]]['dmm_usy_ib']),               float(energies[keys[1]]['dmm_usy_ib']),               n_steps)
@@ -96,4 +111,17 @@ def interpolate(energy_select, energies, n_steps):
 def merge(dict1, dict2):
     res = {**dict1, **dict2}
 
+    return res
+
+
+def closest_value(input_list, input_value):
+ 
+    print('xxxxxxxxxxxxx')
+    print('xxxxxxxxxxxxx')
+    print(float(input_value))
+    print('xxxxxxxxxxxxx')
+    print('xxxxxxxxxxxxx')
+    difference = lambda input_list : abs(float(input_list) - float(input_value))
+    res = min(input_list, key=difference)
+ 
     return res
