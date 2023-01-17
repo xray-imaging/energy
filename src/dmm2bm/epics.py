@@ -10,7 +10,6 @@ ShutterA_Close_Value = 0
 ShutterB_Open_Value  = 1
 ShutterB_Close_Value = 0
 
-
 def move(pos_dmm_energy_select, params):
 
     log.info('Moving DMM to: %s' % pos_dmm_energy_select)

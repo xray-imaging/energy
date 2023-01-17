@@ -52,19 +52,19 @@ def add_pos_dmm_to_local_preset(args):
     log.warning('add current beamline positions to local preset: %s:' % data_path_local)
     
     if args.testing:
-        pos_mirror_angle               = 15.0
-        pos_mirror_vertical_position   = 15.0
-        pos_dmm_usy_ob                 = 15.0
-        pos_dmm_usy_ib                 = 15.0
-        pos_dmm_dsy                    = 15.0
-        pos_dmm_us_arm                 = 15.0
-        pos_dmm_ds_arm                 = 15.0
-        pos_dmm_m2y                    = 15.0
-        pos_dmm_usx                    = 15.0
-        pos_dmm_dsx                    = 15.0
-        pos_filter                     = 15.0
-        pos_table_y                    = 15.0
-        pos_flag                       = 15.0
+        pos_mirror_angle               = 0.0
+        pos_mirror_vertical_position   = 0.0
+        pos_dmm_usy_ob                 = 0.0
+        pos_dmm_usy_ib                 = 0.0
+        pos_dmm_dsy                    = 0.0
+        pos_dmm_us_arm                 = 0.0
+        pos_dmm_ds_arm                 = 0.0
+        pos_dmm_m2y                    = 0.0
+        pos_dmm_usx                    = 0.0
+        pos_dmm_dsx                    = 0.0
+        pos_filter                     = 0.0
+        pos_table_y                    = 0.0
+        pos_flag                       = 0.0
     else:
         pos_mirror_angle               = epics_pvs['mirror_angle'].get()            
         pos_mirror_vertical_position   = epics_pvs['mirror_vertical_position'].get()

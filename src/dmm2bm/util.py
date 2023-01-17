@@ -21,6 +21,7 @@ def yes_or_no(question):
         return False
 
 def find_nearest(array, value):
+
     array = np.asarray(array)
     idx = (np.abs(array - value)).argmin()
     value = "{0:4.2f}".format(array[idx])
@@ -56,7 +57,6 @@ def interpolate(energy_select, energies, n_steps):
     interp_energies_dict = {}
 
     keys = list(energies.keys())
-
 
     # print(keys[0],                                                keys[1])                                    
     # print(energies[keys[0]]['mirror_angle'],             energies[keys[1]]['mirror_angle'])        
@@ -109,18 +109,13 @@ def interpolate(energy_select, energies, n_steps):
     return interp_energies_dict
 
 def merge(dict1, dict2):
+
     res = {**dict1, **dict2}
 
     return res
 
-
 def closest_value(input_list, input_value):
  
-    print('xxxxxxxxxxxxx')
-    print('xxxxxxxxxxxxx')
-    print(float(input_value))
-    print('xxxxxxxxxxxxx')
-    print('xxxxxxxxxxxxx')
     difference = lambda input_list : abs(float(input_list) - float(input_value))
     res = min(input_list, key=difference)
  

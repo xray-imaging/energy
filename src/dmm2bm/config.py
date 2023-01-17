@@ -67,7 +67,6 @@ PINK_PARAMS = ('energyioc', )
 
 NICE_NAMES = ('General', 'DMM Energy', 'Energy IOC')
 
-
 def get_config_name():
     """Get the command line --config option."""
     name = CONFIG_FILE_NAME
@@ -204,7 +203,6 @@ def log_values(args):
     log.warning('energy status end')
 
 def save_params_to_config(args):
-
     # Update current status in default config file.
     # The default confign file name is set in CONFIG_FILE_NAME
     sections = MONO_PARAMS

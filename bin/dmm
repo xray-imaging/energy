@@ -33,6 +33,7 @@ def init(args):
         log.error("{0} already exists".format(args.config))
 
 def run_mono(args):
+
     config.log_values(args)
     args.mode = "Mono"
     energy_select = np.around(args.energy, decimals=2) 
@@ -91,13 +92,13 @@ def run_mono(args):
                     print(str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))), str('{0:.2f}'.format(np.around(float(key), decimals=2))))
                     pos_dmm_energy_select[str('{0:.2f}'.format(np.around(float(key), decimals=2)))] = interp_dmm_positions[key]
             if pos_dmm_energy_select == {}:
-                log.warning('rounding error')
-                log.warning('not exact match between: %s' % str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))))
-                log.warning('and intepolated energies: %s'% interp_dmm_positions.keys())
+                log.warning('Rounding error:')
+                log.warning('   ***   not exact match between: %s' % str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))))
+                log.warning('   ***   and intepolated energies: %s'% interp_dmm_positions.keys())
  
                 key = util.closest_value(interp_dmm_positions.keys(), '{0:.2f}'.format(np.around(float(energy_select), decimals=2)))
                 pos_dmm_energy_select[str('{0:.2f}'.format(np.around(float(key), decimals=2)))] = interp_dmm_positions[key]
-                log.warning('selecting closest: %s' % key)
+                log.warning('   ***   selecting closest: %s' % key)
 
             if epics.move(pos_dmm_energy_select, args):
                 config.save_params_to_config(args)
