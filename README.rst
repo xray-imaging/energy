@@ -32,6 +32,8 @@ of the closest calibrated energies.
 
 To pink beam:
 
+::
+
     $ dmm pink
 
 Save energy
@@ -50,7 +52,9 @@ To restore it::
 Add/Remove precalibrated energies
 ---------------------------------
 
-To associate the current beamline positions to new energy value or update and existing one::
+To associate the current beamline positions to new energy value or update and existing one:
+
+::
 
     $ dmm add --energy 28.32
 
