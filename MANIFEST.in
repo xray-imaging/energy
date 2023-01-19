@@ -1,1 +1,1 @@
-include dmm2bm/data/*
+include src/dmm2bm/data/*
