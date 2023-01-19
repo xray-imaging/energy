@@ -62,6 +62,8 @@ the newly added energy will be used as start/end of the intepolation interval
 
 To remove an energy value from the list of calibrated energies:
 
+::
+
     $ dmm delete --energy 28.32
 
 To list of all available options::
