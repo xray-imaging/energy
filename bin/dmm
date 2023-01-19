@@ -145,12 +145,12 @@ def main():
     pink_params = config.PINK_PARAMS    
     
     cmd_parsers = [
-        ('init',        init,           (),           "Create configuration file"),
+        ('init',        init,           (),           "Create configuration file and restore the original preset energy calibration file"),
         ('mono',        run_mono,       mono_params,  "Set DMM energy"),
         ('pink',        run_pink,       pink_params,  "Set the beamline to pink mode"),
         ('add',         run_add,        mono_params,  "Associate the current beamline positions to --energy value"),             
         ('delete',      run_delete,     mono_params,  "Remove --energy value from the preset energy calibration file"),             
-        ('reset',       run_reset,      mono_params,  "Restore preset energy calibration file"),
+        ('reset',       run_reset,      mono_params,  "Restore original preset energy calibration file"),
         ('status',      run_status,     mono_params,  "Show status"),
     ]
 
