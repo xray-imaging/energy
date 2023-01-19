@@ -1,6 +1,7 @@
 import os
 import json
 import pathlib
+import platform
 
 import numpy as np
 
@@ -9,15 +10,22 @@ from importlib.resources import files
 from dmm2bm import log
 from dmm2bm import epics
 
-def load_preset():
+if platform.system() == 'Darwin':
+    log.info('MacOS')
+    DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')
+elif platform.system() == 'Linux':
+    log.info('Linux')
+    DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')
 
-    data_path = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')    
-    data_path_local = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm.json')
-    
-    if data_path_local.exists():
-        log.info('Local preset file exists: %s' % data_path_local)
-        log.info('Loading preset from: %s' % data_path_local)
-        with open(data_path_local) as json_file:
+DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm.json')
+
+
+
+def load_preset():
+    if DATA_PATH_LOCAL.exists():
+        log.info('Local preset file exists: %s' % DATA_PATH_LOCAL)
+        log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
+        with open(DATA_PATH_LOCAL) as json_file:
             energy_lookup = json.load(json_file)
     else:
         energy_lookup = reset_preset_to_local()
@@ -25,15 +33,12 @@ def load_preset():
 
 def reset_preset_to_local():
 
-    data_path = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')    
-    data_path_local = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm.json')
-
-    log.info('Using preset file: %s' % data_path)
-    log.info('Loading preset from: %s' % data_path)
-    with open(data_path) as json_file:
+    log.info('Using preset file: %s' % DATA_PATH)
+    log.info('Loading preset from: %s' % DATA_PATH)
+    with open(DATA_PATH) as json_file:
         energy_lookup = json.load(json_file)
-    log.info('Create local preset file: %s' % data_path_local)
-    with open(data_path_local, "w") as outfile:
+    log.info('Create local preset file: %s' % DATA_PATH_LOCAL)
+    with open(DATA_PATH_LOCAL, "w") as outfile:
         json.dump(energy_lookup, outfile, indent=4)        
 
     return energy_lookup
@@ -47,9 +52,7 @@ def add_pos_dmm_to_local_preset(args):
     energy = str('{0:.2f}'.format(np.around(args.energy, decimals=2)))
     epics_pvs = epics.init_epics_pvs(args)
     
-    data_path_local = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm.json')
-
-    log.warning('add current beamline positions to local preset: %s:' % data_path_local)
+    log.warning('add current beamline positions to local preset: %s:' % DATA_PATH_LOCAL)
     
     if args.testing:
         pos_mirror_angle               = 0.0
@@ -120,6 +123,18 @@ def add_pos_dmm_to_local_preset(args):
     energy_lookup_sorted['Pink'] = {}
     energy_lookup_sorted['Pink']['30.00'] = energy_lookup['Pink']['30.00']
      
-    log.info('Update local preset file: %s' % data_path_local)
-    with open(data_path_local, "w") as outfile:
+    log.info('Update local preset file: %s' % DATA_PATH_LOCAL)
+    with open(DATA_PATH_LOCAL, "w") as outfile:
         json.dump(energy_lookup_sorted, outfile, indent=4)        
+
+def load_stored_energies(args):
+
+    if DATA_PATH_LOCAL.exists():
+        log.info('Local preset file exists: %s' % DATA_PATH_LOCAL)
+        log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
+        with open(DATA_PATH_LOCAL) as json_file:
+            energy_lookup = json.load(json_file)
+
+        print(energy_lookup)
+    else:
+        log.error("Preset energy file is missing. Run: dmm ")

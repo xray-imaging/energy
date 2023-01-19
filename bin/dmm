@@ -21,7 +21,6 @@ from dmm2bm import util
 from dmm2bm import dataio
 from dmm2bm import epics
 
-
 from importlib.resources import files
 
 
@@ -29,6 +28,7 @@ def init(args):
 
     if not os.path.exists(str(args.config)):
         config.write(args.config)
+        dataio.reset_preset_to_local()
     else:
         log.error("{0} already exists".format(args.config))
 
@@ -127,6 +127,7 @@ def run_save(args):
 def run_status(args):
 
     config.log_values(args)
+    dataio.load_stored_energies(args)
 
 def main():
 
