@@ -34,7 +34,6 @@ def reset_preset_to_local():
     with open(DATA_PATH_LOCAL, "w") as outfile:
         json.dump(energy_lookup, outfile, indent=4)        
 
-    print()
     return energy_lookup
 
 def load_stored_energies(args):
@@ -46,7 +45,8 @@ def load_stored_energies(args):
         log.info('Current calibrated energies:')
         log.info(energy_lookup['Mono'].keys())
     else:
-        log.error("Preset energy file is missing. Run: dmm ")
+        log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
+        log.error("Run: dmm init")
 
 
 def add_pos_dmm_to_local_preset(args):
