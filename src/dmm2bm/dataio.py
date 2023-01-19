@@ -18,7 +18,6 @@ def init_preset():
 
 def load_preset():
     if DATA_PATH_LOCAL.exists():
-        log.info('Local preset file exists: %s' % DATA_PATH_LOCAL)
         log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
         with open(DATA_PATH_LOCAL) as json_file:
             energy_lookup = json.load(json_file)
@@ -27,9 +26,7 @@ def load_preset():
     return energy_lookup
 
 def reset_preset_to_local():
-    print(pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json'))
-    print(DATA_PATH)
-    log.info('Using preset file: %s' % DATA_PATH)
+
     log.info('Loading preset from: %s' % DATA_PATH)
     with open(DATA_PATH) as json_file:
         energy_lookup = json.load(json_file)
@@ -37,17 +34,17 @@ def reset_preset_to_local():
     with open(DATA_PATH_LOCAL, "w") as outfile:
         json.dump(energy_lookup, outfile, indent=4)        
 
+    print()
     return energy_lookup
 
 def load_stored_energies(args):
 
     if DATA_PATH_LOCAL.exists():
-        log.info('Local preset file exists: %s' % DATA_PATH_LOCAL)
         log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
         with open(DATA_PATH_LOCAL) as json_file:
             energy_lookup = json.load(json_file)
-
-        print(energy_lookup)
+        log.info('Current calibrated energies:')
+        log.info(energy_lookup['Mono'].keys())
     else:
         log.error("Preset energy file is missing. Run: dmm ")
 
