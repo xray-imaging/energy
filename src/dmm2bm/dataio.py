@@ -10,16 +10,11 @@ from importlib.resources import files
 from dmm2bm import log
 from dmm2bm import epics
 
-if platform.system() == 'Darwin':
-    log.info('MacOS')
-    DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')
-elif platform.system() == 'Linux':
-    log.info('Linux')
-    DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')
-
+DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')
 DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm.json')
 
-
+def init_preset():
+    reset_preset_to_local()
 
 def load_preset():
     if DATA_PATH_LOCAL.exists():
@@ -32,7 +27,8 @@ def load_preset():
     return energy_lookup
 
 def reset_preset_to_local():
-
+    print(pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json'))
+    print(DATA_PATH)
     log.info('Using preset file: %s' % DATA_PATH)
     log.info('Loading preset from: %s' % DATA_PATH)
     with open(DATA_PATH) as json_file:
@@ -42,6 +38,19 @@ def reset_preset_to_local():
         json.dump(energy_lookup, outfile, indent=4)        
 
     return energy_lookup
+
+def load_stored_energies(args):
+
+    if DATA_PATH_LOCAL.exists():
+        log.info('Local preset file exists: %s' % DATA_PATH_LOCAL)
+        log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
+        with open(DATA_PATH_LOCAL) as json_file:
+            energy_lookup = json.load(json_file)
+
+        print(energy_lookup)
+    else:
+        log.error("Preset energy file is missing. Run: dmm ")
+
 
 def add_pos_dmm_to_local_preset(args):
 
@@ -127,14 +136,3 @@ def add_pos_dmm_to_local_preset(args):
     with open(DATA_PATH_LOCAL, "w") as outfile:
         json.dump(energy_lookup_sorted, outfile, indent=4)        
 
-def load_stored_energies(args):
-
-    if DATA_PATH_LOCAL.exists():
-        log.info('Local preset file exists: %s' % DATA_PATH_LOCAL)
-        log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
-        with open(DATA_PATH_LOCAL) as json_file:
-            energy_lookup = json.load(json_file)
-
-        print(energy_lookup)
-    else:
-        log.error("Preset energy file is missing. Run: dmm ")
