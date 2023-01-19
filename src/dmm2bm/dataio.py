@@ -14,7 +14,7 @@ DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')
 DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm.json')
 
 def init_preset():
-    reset_preset_to_local()
+    reset_default_to_local_preset()
 
 def load_preset():
     if DATA_PATH_LOCAL.exists():
@@ -22,10 +22,10 @@ def load_preset():
         with open(DATA_PATH_LOCAL) as json_file:
             energy_lookup = json.load(json_file)
     else:
-        energy_lookup = reset_preset_to_local()
+        energy_lookup = reset_default_to_local_preset()
     return energy_lookup
 
-def reset_preset_to_local():
+def reset_default_to_local_preset():
 
     log.info('Loading preset from: %s' % DATA_PATH)
     with open(DATA_PATH) as json_file:
@@ -36,18 +36,41 @@ def reset_preset_to_local():
 
     return energy_lookup
 
-def load_stored_energies(args):
+def log_calibrated_energies(args):
 
     if DATA_PATH_LOCAL.exists():
         log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
         with open(DATA_PATH_LOCAL) as json_file:
             energy_lookup = json.load(json_file)
         log.info('Current calibrated energies:')
-        log.info(energy_lookup['Mono'].keys())
+        log.info('  %s' % list(energy_lookup['Mono'].keys()))
     else:
         log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
         log.error("Run: dmm init")
 
+def delete_energy_from_local_preset(args):
+
+    if DATA_PATH_LOCAL.exists():
+        log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
+        with open(DATA_PATH_LOCAL) as json_file:
+            energy_lookup = json.load(json_file)
+        log.info('Current calibrated energies:')
+        log.info('  %s' % list(energy_lookup['Mono'].keys()))
+        found_energy = any(item in list(energy_lookup['Mono'].keys()) for item in list(energy_lookup['Mono'].keys()) if item == "{:.2f}".format(args.energy))
+        if found_energy:
+            log.info('%s keV found in the preset energies' % "{:.2f}".format(args.energy))
+            energy_lookup['Mono'].pop("{:.2f}".format(args.energy))
+            log.info('  %s' % list(energy_lookup['Mono'].keys()))
+
+            log.info('Update local preset file: %s' % DATA_PATH_LOCAL)
+            with open(DATA_PATH_LOCAL, "w") as outfile:
+                json.dump(energy_lookup, outfile, indent=4)    
+        else:
+            log.error('--energy %s in not in the current calibrated energy list' % "{:.2f}".format(args.energy))
+    else:
+        log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
+        log.error("Run: dmm init")
+   
 
 def add_pos_dmm_to_local_preset(args):
 

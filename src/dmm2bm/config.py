@@ -18,8 +18,6 @@ from dmm2bm import __version__
 LOGS_HOME = os.path.join(str(pathlib.Path.home()), 'logs')
 CONFIG_FILE_NAME = os.path.join(str(pathlib.Path.home()), 'logs/dmm.conf')
 
-data_path = Path(__file__).parent / 'data'
-
 SECTIONS = OrderedDict()
 
 SECTIONS['general'] = {

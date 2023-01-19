@@ -118,16 +118,21 @@ def run_pink(args):
 
 def run_reset(args):
 
-    dataio.reset_preset_to_local()
+    dataio.reset_default_to_local_preset()
 
-def run_save(args):
+def run_add(args):
 
     dataio.add_pos_dmm_to_local_preset(args)
+
+def run_delete(args):
+
+    dataio.delete_energy_from_local_preset(args)
+
 
 def run_status(args):
 
     config.log_values(args)
-    dataio.load_stored_energies(args)
+    dataio.log_calibrated_energies(args)
 
 def main():
 
@@ -140,11 +145,12 @@ def main():
     pink_params = config.PINK_PARAMS    
     
     cmd_parsers = [
+        ('add',         run_add,        mono_params,  "Associate the current beamline positions to an energy value"),             
+        ('delete',      run_delete,     mono_params,  "Remove --energy value from the preset energy calibration file"),             
         ('init',        init,           (),           "Create configuration file"),
         ('mono',        run_mono,       mono_params,  "Set DMM energy"),
         ('pink',        run_pink,       pink_params,  "Set the beamline to pink mode"),
         ('reset',       run_reset,      mono_params,  "Restore preset energy calibration file"),
-        ('save',        run_save,       mono_params,  "Associate the current beamline positions to an energy value"),             
         ('status',      run_status,     mono_params,  "Show status"),
     ]
 
