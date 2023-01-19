@@ -53,6 +53,9 @@ def run_mono(args):
         log.info('Energy %s keV is a pre-calibrated energy, using lookup table positions' % energy_select)
         if epics.move(pos_dmm_energy_select, args):
             config.save_params_to_config(args)
+    elif energy_select == -1:
+        log.error('Plese use the --energy option to select an energy value to move to')
+        log.error('Example: dmm mono --energy 22.5')
     else:
         log.warning('Energy %s keV is not a pre-calibrated energy, using interpolation' % energy_select)
         energies_str = np.array(energy_list)
@@ -145,13 +148,13 @@ def main():
     pink_params = config.PINK_PARAMS    
     
     cmd_parsers = [
-        ('init',        init,           (),           "Create configuration file and restore the original preset energy calibration file"),
-        ('mono',        run_mono,       mono_params,  "Set DMM energy"),
-        ('pink',        run_pink,       pink_params,  "Set the beamline to pink mode"),
-        ('add',         run_add,        mono_params,  "Associate the current beamline positions to --energy value"),             
-        ('delete',      run_delete,     mono_params,  "Remove --energy value from the preset energy calibration file"),             
-        ('reset',       run_reset,      mono_params,  "Restore original preset energy calibration file"),
-        ('status',      run_status,     mono_params,  "Show status"),
+        ('init',        init,           (),           "Usage: dmm init                - Create configuration file and restore the original preset energy calibration file"),
+        ('mono',        run_mono,       mono_params,  "Usage: dmm mono   --energy 20  - Set the DMM to the --energy value"),
+        ('pink',        run_pink,       pink_params,  "Usage: dmm pink                - Set the beamline to pink mode "),
+        ('add',         run_add,        mono_params,  "Usage: dmm add    --energy 20  - Associate the current beamline positions to --energy value"),             
+        ('delete',      run_delete,     mono_params,  "Usage: dmm delete --energy 20  - Remove --energy value from the preset energy calibration file"),             
+        ('reset',       run_reset,      mono_params,  "Usage: dmm reset               - Restore original preset energy calibration file. "),
+        ('status',      run_status,     mono_params,  "Usage: dmm status              - Show status"),
     ]
 
     subparsers = parser.add_subparsers(title="Commands", metavar='')

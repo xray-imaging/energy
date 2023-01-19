@@ -66,7 +66,11 @@ def delete_energy_from_local_preset(args):
             with open(DATA_PATH_LOCAL, "w") as outfile:
                 json.dump(energy_lookup, outfile, indent=4)    
         else:
-            log.error('--energy %s in not in the current calibrated energy list' % "{:.2f}".format(args.energy))
+            if args.energy == -1:
+                log.error('Plese use the --energy option to remove an energy from: %s' % list(energy_lookup['Mono'].keys()))
+                log.error('Example: dmm delete --energy %s' % list(energy_lookup['Mono'].keys())[0])
+            else:
+                log.error('--energy %s in not in the current calibrated energy list' % "{:.2f}".format(args.energy))            
     else:
         log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
         log.error("Run: dmm init")
@@ -75,7 +79,8 @@ def delete_energy_from_local_preset(args):
 def add_pos_dmm_to_local_preset(args):
 
     if args.energy <= 0:
-        log.error('--energy %.2f in not allowed' % args.energy)
+        log.error('Plese use the --energy option to associate an energy value to the current DMM position')
+        log.error('Example: dmm add --energy 22.5')
         return
 
     energy = str('{0:.2f}'.format(np.around(args.energy, decimals=2)))
