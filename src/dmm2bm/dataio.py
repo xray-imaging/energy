@@ -67,7 +67,7 @@ def delete_energy_from_local_preset(args):
                 json.dump(energy_lookup, outfile, indent=4)    
         else:
             if args.energy == -1:
-                log.error('Plese use the --energy option to remove an energy from: %s' % list(energy_lookup['Mono'].keys()))
+                log.error('Please use the --energy option to remove an energy from: %s' % list(energy_lookup['Mono'].keys()))
                 log.error('Example: dmm delete --energy %s' % list(energy_lookup['Mono'].keys())[0])
             else:
                 log.error('--energy %s in not in the current calibrated energy list' % "{:.2f}".format(args.energy))            
@@ -79,7 +79,7 @@ def delete_energy_from_local_preset(args):
 def add_pos_dmm_to_local_preset(args):
 
     if args.energy <= 0:
-        log.error('Plese use the --energy option to associate an energy value to the current DMM position')
+        log.error('Please use the --energy option to associate an energy value to the current DMM position')
         log.error('Example: dmm add --energy 22.5')
         return
 

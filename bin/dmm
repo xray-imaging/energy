@@ -54,7 +54,7 @@ def run_mono(args):
         if epics.move(pos_dmm_energy_select, args):
             config.save_params_to_config(args)
     elif energy_select == -1:
-        log.error('Plese use the --energy option to select an energy value to move to')
+        log.error('Please use the --energy option to select an energy value to move to')
         log.error('Example: dmm mono --energy 22.5')
     else:
         log.warning('Energy %s keV is not a pre-calibrated energy, using interpolation' % energy_select)
