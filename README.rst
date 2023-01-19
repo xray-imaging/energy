@@ -55,11 +55,11 @@ to list of all available options::
 
     Commands:
       
-        add          Associate the current beamline positions to an energy value
-        delete       Remove --energy value from the preset energy calibration file
         init         Create configuration file
         mono         Set DMM energy
         pink         Set the beamline to pink mode
+        add          Associate the current beamline positions to --energy value
+        delete       Remove --energy value from the preset energy calibration file
         reset        Restore preset energy calibration file
         status       Show status
 
