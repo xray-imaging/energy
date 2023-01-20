@@ -17,7 +17,12 @@ def move(pos_dmm_energy_select, params):
     if params.force:
         pass
     else:
-        if not util.yes_or_no('Confirm energy change? The DDM will move pressing Y'):              
+        if (params.testing):
+            log.info('Testing mode is active. Nothing will move!')
+        else:
+            log.error('DMM motors will move if you press Y!')
+
+        if not util.yes_or_no('Confirm energy change?'):              
             log.info(' ')
             log.warning('   *** Energy not changed')
             return False

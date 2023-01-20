@@ -92,7 +92,7 @@ def run_mono(args):
 
             for key in  interp_dmm_positions:
                 if str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))) == str('{0:.2f}'.format(np.around(float(key), decimals=2))):
-                    print(str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))), str('{0:.2f}'.format(np.around(float(key), decimals=2))))
+                    # print(str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))), str('{0:.2f}'.format(np.around(float(key), decimals=2))))
                     pos_dmm_energy_select[str('{0:.2f}'.format(np.around(float(key), decimals=2)))] = interp_dmm_positions[key]
             if pos_dmm_energy_select == {}:
                 log.warning('Rounding error:')
