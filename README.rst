@@ -30,7 +30,7 @@ To set the beamline energy to 20 keV::
 If the selected energy is not included in the pre-calibrated energy list, **dmm** will interpolate all motor positions using the values
 of the closest calibrated energies.
 
-To pink beam:
+To set pink beam:
 
 ::
 
@@ -78,13 +78,13 @@ To list of all available options::
 
     Commands:
       
-        init         Create configuration file and restore the original preset energy calibration file
-        mono         Set DMM energy
-        pink         Set the beamline to pink mode
-        add          Associate the current beamline positions to --energy value
-        delete       Remove --energy value from the preset energy calibration file
-        reset        Restore original preset energy calibration file
-        status       Show status
+        init         Usage: dmm init - Create configuration file and restore the original preset energy calibration file
+        mono         Usage: dmm mono --energy 20 - Set the DMM to the --energy value
+        pink         Usage: dmm pink - Set the beamline to pink mode
+        add          Usage: dmm add --energy 20 - Associate the current beamline positions to --energy value
+        delete       Usage: dmm delete --energy 20 - Remove --energy value from the preset energy calibration file
+        reset        Usage: dmm reset - Restore original preset energy calibration file.
+        status       Usage: dmm status - Show status
 
 to list of all **dmm save** options::
 
