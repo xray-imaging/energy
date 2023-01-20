@@ -78,9 +78,11 @@ To list of all available options::
 
     Commands:
       
-        init         Usage: dmm init - Create configuration file and restore the original preset energy calibration file
-        mono         Usage: dmm mono --energy 20 - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation between the two closest
-                     calibrared values
+        init         Usage: dmm init - Create configuration file and restore the original preset energy 
+                            calibration file
+        mono         Usage: dmm mono --energy 20 - Set the beamline to the --energy value using a 
+                            precalibrated list or, if missing, a linear interpolation between the two 
+                            closest calibrared values
         pink         Usage: dmm pink - Set the beamline to pink mode
         add          Usage: dmm add --energy 20 - Associate the current beamline positions to --energy value
         delete       Usage: dmm delete --energy 20 - Remove --energy value from the preset energy calibration file
