@@ -36,20 +36,20 @@ def run_mono(args):
 
     config.log_values(args)
     args.mode = "Mono"
-    energy_select = np.around(args.energy, decimals=2) 
+    energy_select = np.around(args.energy, decimals=3) 
     energy_lookup = dataio.load_preset()
     energy_list = []
 
     for key in energy_lookup['Mono']:
         energy_list.append(key)
 
-    log.info('Selected energy: %4.2f keV'  %  energy_select)
+    log.info('Selected energy: %4.3f keV'  %  energy_select)
     log.info('Pre-calibrated energies: %s keV' %  energy_list)
 
     pos_dmm_energy_select = {}
 
-    if "{:.2f}".format(energy_select) in energy_list:
-        pos_dmm_energy_select["{:.2f}".format(energy_select)] = energy_lookup['Mono']["{:.2f}".format(energy_select)]
+    if "{:.3f}".format(energy_select) in energy_list:
+        pos_dmm_energy_select["{:.3f}".format(energy_select)] = energy_lookup['Mono']["{:.3f}".format(energy_select)]
         log.info('Energy %s keV is a pre-calibrated energy, using lookup table positions' % energy_select)
         if epics.move(pos_dmm_energy_select, args):
             config.save_params_to_config(args)
@@ -71,42 +71,42 @@ def run_mono(args):
             energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
 
             if energy_select >= float(energy_calibrated):
-                energy_low  = np.around(float(energies_str[energy_closer_index]), decimals=2)
-                energy_high = np.around(float(energies_str[energy_closer_index+1]), decimals=2)
+                energy_low  = np.around(float(energies_str[energy_closer_index]), decimals=3)
+                energy_high = np.around(float(energies_str[energy_closer_index+1]), decimals=3)
             else:
-                energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=2)
-                energy_high = np.around(float(energies_str[energy_closer_index]), decimals=2)
+                energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=3)
+                energy_high = np.around(float(energies_str[energy_closer_index]), decimals=3)
                
-            n_steps = int(100*(energy_high-energy_low))
-            log.info("   ***   Calibrated range [%4.2f, %4.2f] keV" % (energy_low, energy_high))
+            n_steps = int(1000*(energy_high-energy_low))
+            log.info("   ***   Calibrated range [%4.3f, %4.3f] keV" % (energy_low, energy_high))
             log.info("   ***   Interpolation steps: %d" % n_steps)
 
-            interp_energies = np.linspace(energy_low, energy_high, n_steps).round(decimals=2)
+            interp_energies = np.linspace(energy_low, energy_high, n_steps).round(decimals=3)
 
             pos_energy_start = {}
             pos_energy_end = {}
-            pos_energy_start["{:.2f}".format(energy_low)] = energy_lookup['Mono']["{:.2f}".format(energy_low)]
-            pos_energy_end["{:.2f}".format(energy_high)] = energy_lookup['Mono']["{:.2f}".format(energy_high)]
+            pos_energy_start["{:.3f}".format(energy_low)] = energy_lookup['Mono']["{:.3f}".format(energy_low)]
+            pos_energy_end["{:.3f}".format(energy_high)] = energy_lookup['Mono']["{:.3f}".format(energy_high)]
             pos_dmm_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
             interp_dmm_positions = util.interpolate(energy_select, pos_dmm_start_end_energies, n_steps)
 
             for key in  interp_dmm_positions:
-                if str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))) == str('{0:.2f}'.format(np.around(float(key), decimals=2))):
-                    # print(str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))), str('{0:.2f}'.format(np.around(float(key), decimals=2))))
-                    pos_dmm_energy_select[str('{0:.2f}'.format(np.around(float(key), decimals=2)))] = interp_dmm_positions[key]
+                if str('{0:.3f}'.format(np.around(float(energy_select), decimals=3))) == str('{0:.3f}'.format(np.around(float(key), decimals=3))):
+                    # print(str('{0:.3f}'.format(np.around(float(energy_select), decimals=3))), str('{0:.3f}'.format(np.around(float(key), decimals=3))))
+                    pos_dmm_energy_select[str('{0:.3f}'.format(np.around(float(key), decimals=3)))] = interp_dmm_positions[key]
             if pos_dmm_energy_select == {}:
                 log.warning('Rounding error:')
-                log.warning('   ***   not exact match between: %s' % str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))))
+                log.warning('   ***   not exact match between: %s' % str('{0:.3f}'.format(np.around(float(energy_select), decimals=3))))
                 log.warning('   ***   and intepolated energies: %s'% interp_dmm_positions.keys())
  
-                key = util.closest_value(interp_dmm_positions.keys(), '{0:.2f}'.format(np.around(float(energy_select), decimals=2)))
-                pos_dmm_energy_select[str('{0:.2f}'.format(np.around(float(key), decimals=2)))] = interp_dmm_positions[key]
+                key = util.closest_value(interp_dmm_positions.keys(), '{0:.3f}'.format(np.around(float(energy_select), decimals=3)))
+                pos_dmm_energy_select[str('{0:.3f}'.format(np.around(float(key), decimals=3)))] = interp_dmm_positions[key]
                 log.warning('   ***   selecting closest: %s' % key)
 
             if epics.move(pos_dmm_energy_select, args):
                 config.save_params_to_config(args)
         else:
-            log.error('Error: energy selected %4.2f is outside the calibrated range [%4.2f, %4.2f]' %(energy_select, energy_min, energy_max))
+            log.error('Error: energy selected %4.3f is outside the calibrated range [%4.3f, %4.3f]' %(energy_select, energy_min, energy_max))
 
 def run_pink(args):
 

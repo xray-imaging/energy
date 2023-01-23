@@ -56,10 +56,10 @@ def delete_energy_from_local_preset(args):
             energy_lookup = json.load(json_file)
         log.info('Current calibrated energies:')
         log.info('  %s' % list(energy_lookup['Mono'].keys()))
-        found_energy = any(item in list(energy_lookup['Mono'].keys()) for item in list(energy_lookup['Mono'].keys()) if item == "{:.2f}".format(args.energy))
+        found_energy = any(item in list(energy_lookup['Mono'].keys()) for item in list(energy_lookup['Mono'].keys()) if item == "{:.3f}".format(args.energy))
         if found_energy:
-            log.info('%s keV found in the preset energies' % "{:.2f}".format(args.energy))
-            energy_lookup['Mono'].pop("{:.2f}".format(args.energy))
+            log.info('%s keV found in the preset energies' % "{:.3f}".format(args.energy))
+            energy_lookup['Mono'].pop("{:.3f}".format(args.energy))
             log.info('  %s' % list(energy_lookup['Mono'].keys()))
 
             log.info('Update local preset file: %s' % DATA_PATH_LOCAL)
@@ -70,7 +70,7 @@ def delete_energy_from_local_preset(args):
                 log.error('Please use the --energy option to remove an energy from: %s' % list(energy_lookup['Mono'].keys()))
                 log.error('Example: dmm delete --energy %s' % list(energy_lookup['Mono'].keys())[0])
             else:
-                log.error('--energy %s in not in the current calibrated energy list' % "{:.2f}".format(args.energy))            
+                log.error('--energy %s in not in the current calibrated energy list' % "{:.3f}".format(args.energy))            
     else:
         log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
         log.error("Run: dmm init")
@@ -83,7 +83,7 @@ def add_pos_dmm_to_local_preset(args):
         log.error('Example: dmm add --energy 22.5')
         return
 
-    energy = str('{0:.2f}'.format(np.around(args.energy, decimals=2)))
+    energy = str('{0:.3f}'.format(np.around(args.energy, decimals=3)))
     epics_pvs = epics.init_epics_pvs(args)
     
     log.warning('add current beamline positions to local preset: %s:' % DATA_PATH_LOCAL)
@@ -155,7 +155,7 @@ def add_pos_dmm_to_local_preset(args):
     energy_lookup_sorted = {}
     energy_lookup_sorted['Mono'] = {i: energy_lookup['Mono'][i] for i in myKeys}
     energy_lookup_sorted['Pink'] = {}
-    energy_lookup_sorted['Pink']['30.00'] = energy_lookup['Pink']['30.00']
+    energy_lookup_sorted['Pink']['30.000'] = energy_lookup['Pink']['30.000']
      
     log.info('Update local preset file: %s' % DATA_PATH_LOCAL)
     with open(DATA_PATH_LOCAL, "w") as outfile:

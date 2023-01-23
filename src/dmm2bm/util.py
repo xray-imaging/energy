@@ -24,7 +24,7 @@ def find_nearest(array, value):
 
     array = np.asarray(array)
     idx = (np.abs(array - value)).argmin()
-    value = "{0:4.2f}".format(array[idx])
+    value = "{0:4.3f}".format(array[idx])
 
     return value
 
@@ -45,7 +45,7 @@ def wait_pv(epics_pv, wait_val, timeout=-1):
                 current_time = time.time()
                 diff_time = current_time - start_time
                 if diff_time >= timeout:
-                    log.error('  *** wait_pv(%s, %d, %5.2f reached max timeout. Return False',
+                    log.error('  *** wait_pv(%s, %d, %5.3f reached max timeout. Return False',
                                   epics_pv.pvname, wait_val, timeout)
                     return False
             time.sleep(.01)
