@@ -20,7 +20,7 @@ from dmm2bm import __version__
 from dmm2bm import log
 from dmm2bm import util
 from dmm2bm import dataio
-from dmm2bm import epics
+from dmm2bm import move
 
 from importlib.resources import files
 
@@ -32,7 +32,7 @@ def init(args):
     else:
         log.error("{0} already exists".format(args.config))
 
-def run_mono(args):
+def set_mono(args):
 
     config.log_values(args)
     args.mode = "Mono"
@@ -51,7 +51,7 @@ def run_mono(args):
     if "{:.3f}".format(energy_select) in energy_list:
         pos_dmm_energy_select["{:.3f}".format(energy_select)] = energy_lookup['Mono']["{:.3f}".format(energy_select)]
         log.info('Energy %s keV is a pre-calibrated energy, using lookup table positions' % energy_select)
-        if epics.move(pos_dmm_energy_select, args):
+        if move.aps2bm(pos_dmm_energy_select, args):
             config.save_params_to_config(args)
     elif energy_select == -1:
         log.error('Please use the --energy option to select an energy value to move to')
@@ -103,7 +103,7 @@ def run_mono(args):
                 pos_dmm_energy_select[str('{0:.3f}'.format(np.around(float(key), decimals=3)))] = interp_dmm_positions[key]
                 log.warning('   ***   selecting closest: %s' % key)
 
-            if epics.move(pos_dmm_energy_select, args):
+            if move.aps2bm(pos_dmm_energy_select, args):
                 config.save_params_to_config(args)
         else:
             log.error('Error: energy selected %4.3f is outside the calibrated range [%4.3f, %4.3f]' %(energy_select, energy_min, energy_max))
@@ -116,10 +116,10 @@ def run_pink(args):
     energy_lookup = dataio.load_preset()
     pos_dmm_energy_select = energy_lookup[args.mode]
 
-    if epics.move(pos_dmm_energy_select, args):
+    if move.aps2bm(pos_dmm_energy_select, args):
         config.save_params_to_config(args)
 
-def run_reset(args):
+def run_restore(args):
 
     dataio.reset_default_to_local_preset()
 
@@ -149,11 +149,11 @@ def main():
     
     cmd_parsers = [
         ('init',        init,           (),           "Usage: dmm init                - Create configuration file and restore the original preset energy calibration file"),
-        ('mono',        run_mono,       mono_params,  "Usage: dmm mono   --energy 20  - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation between the two closest calibrared values"),
+        ('set',         set_mono,       mono_params,  "Usage: dmm set    --energy 20  - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation point between the two closest calibrared values"),
         ('pink',        run_pink,       pink_params,  "Usage: dmm pink                - Set the beamline to pink mode "),
         ('add',         run_add,        mono_params,  "Usage: dmm add    --energy 20  - Associate the current beamline positions to --energy value"),             
         ('delete',      run_delete,     mono_params,  "Usage: dmm delete --energy 20  - Remove --energy value from the preset energy calibration file"),             
-        ('reset',       run_reset,      mono_params,  "Usage: dmm reset               - Restore original preset energy calibration file. "),
+        ('restore',     run_restore,    mono_params,  "Usage: dmm restore             - Restore original preset energy calibration file. "),
         ('status',      run_status,     mono_params,  "Usage: dmm status              - Show status"),
     ]
 

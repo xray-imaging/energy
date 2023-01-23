@@ -8,7 +8,7 @@ import numpy as np
 from importlib.resources import files
 
 from dmm2bm import log
-from dmm2bm import epics
+from dmm2bm import pvs
 
 DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')
 DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm.json')
@@ -84,7 +84,7 @@ def add_pos_dmm_to_local_preset(args):
         return
 
     energy = str('{0:.3f}'.format(np.around(args.energy, decimals=3)))
-    epics_pvs = epics.init_epics_pvs(args)
+    epics_pvs = pvs.init(args)
     
     log.warning('add current beamline positions to local preset: %s:' % DATA_PATH_LOCAL)
     
