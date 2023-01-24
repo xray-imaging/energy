@@ -121,13 +121,43 @@ def run_pink(args):
 
 def run_restore(args):
 
+    if args.force:
+        pass
+    else:
+        if not util.yes_or_no('Confirm restore original preset energy calibration file?'):              
+            log.warning('   *** Original preset energy calibration file NOT restored')
+            return
+        else:
+            log.info(' ')
+            log.info('   *** Restoring original preset energy calibration file ...')
+    
     dataio.reset_default_to_local_preset()
 
 def run_add(args):
 
+    if args.force:
+        pass
+    else:
+        if not util.yes_or_no('Confirm associate the current beamline positions to --energy value?'):              
+            log.warning('   *** Beamlie position NOT asociated with --energy value ' + str(args.energy))
+            return
+        else:
+            log.info(' ')
+            log.info('   *** Beamlie position associated with --energy value ' + str(args.energy))
+
     dataio.add_pos_dmm_to_local_preset(args)
 
 def run_delete(args):
+
+    if args.force:
+        pass
+    else:
+        if not util.yes_or_no('Confirm delete --energy ' + str(args.energy) + ' from the preset energy calibration file?'):              
+            log.warning('   *** --energy %s NOT deleted' % args.energy)
+            return
+        else:
+            log.info(' ')
+            log.info('   *** --energy %s deleted' % args.energy)
 
     dataio.delete_energy_from_local_preset(args)
 
@@ -152,7 +182,7 @@ def main():
         ('set',         set_mono,       mono_params,  "Usage: dmm set    --energy 20  - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation point between the two closest calibrared values"),
         ('pink',        run_pink,       pink_params,  "Usage: dmm pink                - Set the beamline to pink mode "),
         ('add',         run_add,        mono_params,  "Usage: dmm add    --energy 20  - Associate the current beamline positions to --energy value"),             
-        ('delete',      run_delete,     mono_params,  "Usage: dmm delete --energy 20  - Remove --energy value from the preset energy calibration file"),             
+        ('delete',      run_delete,     mono_params,  "Usage: dmm delete --energy 20  - Delete --energy value from the preset energy calibration file"),             
         ('restore',     run_restore,    mono_params,  "Usage: dmm restore             - Restore original preset energy calibration file. "),
         ('status',      run_status,     mono_params,  "Usage: dmm status              - Show status"),
     ]

@@ -8,8 +8,6 @@ from dmm2bm import pvs
 
 ShutterA_Open_Value  = 1
 ShutterA_Close_Value = 0
-ShutterB_Open_Value  = 1
-ShutterB_Close_Value = 0
 
 def aps2bm(pos_dmm_energy_select, params):
 
