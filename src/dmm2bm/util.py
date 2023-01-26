@@ -1,3 +1,4 @@
+import re
 import numpy as np
 
 from dmm2bm import log
@@ -56,53 +57,26 @@ def interpolate(energy_select, energies, n_steps):
 
     interp_energies_dict = {}
 
-    keys = list(energies.keys())
+    energy = list(energies.keys())
+    interp_energies = np.linspace(float(energy[0]), float(energy[1]), n_steps)
 
-    # print(keys[0],                                                keys[1])                                    
-    # print(energies[keys[0]]['mirror_angle'],             energies[keys[1]]['mirror_angle'])        
-    # print(energies[keys[0]]['mirror_vertical_position'], energies[keys[1]]['mirror_vertical_position'])
-    # print(energies[keys[0]]['dmm_usy_ob'],               energies[keys[1]]['dmm_usy_ob'])              
-    # print(energies[keys[0]]['dmm_usy_ib'],               energies[keys[1]]['dmm_usy_ib'])              
-    # print(energies[keys[0]]['dmm_dsy'],                  energies[keys[1]]['dmm_dsy'])                 
-    # print(energies[keys[0]]['dmm_us_arm'],               energies[keys[1]]['dmm_us_arm'])              
-    # print(energies[keys[0]]['dmm_ds_arm'],               energies[keys[1]]['dmm_ds_arm'])              
-    # print(energies[keys[0]]['dmm_m2y'],                  energies[keys[1]]['dmm_m2y'])                 
-    # print(energies[keys[0]]['dmm_usx'],                  energies[keys[1]]['dmm_usx'])                
-    # print(energies[keys[0]]['dmm_dsx'],                  energies[keys[1]]['dmm_dsx'])                 
-    # print(energies[keys[0]]['table_y'],                  energies[keys[1]]['table_y'])               
-    # print(energies[keys[0]]['flag'],                     energies[keys[1]]['flag'])                   
-
-    interp_energies                 = np.linspace(float(keys[0]),                                       float(keys[1]),                                       n_steps)
-    interp_mirror_angle             = np.linspace(float(energies[keys[0]]['mirror_angle']),             float(energies[keys[1]]['mirror_angle']),             n_steps)
-    interp_mirror_vertical_position = np.linspace(float(energies[keys[0]]['mirror_vertical_position']), float(energies[keys[1]]['mirror_vertical_position']), n_steps)
-    interp_dmm_usy_ob               = np.linspace(float(energies[keys[0]]['dmm_usy_ob']),               float(energies[keys[1]]['dmm_usy_ob']),               n_steps)
-    interp_dmm_usy_ib               = np.linspace(float(energies[keys[0]]['dmm_usy_ib']),               float(energies[keys[1]]['dmm_usy_ib']),               n_steps)
-    interp_dmm_dsy                  = np.linspace(float(energies[keys[0]]['dmm_dsy']),                  float(energies[keys[1]]['dmm_dsy']),                  n_steps) 
-    interp_dmm_us_arm               = np.linspace(float(energies[keys[0]]['dmm_us_arm']),               float(energies[keys[1]]['dmm_us_arm']),               n_steps)
-    interp_dmm_ds_arm               = np.linspace(float(energies[keys[0]]['dmm_ds_arm']),               float(energies[keys[1]]['dmm_ds_arm']),               n_steps)
-    interp_dmm_m2y                  = np.linspace(float(energies[keys[0]]['dmm_m2y']),                  float(energies[keys[1]]['dmm_m2y']),                  n_steps)
-    interp_dmm_usx                  = np.linspace(float(energies[keys[0]]['dmm_usx']),                  float(energies[keys[1]]['dmm_usx']),                  n_steps)
-    interp_dmm_dsx                  = np.linspace(float(energies[keys[0]]['dmm_dsx']),                  float(energies[keys[1]]['dmm_dsx']),                  n_steps)
-    interp_table_y                  = np.linspace(float(energies[keys[0]]['table_y']),                  float(energies[keys[1]]['table_y']),                  n_steps)
-    interp_flag                     = np.linspace(float(energies[keys[0]]['flag']),                     float(energies[keys[1]]['flag']),                     n_steps) 
-
+    interp_positions = {} 
+    for key in energies[energy[0]]:
+        if 'energy_move' in key:
+            try:
+                interp_positions[key] = np.linspace(float(energies[energy[0]][key]), float(energies[energy[1]][key]), n_steps)      
+            except KeyError:
+                log.error('%s value is missing for energy = %s keV' % (key, energy_select))
+                log.error('Please check/recalibrate %s for [%s, %s] keV' % (key, energy[0], energy[1]))
+                exit()
     i = 0
-    for energy in interp_energies:
+    for interp_energy in interp_energies:
         temp_dict = {}
-        temp_dict['mirror_angle']             =  interp_mirror_angle[i]
-        temp_dict['mirror_vertical_position'] =  interp_mirror_vertical_position[i]
-        temp_dict['dmm_usy_ob']               =  interp_dmm_usy_ob[i]
-        temp_dict['dmm_usy_ib']               =  interp_dmm_usy_ib[i]
-        temp_dict['dmm_dsy']                  =  interp_dmm_dsy[i]
-        temp_dict['dmm_us_arm']               =  interp_dmm_us_arm[i]
-        temp_dict['dmm_ds_arm']               =  interp_dmm_ds_arm[i]
-        temp_dict['dmm_m2y']                  =  interp_dmm_m2y[i]
-        temp_dict['dmm_usx']                  =  interp_dmm_usx[i]
-        temp_dict['dmm_dsx']                  =  interp_dmm_dsx[i]
-        temp_dict['table_y']                  =  interp_table_y[i]
-        temp_dict['flag']                     =  interp_flag[i]
+        for key in energies[energy[0]]:
+            if 'energy_move' in key:
+                temp_dict[key] = interp_positions[key][i]
 
-        interp_energies_dict[str(energy)]     = temp_dict
+        interp_energies_dict[str(interp_energy)]     = temp_dict
 
         i += 1
 
@@ -120,3 +94,15 @@ def closest_value(input_list, input_value):
     res = min(input_list, key=difference)
  
     return res
+
+def clean(s):
+
+    # Remove all non-word characters (everything except numbers and letters)
+    s = re.sub(r"[^\w\s]", '', s)
+
+    # Replace all runs of whitespace with a single dash
+    s = re.sub(r"\s+", '_', s)
+
+    # lower case
+    s = s.lower()
+    return s

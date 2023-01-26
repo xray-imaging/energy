@@ -88,51 +88,13 @@ def add_pos_dmm_to_local_preset(args):
     
     log.warning('add current beamline positions to local preset: %s:' % DATA_PATH_LOCAL)
     
-    if args.testing:
-        pos_mirror_angle               = 0.0
-        pos_mirror_vertical_position   = 0.0
-        pos_dmm_usy_ob                 = 0.0
-        pos_dmm_usy_ib                 = 0.0
-        pos_dmm_dsy                    = 0.0
-        pos_dmm_us_arm                 = 0.0
-        pos_dmm_ds_arm                 = 0.0
-        pos_dmm_m2y                    = 0.0
-        pos_dmm_usx                    = 0.0
-        pos_dmm_dsx                    = 0.0
-        pos_filter                     = 0.0
-        pos_table_y                    = 0.0
-        pos_flag                       = 0.0
-    else:
-        pos_mirror_angle               = epics_pvs['mirror_angle'].get()            
-        pos_mirror_vertical_position   = epics_pvs['mirror_vertical_position'].get()
-        pos_dmm_usy_ob                 = epics_pvs['dmm_usy_ob'].get()              
-        pos_dmm_usy_ib                 = epics_pvs['dmm_usy_ib'].get()              
-        pos_dmm_dsy                    = epics_pvs['dmm_dsy'].get()                 
-        pos_dmm_us_arm                 = epics_pvs['dmm_us_arm'].get()              
-        pos_dmm_ds_arm                 = epics_pvs['dmm_ds_arm'].get()              
-        pos_dmm_m2y                    = epics_pvs['dmm_m2y'].get()                 
-        pos_dmm_usx                    = epics_pvs['dmm_usx'].get()                 
-        pos_dmm_dsx                    = epics_pvs['dmm_dsx'].get()                 
-        pos_filter                     = epics_pvs['filter'].get()  
-        pos_table_y                    = epics_pvs['table_y'].get()  
-        pos_flag                       = epics_pvs['flag'].get()  
-
     pos_dmm_energy_select = {}
     pos_dmm_energy_select['Mono'] = {}
     pos_dmm_energy_select['Mono'][energy] = {}
-    pos_dmm_energy_select['Mono'][energy]['mirror_angle']             = pos_mirror_angle            
-    pos_dmm_energy_select['Mono'][energy]['mirror_vertical_position'] = pos_mirror_vertical_position
-    pos_dmm_energy_select['Mono'][energy]['dmm_usy_ob']               = pos_dmm_usy_ob              
-    pos_dmm_energy_select['Mono'][energy]['dmm_usy_ib']               = pos_dmm_usy_ib              
-    pos_dmm_energy_select['Mono'][energy]['dmm_dsy']                  = pos_dmm_dsy                 
-    pos_dmm_energy_select['Mono'][energy]['dmm_us_arm']               = pos_dmm_us_arm              
-    pos_dmm_energy_select['Mono'][energy]['dmm_ds_arm']               = pos_dmm_ds_arm              
-    pos_dmm_energy_select['Mono'][energy]['dmm_m2y']                  = pos_dmm_m2y                 
-    pos_dmm_energy_select['Mono'][energy]['dmm_usx']                  = pos_dmm_usx                 
-    pos_dmm_energy_select['Mono'][energy]['dmm_dsx']                  = pos_dmm_dsx                 
-    pos_dmm_energy_select['Mono'][energy]['filter']                   = pos_filter                  
-    pos_dmm_energy_select['Mono'][energy]['table_y']                  = pos_table_y                 
-    pos_dmm_energy_select['Mono'][energy]['flag']                     = pos_flag                        
+
+    for key in epics_pvs:
+        if 'energy_move' in key or 'energy_pos' in key:
+            pos_dmm_energy_select['Mono'][energy][key] = epics_pvs[key].get() 
 
     log.info('save dmm positions: %s' % pos_dmm_energy_select)
 
@@ -160,4 +122,3 @@ def add_pos_dmm_to_local_preset(args):
     log.info('Update local preset file: %s' % DATA_PATH_LOCAL)
     with open(DATA_PATH_LOCAL, "w") as outfile:
         json.dump(energy_lookup_sorted, outfile, indent=4)        
-

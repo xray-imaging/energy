@@ -21,6 +21,7 @@ from dmm2bm import log
 from dmm2bm import util
 from dmm2bm import dataio
 from dmm2bm import move
+from dmm2bm import pvs
 
 from importlib.resources import files
 
@@ -124,7 +125,7 @@ def run_restore(args):
     if args.force:
         pass
     else:
-        if not util.yes_or_no('Confirm restore original preset energy calibration file?'):              
+        if not util.yes_or_no('Confirm restore original preset energy calibration file ?'):              
             log.warning('   *** Original preset energy calibration file NOT restored')
             return
         else:
@@ -138,7 +139,7 @@ def run_add(args):
     if args.force:
         pass
     else:
-        if not util.yes_or_no('Confirm associate the current beamline positions to --energy value?'):              
+        if not util.yes_or_no('Confirm associate the current beamline positions to --energy ' + str(args.energy) + ' ?'):              
             log.warning('   *** Beamlie position NOT asociated with --energy value ' + str(args.energy))
             return
         else:
@@ -152,7 +153,7 @@ def run_delete(args):
     if args.force:
         pass
     else:
-        if not util.yes_or_no('Confirm delete --energy ' + str(args.energy) + ' from the preset energy calibration file?'):              
+        if not util.yes_or_no('Confirm delete --energy ' + str(args.energy) + ' from the preset energy calibration file ?'):              
             log.warning('   *** --energy %s NOT deleted' % args.energy)
             return
         else:
@@ -166,6 +167,8 @@ def run_status(args):
 
     config.log_values(args)
     dataio.log_calibrated_energies(args)
+    pvs.init(args)
+
 
 def main():
 
