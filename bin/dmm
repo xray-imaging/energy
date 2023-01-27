@@ -78,33 +78,17 @@ def set_mono(args):
                 energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=3)
                 energy_high = np.around(float(energies_str[energy_closer_index]), decimals=3)
                
-            n_steps = int(1000*(energy_high-energy_low))
             log.info("   ***   Calibrated range [%4.3f, %4.3f] keV" % (energy_low, energy_high))
-            log.info("   ***   Interpolation steps: %d" % n_steps)
-
-            interp_energies = np.linspace(energy_low, energy_high, n_steps).round(decimals=3)
 
             pos_energy_start = {}
             pos_energy_end = {}
             pos_energy_start["{:.3f}".format(energy_low)] = energy_lookup['Mono']["{:.3f}".format(energy_low)]
             pos_energy_end["{:.3f}".format(energy_high)] = energy_lookup['Mono']["{:.3f}".format(energy_high)]
             pos_dmm_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
-            interp_dmm_positions = util.interpolate(energy_select, pos_dmm_start_end_energies, n_steps)
+      
+            interp_dmm_positions = util.interpolate(energy_select, pos_dmm_start_end_energies)
 
-            for key in  interp_dmm_positions:
-                if str('{0:.3f}'.format(np.around(float(energy_select), decimals=3))) == str('{0:.3f}'.format(np.around(float(key), decimals=3))):
-                    # print(str('{0:.3f}'.format(np.around(float(energy_select), decimals=3))), str('{0:.3f}'.format(np.around(float(key), decimals=3))))
-                    pos_dmm_energy_select[str('{0:.3f}'.format(np.around(float(key), decimals=3)))] = interp_dmm_positions[key]
-            if pos_dmm_energy_select == {}:
-                log.warning('Rounding error:')
-                log.warning('   ***   not exact match between: %s' % str('{0:.3f}'.format(np.around(float(energy_select), decimals=3))))
-                log.warning('   ***   and intepolated energies: %s'% interp_dmm_positions.keys())
- 
-                key = util.closest_value(interp_dmm_positions.keys(), '{0:.3f}'.format(np.around(float(energy_select), decimals=3)))
-                pos_dmm_energy_select[str('{0:.3f}'.format(np.around(float(key), decimals=3)))] = interp_dmm_positions[key]
-                log.warning('   ***   selecting closest: %s' % key)
-
-            if move.aps2bm(pos_dmm_energy_select, args):
+            if move.aps2bm(interp_dmm_positions, args):
                 config.save_params_to_config(args)
         else:
             log.error('Error: energy selected %4.3f is outside the calibrated range [%4.3f, %4.3f]' %(energy_select, energy_min, energy_max))

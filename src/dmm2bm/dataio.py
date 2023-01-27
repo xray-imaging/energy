@@ -94,7 +94,10 @@ def add_pos_dmm_to_local_preset(args):
 
     for key in epics_pvs:
         if 'energy_move' in key or 'energy_pos' in key:
-            pos_dmm_energy_select['Mono'][energy][key] = epics_pvs[key].get() 
+            if args.testing:
+                pos_dmm_energy_select['Mono'][energy][key] = 0.0 
+            else:
+                pos_dmm_energy_select['Mono'][energy][key] = epics_pvs[key].get() 
 
     log.info('save dmm positions: %s' % pos_dmm_energy_select)
 
@@ -112,10 +115,12 @@ def add_pos_dmm_to_local_preset(args):
 
     energy_lookup['Mono'][energy] = pos_dmm_energy_select['Mono'][energy]
 
-    myKeys = list(energy_lookup['Mono'].keys())
-    myKeys.sort()
+    sorted_list = list(map(float, list(energy_lookup['Mono'].keys())))
+    sorted_numbers = sorted(sorted_list)
+    sorted_strings = ['{:.3f}'.format(x) for x in sorted_numbers]
+
     energy_lookup_sorted = {}
-    energy_lookup_sorted['Mono'] = {i: energy_lookup['Mono'][i] for i in myKeys}
+    energy_lookup_sorted['Mono'] = {i: energy_lookup['Mono'][i] for i in sorted_strings}
     energy_lookup_sorted['Pink'] = {}
     energy_lookup_sorted['Pink']['30.000'] = energy_lookup['Pink']['30.000']
      

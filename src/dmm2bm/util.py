@@ -53,34 +53,22 @@ def wait_pv(epics_pv, wait_val, timeout=-1):
         else:
             return True
 
-def interpolate(energy_select, energies, n_steps):
+def interpolate(energy_select, energies):
 
-    interp_energies_dict = {}
+    energy      = list(energies.keys())
+    energy_low  = float(energy[0])
+    energy_high = float(energy[1])
 
-    energy = list(energies.keys())
-    interp_energies = np.linspace(float(energy[0]), float(energy[1]), n_steps)
+    temp_dict = {}
+    interp_energy_dict = {}
 
-    interp_positions = {} 
     for key in energies[energy[0]]:
         if 'energy_move' in key:
-            try:
-                interp_positions[key] = np.linspace(float(energies[energy[0]][key]), float(energies[energy[1]][key]), n_steps)      
-            except KeyError:
-                log.error('%s value is missing for energy = %s keV' % (key, energy_select))
-                log.error('Please check/recalibrate %s for [%s, %s] keV' % (key, energy[0], energy[1]))
-                exit()
-    i = 0
-    for interp_energy in interp_energies:
-        temp_dict = {}
-        for key in energies[energy[0]]:
-            if 'energy_move' in key:
-                temp_dict[key] = interp_positions[key][i]
+             temp_dict[key] = energies[energy[0]][key] + ((energy_select - energy_low) / (energy_high - energy_low) * (energies[energy[1]][key] - energies[energy[0]][key]))
+    
+    interp_energy_dict["{:.3f}".format(energy_select)] = temp_dict
 
-        interp_energies_dict[str(interp_energy)]     = temp_dict
-
-        i += 1
-
-    return interp_energies_dict
+    return interp_energy_dict
 
 def merge(dict1, dict2):
 
