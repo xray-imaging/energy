@@ -11,6 +11,7 @@ ShutterA_Close_Value = 0
 
 def aps2bm(pos_dmm_energy_select, params):
 
+    move_status = False
     log.info('Moving DMM to: %s %s' % (params.mode, pos_dmm_energy_select))
 
     if params.force:
@@ -24,7 +25,7 @@ def aps2bm(pos_dmm_energy_select, params):
         if not util.yes_or_no('Confirm energy change?'):              
             log.info(' ')
             log.warning('   *** Energy not changed')
-            return False
+            return move_status
 
     epics_pvs = pvs.init(params)
 
@@ -49,10 +50,17 @@ def aps2bm(pos_dmm_energy_select, params):
                 if (params.testing):
                     log.warning('     *** testing mode:  set %s to %s' % (key.replace('energy_', ''), pos))
                 else:
+                    move_status = True
                     log.error('>>> moving command: epics_pvs[%s].put(%s)' % (key, pos))
                     # commented for testing
                     # epics_pvs[key].put(pos)
         except KeyError: 
             log.error('When using an intepolated position the PV associated to motor: %s is not moved' % epics_pvs[key].pvname)
     log.info('     *** move motors: Done!')
+
+    if move_status:
+        epics_pvs['energy_mode'].put(params.mode, wait=True)
+        epics_pvs['energy'].put(energy, wait=True)
+
+    return move_status
 
