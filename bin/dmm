@@ -87,7 +87,6 @@ def set_mono(args):
             pos_dmm_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
       
             interp_dmm_positions = util.interpolate(energy_select, pos_dmm_start_end_energies)
-
             if move.aps2bm(interp_dmm_positions, args):
                 config.save_params_to_config(args)
         else:

@@ -1,7 +1,11 @@
 import re
+import time
+
 import numpy as np
 
 from dmm2bm import log
+
+EPSILON = 0.01
 
 def positive_int(value):
     """Convert *value* to an integer and make sure it is positive."""

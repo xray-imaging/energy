@@ -36,11 +36,10 @@ def aps2bm(pos_dmm_energy_select, params):
         log.warning('closing A-shutter')
         epics_pvs['ShutterA_Close'].put(1, wait=True)
         # uncomment and test with beam:
-        # util.wait_pv(epics_pvs['ShutterA_Move_Status'], ShutterA_Close_Value)
+        util.wait_pv(epics_pvs['ShutterA_Move_Status'], ShutterA_Close_Value)
         log.info('     *** close_shutter A: Done!')
 
     log.info('move motors')
-
     energy = list(pos_dmm_energy_select.keys())[0]
     for key in epics_pvs:
         try:
@@ -48,15 +47,19 @@ def aps2bm(pos_dmm_energy_select, params):
                 pos     = pos_dmm_energy_select[energy][key]
                 pv_name = epics_pvs[key].pvname
                 if (params.testing):
-                    log.warning('     *** testing mode:  set %s to %s' % (key.replace('energy_', ''), pos))
+                    log.warning('     ***  testing mode:  set %s to %f' % (key.replace('energy_', ''), pos))
+                    time.sleep(1) 
                 else:
                     move_status = True
-                    log.error('>>> moving command: epics_pvs[%s].put(%s)' % (key, pos))
+                    log.info('move command: epics_pvs[%s].put(%s) sent to motor' % (key, pos))
                     # commented for testing
-                    # epics_pvs[key].put(pos)
+                    epics_pvs[key].put(pos)
+                    time.sleep(.1) 
+
         except KeyError: 
             log.error('When using an intepolated position the PV associated to motor: %s is not moved' % epics_pvs[key].pvname)
-    log.info('     *** move motors: Done!')
+    
+    log.info('     *** all move commands sent to motors')
 
     if move_status:
         epics_pvs['energy_mode'].put(params.mode, wait=True)
