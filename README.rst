@@ -23,9 +23,10 @@ This python tool box relies on the following EPICS PVs served by a different IOC
 
 
 ::
+
     $(P)$(R)EnergyMoveXPVName (X=0, 1 ...) 
 
-hosting the PV name of motors that will be used to move to interpolated positions. The motor position for **$(P)$(R)EnergyMoveXPVName** 
+hosting the PV name of motors that will be used to move to interpolated positions. The motor position for **"$(P)$(R)EnergyMoveXPVName"** 
 must be present in both lookup table entries for the energy below/above the selected value, if one of the values is missing the motor will not be moved.  
 
 ::
@@ -38,7 +39,7 @@ PV hosting the shutter PV Open/Close/Status PV names formatted as:
 
     $(P)$(R)OpenShutterPVName
     $(P)$(R)CloseShutterPVName
-$(P)$(R)ShutterStatusPVName
+    $(P)$(R)ShutterStatusPVName
 
 PV hosting the value to Open/Close the shutter;
 
