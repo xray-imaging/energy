@@ -10,13 +10,13 @@ from importlib.resources import files
 from dmm2bm import log
 from dmm2bm import pvs
 
-DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm.json')
-DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm.json')
+DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm2bm.json')
+DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm2bm.json')
 
-def init_preset():
-    reset_default_to_local_preset()
+def init_preset(args):
+    reset_default_to_local_preset(args)
 
-def load_preset():
+def load_preset(args):
     if DATA_PATH_LOCAL.exists():
         log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
         with open(DATA_PATH_LOCAL) as json_file:
@@ -25,7 +25,7 @@ def load_preset():
         energy_lookup = reset_default_to_local_preset()
     return energy_lookup
 
-def reset_default_to_local_preset():
+def reset_default_to_local_preset(args):
 
     log.info('Loading preset from: %s' % DATA_PATH)
     with open(DATA_PATH) as json_file:
@@ -101,7 +101,7 @@ def add_pos_dmm_to_local_preset(args):
 
     log.info('save dmm positions: %s' % pos_dmm_energy_select)
 
-    energy_lookup = load_preset()
+    energy_lookup = load_preset(args)
 
     energy_list = []
 

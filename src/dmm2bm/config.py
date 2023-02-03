@@ -12,11 +12,10 @@ from datetime import datetime
 
 from dmm2bm import log
 from dmm2bm import util
-from dmm2bm import epics
 from dmm2bm import __version__
 
 LOGS_HOME = os.path.join(str(pathlib.Path.home()), 'logs')
-CONFIG_FILE_NAME = os.path.join(str(pathlib.Path.home()), 'logs/dmm.conf')
+CONFIG_FILE_NAME = os.path.join(str(pathlib.Path.home()), 'logs/energy.conf')
 
 SECTIONS = OrderedDict()
 
@@ -53,17 +52,23 @@ SECTIONS['energy'] = {
         }
 
 
-SECTIONS['energyioc'] = {
+SECTIONS['settings'] = {
     'energyioc-prefix':{
         'default': '2bm:MCTOptics:',
         'type': str,
         'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "},
+    'beamline': {
+        'default': 'None',
+        'type': str,
+        'help': "This parameter is used to select the pv-x-y.json file, e.g. pv-2-bm.json. This file must be created in the slackbot/data directory",
+        'choices': ['None','2-bm', '7-bm', '8-id', '20-bm', '29-id', '32-id']
+        },
     }
 
-MONO_PARAMS = ('energy', 'energyioc')
-PINK_PARAMS = ('energyioc', )
+MONO_PARAMS = ('energy', 'settings')
+PINK_PARAMS = ('settings', )
 
-NICE_NAMES = ('General', 'DMM Energy', 'Energy IOC')
+NICE_NAMES = ('General', 'DMM Energy', 'Settings')
 
 def get_config_name():
     """Get the command line --config option."""

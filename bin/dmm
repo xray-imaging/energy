@@ -29,7 +29,7 @@ from importlib.resources import files
 def init(args):
     if not os.path.exists(str(args.config)):
         config.write(args.config)
-        dataio.init_preset()
+        dataio.init_preset(args)
     else:
         log.error("{0} already exists".format(args.config))
 
@@ -38,7 +38,7 @@ def set_mono(args):
     config.log_values(args)
     args.mode = "Mono"
     energy_select = np.around(args.energy, decimals=3) 
-    energy_lookup = dataio.load_preset()
+    energy_lookup = dataio.load_preset(args)
     energy_list = []
 
     for key in energy_lookup['Mono']:
@@ -97,7 +97,7 @@ def run_pink(args):
     config.log_values(args)
     args.mode = "Pink"
 
-    energy_lookup = dataio.load_preset()
+    energy_lookup = dataio.load_preset(args)
     pos_dmm_energy_select = energy_lookup[args.mode]
 
     if move.aps2bm(pos_dmm_energy_select, args):
