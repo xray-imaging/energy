@@ -2,7 +2,7 @@
 energy-cli
 ==========
 
-**energy-cli** a general purpose commad-line-interface that allows to move a set of motors using a list of preselected/calibrated positions stored in a lookup table. The list of motor positions is labeled with an an energy value. When the enegy selected is not in the list of calibrated positions a subset of motors can be moved to interplatate positions.
+**energy-cli** a general purpose commad-line-interface that allows to move a set of motors using a list of preselected/calibrated positions stored in a lookup table. The list of motor positions is labeled with an energy value. When the enegy selected is not in the list of calibrated positions a subset of motors can be moved to interplatate positions.
 
 Installation
 ============
@@ -64,6 +64,8 @@ Optional PVs to store the motion all done:
     $(P)$(R)AllDoneB
 
 These are only used before the opening the front end shutter to confirm all motors are done moving.
+
+If these PVs are not avaialable from an EPICS IOC, you can simply hardcode the motor PV names in the **src/energy/pvs.py** file
 
 Usage
 =====
