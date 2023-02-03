@@ -58,10 +58,10 @@ SECTIONS['settings'] = {
         'type': str,
         'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "},
     'beamline': {
-        'default': 'None',
+        'default': '2bm',
         'type': str,
-        'help': "This parameter is used to select the pv-x-y.json file, e.g. pv-2-bm.json. This file must be created in the slackbot/data directory",
-        'choices': ['None','2-bm', '7-bm', '8-id', '20-bm', '29-id', '32-id']
+        'help': "This parameter is used to select the energy---.json file, e.g. energy2bm.json. This file must be created in the DATA_PATH_LOCAL directory",
+        'choices': ['None','2bm', '7bm', '8id', '20bm', '29id', '32id']
         },
     }
 
@@ -174,7 +174,7 @@ def write(config_file, args=None, sections=None):
 
             if name != 'config':
                 config.set(section, prefix + name, str(value))
-    #print(args.energy_value)
+    # print(args.energy_value)
     with open(config_file, 'w') as f:        
         config.write(f)
 

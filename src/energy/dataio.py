@@ -10,49 +10,59 @@ from importlib.resources import files
 from energy import log
 from energy import pvs
 
-DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm2bm.json')
-DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm2bm.json')
+DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data')
+DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs')
 
 def init_preset(args):
     reset_default_to_local_preset(args)
 
 def load_preset(args):
-    if DATA_PATH_LOCAL.exists():
-        log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
-        with open(DATA_PATH_LOCAL) as json_file:
+
+    run_time_data_file     = pathlib.Path(DATA_PATH_LOCAL, 'energy' + args.beamline + '.json')
+
+    if run_time_data_file.exists():
+        log.info('Loading preset from: %s' % run_time_data_file)
+        with open(run_time_data_file) as json_file:
             energy_lookup = json.load(json_file)
     else:
-        energy_lookup = reset_default_to_local_preset()
+        energy_lookup = reset_default_to_local_preset(args)
     return energy_lookup
 
 def reset_default_to_local_preset(args):
 
-    log.info('Loading preset from: %s' % DATA_PATH)
-    with open(DATA_PATH) as json_file:
+    run_time_data_file     = pathlib.Path(DATA_PATH_LOCAL, 'energy' + args.beamline + '.json')
+    install_time_data_file = pathlib.Path(DATA_PATH,       'energy' + args.beamline + '.json')
+
+    log.info('Loading preset from: %s' % install_time_data_file)
+    with open(install_time_data_file) as json_file:
         energy_lookup = json.load(json_file)
-    log.info('Create local preset file: %s' % DATA_PATH_LOCAL)
-    with open(DATA_PATH_LOCAL, "w") as outfile:
+    log.info('Create local preset file: %s' % run_time_data_file)
+    with open(run_time_data_file, "w") as outfile:
         json.dump(energy_lookup, outfile, indent=4)        
 
     return energy_lookup
 
 def log_calibrated_energies(args):
 
-    if DATA_PATH_LOCAL.exists():
-        log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
-        with open(DATA_PATH_LOCAL) as json_file:
+    run_time_data_file     = pathlib.Path(DATA_PATH_LOCAL, 'energy' + args.beamline + '.json')
+
+    if run_time_data_file.exists():
+        log.info('Loading preset from: %s' % run_time_data_file)
+        with open(run_time_data_file) as json_file:
             energy_lookup = json.load(json_file)
         log.info('Current calibrated energies:')
         log.info('  %s' % list(energy_lookup['Mono'].keys()))
     else:
-        log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
+        log.error("Missing preset energy file %s" % run_time_data_file) 
         log.error("Run: energy init")
 
 def delete_energy_from_local_preset(args):
 
-    if DATA_PATH_LOCAL.exists():
-        log.info('Loading preset from: %s' % DATA_PATH_LOCAL)
-        with open(DATA_PATH_LOCAL) as json_file:
+    run_time_data_file     = pathlib.Path(DATA_PATH_LOCAL, 'energy' + args.beamline + '.json')
+
+    if run_time_data_file.exists():
+        log.info('Loading preset from: %s' % run_time_data_file)
+        with open(run_time_data_file) as json_file:
             energy_lookup = json.load(json_file)
         log.info('Current calibrated energies:')
         log.info('  %s' % list(energy_lookup['Mono'].keys()))
@@ -62,8 +72,8 @@ def delete_energy_from_local_preset(args):
             energy_lookup['Mono'].pop("{:.3f}".format(args.energy))
             log.info('  %s' % list(energy_lookup['Mono'].keys()))
 
-            log.info('Update local preset file: %s' % DATA_PATH_LOCAL)
-            with open(DATA_PATH_LOCAL, "w") as outfile:
+            log.info('Update local preset file: %s' % run_time_data_file)
+            with open(run_time_data_file, "w") as outfile:
                 json.dump(energy_lookup, outfile, indent=4)    
         else:
             if args.energy == -1:
@@ -72,7 +82,7 @@ def delete_energy_from_local_preset(args):
             else:
                 log.error('--energy %s in not in the current calibrated energy list' % "{:.3f}".format(args.energy))            
     else:
-        log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
+        log.error("Missing preset energy file %s" % run_time_data_file) 
         log.error("Run: energy init")
    
 
@@ -85,8 +95,10 @@ def add_pos_to_local_preset(args):
 
     energy = str('{0:.3f}'.format(np.around(args.energy, decimals=3)))
     epics_pvs = pvs.init(args)
+
+    run_time_data_file     = pathlib.Path(DATA_PATH_LOCAL, 'energy' + args.beamline + '.json')
     
-    log.warning('add current beamline positions to local preset: %s:' % DATA_PATH_LOCAL)
+    log.warning('add current beamline positions to local preset: %s:' % run_time_data_file)
     
     pos_energy_select = {}
     pos_energy_select['Mono'] = {}
@@ -124,6 +136,6 @@ def add_pos_to_local_preset(args):
     energy_lookup_sorted['Pink'] = {}
     energy_lookup_sorted['Pink']['30.000'] = energy_lookup['Pink']['30.000']
      
-    log.info('Update local preset file: %s' % DATA_PATH_LOCAL)
-    with open(DATA_PATH_LOCAL, "w") as outfile:
+    log.info('Update local preset file: %s' % run_time_data_file)
+    with open(run_time_data_file, "w") as outfile:
         json.dump(energy_lookup_sorted, outfile, indent=4)        
