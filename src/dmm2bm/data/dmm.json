@@ -140,17 +140,17 @@
         "30.000": {
             "energy_move_m1angl": 2.657,
             "energy_move_m1avg": -0.40000000000000013,
+            "energy_move_dmm_usx": 51.0,
+            "energy_move_dmm_dsx": 51.0,
             "energy_move_dmm_usy_ob": -10.0,
             "energy_move_dmm_usy_ib": -10.0,
             "energy_move_dmm_dsy": -10.0,
             "energy_move_dmm_us_arm": 1.33,
             "energy_move_dmm_ds_arm": 1.4002999999999552,
             "energy_move_dmm_m2_y": 17.390000000000036,
-            "energy_move_dmm_usx": 51.0,
-            "energy_move_dmm_dsx": 51.0,
-            "energy_pos_fltr1select": 3,
-            "energy_move_table3y": 1.7600000000000002,
-            "energy_move_flag": 3.0
+            "energy_move_table3y": -0.7400000000000002,
+            "energy_move_flag": 3.0,
+            "energy_pos_fltr1select": 3
         }
     }
 }
