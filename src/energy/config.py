@@ -10,9 +10,9 @@ from pathlib import Path
 from collections import OrderedDict
 from datetime import datetime
 
-from dmm2bm import log
-from dmm2bm import util
-from dmm2bm import __version__
+from energy import log
+from energy import util
+from energy import __version__
 
 LOGS_HOME = os.path.join(str(pathlib.Path.home()), 'logs')
 CONFIG_FILE_NAME = os.path.join(str(pathlib.Path.home()), 'logs/energy.conf')

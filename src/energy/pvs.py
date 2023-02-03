@@ -2,8 +2,8 @@ import time
 
 from epics import PV
 
-from dmm2bm import log
-from dmm2bm import util
+from energy import log
+from energy import util
 
 def init(params):
 

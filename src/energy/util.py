@@ -3,7 +3,7 @@ import time
 
 import numpy as np
 
-from dmm2bm import log
+from energy import log
 
 EPSILON = 0.01
 

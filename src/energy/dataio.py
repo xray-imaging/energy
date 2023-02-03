@@ -7,8 +7,8 @@ import numpy as np
 
 from importlib.resources import files
 
-from dmm2bm import log
-from dmm2bm import pvs
+from energy import log
+from energy import pvs
 
 DATA_PATH = pathlib.Path(pathlib.Path(__file__).parent, 'data', 'dmm2bm.json')
 DATA_PATH_LOCAL = pathlib.Path(pathlib.Path.home(), 'logs', 'dmm2bm.json')

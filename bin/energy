@@ -13,15 +13,13 @@ import json
 import numpy as np
 import platform
 
-import dmm2bm
-
-from dmm2bm import config
-from dmm2bm import __version__
-from dmm2bm import log
-from dmm2bm import util
-from dmm2bm import dataio
-from dmm2bm import move
-from dmm2bm import pvs
+from energy import config
+from energy import __version__
+from energy import log
+from energy import util
+from energy import dataio
+from energy import move
+from energy import pvs
 
 from importlib.resources import files
 
@@ -164,13 +162,13 @@ def main():
     pink_params = config.PINK_PARAMS    
     
     cmd_parsers = [
-        ('init',        init,           (),           "Usage: dmm init                - Create configuration file and restore the original preset energy calibration file"),
-        ('set',         set_mono,       mono_params,  "Usage: dmm set    --energy 20  - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation point between the two closest calibrared values"),
-        ('pink',        run_pink,       pink_params,  "Usage: dmm pink                - Set the beamline to pink mode "),
-        ('add',         run_add,        mono_params,  "Usage: dmm add    --energy 20  - Associate the current beamline positions to --energy value"),             
-        ('delete',      run_delete,     mono_params,  "Usage: dmm delete --energy 20  - Delete --energy value from the preset energy calibration file"),             
-        ('restore',     run_restore,    mono_params,  "Usage: dmm restore             - Restore original preset energy calibration file. "),
-        ('status',      run_status,     mono_params,  "Usage: dmm status              - Show status"),
+        ('init',        init,           (),           "Usage: energy init                - Create configuration file and restore the original preset energy calibration file"),
+        ('set',         set_mono,       mono_params,  "Usage: energy set    --energy 20  - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation point between the two closest calibrared values"),
+        ('pink',        run_pink,       pink_params,  "Usage: energy pink                - Set the beamline to pink mode "),
+        ('add',         run_add,        mono_params,  "Usage: energy add    --energy 20  - Associate the current beamline positions to --energy value"),             
+        ('delete',      run_delete,     mono_params,  "Usage: energy delete --energy 20  - Delete --energy value from the preset energy calibration file"),             
+        ('restore',     run_restore,    mono_params,  "Usage: energy restore             - Restore original preset energy calibration file. "),
+        ('status',      run_status,     mono_params,  "Usage: energy status              - Show status"),
     ]
 
     subparsers = parser.add_subparsers(title="Commands", metavar='')

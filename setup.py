@@ -1,16 +1,16 @@
 from setuptools import setup, find_packages, find_namespace_packages
 
 setup(
-    name='dmm2bm',
+    name='energy',
     version=open('VERSION').read().strip(),
     #version=__version__,
     author='Francesco De Carlo',
     author_email='decarlof@gmail.com',
-    url='https://github.com/decarlof/dmm',
+    url='https://github.com/decarlof/energy',
     packages=find_namespace_packages(where="src"),
     package_dir={"": "src"},
     include_package_data=True,
-    scripts=['bin/dmm'],
+    scripts=['bin/energy'],
     description='ops',
     zip_safe=False,
 )

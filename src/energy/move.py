@@ -2,9 +2,9 @@ import time
 
 from epics import PV
 
-from dmm2bm import log
-from dmm2bm import util
-from dmm2bm import pvs
+from energy import log
+from energy import util
+from energy import pvs
 
 # OpenShutterValue  = 1
 # CloseShutterValue = 0
@@ -46,7 +46,7 @@ def aps2bm(pos_dmm_energy_select, params):
                 pv_name = epics_pvs[key].pvname
                 if (params.testing):
                     log.warning('     ***  testing mode:  set %s to %f' % (key.replace('energy_', ''), pos))
-                    time.sleep(1) 
+                    time.sleep(.1) 
                 else:
                     move_status = True
                     log.info('move command: epics_pvs[%s].put(%s) sent to motor' % (key, pos))
@@ -63,13 +63,18 @@ def aps2bm(pos_dmm_energy_select, params):
         epics_pvs['energy_mode'].put(params.mode, wait=True)
         epics_pvs['energy'].put(energy, wait=True)
 
-    log.info('dmm: waiting on motion to complete')
+    log.info('energy: waiting on motion to complete')
     while True:
         time.sleep(.3)
         if epics_pvs['AllDoneA'].get() and epics_pvs['AllDoneB'].get():
             break
     log.info('motion completed')
-    open_frontend_shutter(epics_pvs)
+    log.info('open shutter')
+    if params.testing:
+        log.warning('     *** testing mode: A-shutter will be open at the end of the energy change')
+    else:
+        log.warning('opening A-shutter')
+        open_frontend_shutter(epics_pvs)
 
     return move_status
 
