@@ -46,7 +46,7 @@ def log_calibrated_energies(args):
         log.info('  %s' % list(energy_lookup['Mono'].keys()))
     else:
         log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
-        log.error("Run: dmm init")
+        log.error("Run: energy init")
 
 def delete_energy_from_local_preset(args):
 
@@ -68,19 +68,19 @@ def delete_energy_from_local_preset(args):
         else:
             if args.energy == -1:
                 log.error('Please use the --energy option to remove an energy from: %s' % list(energy_lookup['Mono'].keys()))
-                log.error('Example: dmm delete --energy %s' % list(energy_lookup['Mono'].keys())[0])
+                log.error('Example: energy delete --energy %s' % list(energy_lookup['Mono'].keys())[0])
             else:
                 log.error('--energy %s in not in the current calibrated energy list' % "{:.3f}".format(args.energy))            
     else:
         log.error("Missing preset energy file %s" % DATA_PATH_LOCAL) 
-        log.error("Run: dmm init")
+        log.error("Run: energy init")
    
 
-def add_pos_dmm_to_local_preset(args):
+def add_pos_to_local_preset(args):
 
     if args.energy <= 0:
-        log.error('Please use the --energy option to associate an energy value to the current DMM position')
-        log.error('Example: dmm add --energy 22.5')
+        log.error('Please use the --energy option to associate an energy value to the current motors position')
+        log.error('Example: energy add --energy 22.5')
         return
 
     energy = str('{0:.3f}'.format(np.around(args.energy, decimals=3)))
@@ -88,18 +88,18 @@ def add_pos_dmm_to_local_preset(args):
     
     log.warning('add current beamline positions to local preset: %s:' % DATA_PATH_LOCAL)
     
-    pos_dmm_energy_select = {}
-    pos_dmm_energy_select['Mono'] = {}
-    pos_dmm_energy_select['Mono'][energy] = {}
+    pos_energy_select = {}
+    pos_energy_select['Mono'] = {}
+    pos_energy_select['Mono'][energy] = {}
 
     for key in epics_pvs:
         if 'energy_move' in key or 'energy_pos' in key:
             if args.testing:
-                pos_dmm_energy_select['Mono'][energy][key] = 0.0 
+                pos_energy_select['Mono'][energy][key] = 0.0 
             else:
-                pos_dmm_energy_select['Mono'][energy][key] = epics_pvs[key].get() 
+                pos_energy_select['Mono'][energy][key] = epics_pvs[key].get() 
 
-    log.info('save dmm positions: %s' % pos_dmm_energy_select)
+    log.info('save energy positions: %s' % pos_energy_select)
 
     energy_lookup = load_preset(args)
 
@@ -109,11 +109,11 @@ def add_pos_dmm_to_local_preset(args):
         energy_list.append(key)
 
     if energy in energy_list:
-        log.warning('Energy %s keV is a pre-calibrated energy, update DMM positions' % energy)
+        log.warning('Energy %s keV is a pre-calibrated energy, update energy positions' % energy)
     else:
-        log.info('Energy %s keV is not a pre-calibrated energy, add DMM positions' % energy)
+        log.info('Energy %s keV is not a pre-calibrated energy, add energy positions' % energy)
 
-    energy_lookup['Mono'][energy] = pos_dmm_energy_select['Mono'][energy]
+    energy_lookup['Mono'][energy] = pos_energy_select['Mono'][energy]
 
     sorted_list = list(map(float, list(energy_lookup['Mono'].keys())))
     sorted_numbers = sorted(sorted_list)

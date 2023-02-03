@@ -9,10 +9,10 @@ from energy import pvs
 # OpenShutterValue  = 1
 # CloseShutterValue = 0
 
-def aps2bm(pos_dmm_energy_select, params):
+def aps2bm(pos_energy_select, params):
 
     move_status = False
-    log.info('Moving DMM to: %s %s' % (params.mode, pos_dmm_energy_select))
+    log.info('Moving motors to: %s %s' % (params.mode, pos_energy_select))
 
     if params.force:
         pass
@@ -20,7 +20,7 @@ def aps2bm(pos_dmm_energy_select, params):
         if (params.testing):
             log.warning('Testing mode is active. Nothing will move!')
         else:
-            log.error('DMM motors will move if you press Y!')
+            log.error('Beamline motors will move if you press Y!')
 
         if not util.yes_or_no('Confirm energy change?'):              
             log.info(' ')
@@ -38,11 +38,11 @@ def aps2bm(pos_dmm_energy_select, params):
         close_frontend_shutter(epics_pvs)
     
     log.info('move motors')
-    energy = list(pos_dmm_energy_select.keys())[0]
+    energy = list(pos_energy_select.keys())[0]
     for key in epics_pvs:
         try:
             if 'energy_move' in key or 'energy_pos' in key:
-                pos     = pos_dmm_energy_select[energy][key]
+                pos     = pos_energy_select[energy][key]
                 pv_name = epics_pvs[key].pvname
                 if (params.testing):
                     log.warning('     ***  testing mode:  set %s to %f' % (key.replace('energy_', ''), pos))

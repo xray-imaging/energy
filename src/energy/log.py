@@ -1,5 +1,5 @@
 '''
-    DMM log module
+    Energy change log module
     
 '''
 import logging

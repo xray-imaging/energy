@@ -45,16 +45,16 @@ def set_mono(args):
     log.info('Selected energy: %4.3f keV'  %  energy_select)
     log.info('Pre-calibrated energies: %s keV' %  energy_list)
 
-    pos_dmm_energy_select = {}
+    pos_energy_select = {}
 
     if "{:.3f}".format(energy_select) in energy_list:
-        pos_dmm_energy_select["{:.3f}".format(energy_select)] = energy_lookup['Mono']["{:.3f}".format(energy_select)]
+        pos_energy_select["{:.3f}".format(energy_select)] = energy_lookup['Mono']["{:.3f}".format(energy_select)]
         log.info('Energy %s keV is a pre-calibrated energy, using lookup table positions' % energy_select)
-        if move.aps2bm(pos_dmm_energy_select, args):
+        if move.aps2bm(pos_energy_select, args):
             config.save_params_to_config(args)
     elif energy_select == -1:
         log.error('Please use the --energy option to select an energy value to move to')
-        log.error('Example: dmm mono --energy 22.5')
+        log.error('Example: energy mono --energy 22.5')
     else:
         log.warning('Energy %s keV is not a pre-calibrated energy, using interpolation' % energy_select)
         energies_str = np.array(energy_list)
@@ -82,10 +82,10 @@ def set_mono(args):
             pos_energy_end = {}
             pos_energy_start["{:.3f}".format(energy_low)] = energy_lookup['Mono']["{:.3f}".format(energy_low)]
             pos_energy_end["{:.3f}".format(energy_high)] = energy_lookup['Mono']["{:.3f}".format(energy_high)]
-            pos_dmm_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
+            pos_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
       
-            interp_dmm_positions = util.interpolate(energy_select, pos_dmm_start_end_energies)
-            if move.aps2bm(interp_dmm_positions, args):
+            interp_positions = util.interpolate(energy_select, pos_start_end_energies)
+            if move.aps2bm(interp_positions, args):
                 config.save_params_to_config(args)
         else:
             log.error('Error: energy selected %4.3f is outside the calibrated range [%4.3f, %4.3f]' %(energy_select, energy_min, energy_max))
@@ -96,9 +96,9 @@ def run_pink(args):
     args.mode = "Pink"
 
     energy_lookup = dataio.load_preset(args)
-    pos_dmm_energy_select = energy_lookup[args.mode]
+    pos_energy_select = energy_lookup[args.mode]
 
-    if move.aps2bm(pos_dmm_energy_select, args):
+    if move.aps2bm(pos_energy_select, args):
         config.save_params_to_config(args)
 
 def run_restore(args):
@@ -127,7 +127,7 @@ def run_add(args):
             log.info(' ')
             log.info('   *** Beamlie position associated with --energy value ' + str(args.energy))
 
-    dataio.add_pos_dmm_to_local_preset(args)
+    dataio.add_pos_to_local_preset(args)
 
 def run_delete(args):
 
@@ -188,7 +188,7 @@ def main():
     if not os.path.exists(logs_home):
         os.makedirs(logs_home)
 
-    lfname = os.path.join(logs_home, 'dmm_' + datetime.strftime(datetime.now(), "%Y-%m-%d_%H_%M_%S") + '.log')
+    lfname = os.path.join(logs_home, 'energy_' + datetime.strftime(datetime.now(), "%Y-%m-%d_%H_%M_%S") + '.log')
  
     log.setup_custom_logger(lfname)
     log.info("Saving log at %s" % lfname)

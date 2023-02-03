@@ -36,7 +36,7 @@ SECTIONS['general'] = {
         'action': 'store_true'},
     'testing': {
         'default': False,
-        'help': 'Enable test mode to show DMM new motor positions. The DMM motors will not move',
+        'help': 'Enable test mode to show new motor positions. The motors will not move',
         'action': 'store_true'},
     'force': {
         'default': False,
@@ -48,7 +48,7 @@ SECTIONS['energy'] = {
     'energy': {
         'default': -1,
         'type': float,
-        'help': "Desired double crystal multilayer (DMM) monochromator energy. Default (-1) = Pink beam"},
+        'help': "Desired energy. Default (-1) = Pink beam"},
         }
 
 
@@ -68,7 +68,7 @@ SECTIONS['settings'] = {
 MONO_PARAMS = ('energy', 'settings')
 PINK_PARAMS = ('settings', )
 
-NICE_NAMES = ('General', 'DMM Energy', 'Settings')
+NICE_NAMES = ('General', 'Energy', 'Settings')
 
 def get_config_name():
     """Get the command line --config option."""
