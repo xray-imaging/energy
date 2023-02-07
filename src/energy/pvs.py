@@ -15,10 +15,10 @@ def init(params):
     # $(P)$(R)EnergyMoveXPVName (X=0, 1 ...) hosting the PV name of motors that will be used to move to interpolated positions.
     # The motor position for $(P)$(R)EnergyMoveXPVName must be present in both lookup table entries for the energy below/above the selected value,
     # if one of the values is missing the motor will not be moved.  
-    epics_move_pvs = init_pvs(params, 'EnergyMove', 'energy move ', n=16)
+    epics_move_pvs = init_pvs(params, 'EnergyMove', 'energy move ')
     # $(P)$(R)EnergyPosXPVName (X=0, 1 ...) hosting the PV name of motors that will NOT be used to move to interpolated positions
     # These motors will move only when a pre-calibrated energy is selected
-    epics_pos_pvs  = init_pvs(params, 'EnergyPos',  'energy pos ',  n=40)
+    epics_pos_pvs  = init_pvs(params, 'EnergyPos',  'energy pos ',)
 
     epics_pvs = {**epics_move_pvs, **epics_pos_pvs}
 
@@ -39,20 +39,25 @@ def init(params):
     # These are optional PV to store the motion all done. 
     # These are only used before the open_frontend_shutter() to confirm all motors are done moving
     # Temporary hardcoded. 
-    epics_pvs['AllDoneA']                 = PV('2bma:alldone')
-    epics_pvs['AllDoneB']                 = PV('2bmb:alldone')
+    if params.beamline == '2bm':
+        epics_pvs['AllDoneA']                 = PV('2bma:alldone')
+        epics_pvs['AllDoneB']                 = PV('2bmb:alldone')
 
     # Wait 1 second for all PVs to connect
     time.sleep(1)
     
     return epics_pvs
 
-def init_pvs(params, pv_prefix='EnergyMove', label='energy move ', n=16):
+def init_pvs(params, pv_prefix='EnergyMove', label='energy move '):
 
     # this python toolbox relies on epics PVs provided by an external IOC.
     # These PV host 
-    # pv_name = {}
     epics_pvs = {}
+
+    if pv_prefix=='EnergyMove':
+        n = params.n_move
+    else:
+        n = params.n_pos 
     s = ''
     for i in range(n):
         pv_pv_desc = params.energyioc_prefix + pv_prefix + str(i) + 'PVDesc'

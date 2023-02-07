@@ -41,27 +41,40 @@ SECTIONS['general'] = {
     'force': {
         'default': False,
         'help': 'When set the enegy change will occurs without a confirmation request',
-        'action': 'store_true'},
-        }
+        'action': 'store_true'
+        },
+    }
 
 SECTIONS['energy'] = {
     'energy': {
         'default': -1,
         'type': float,
-        'help': "Desired energy. Default (-1) = Pink beam"},
-        }
+        'help': "Desired energy. Default (-1) = Pink beam"
+        },
+    }
 
 
 SECTIONS['settings'] = {
     'energyioc-prefix':{
         'default': '32id:TXMOptics:',
         'type': str,
-        'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "},
+        'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "
+        },
     'beamline': {
         'default': '32id',
         'type': str,
         'help': "This parameter is used to select the energy---.json file, e.g. energy2bm.json. This file must be created in the DATA_PATH_LOCAL directory",
         'choices': ['None','2bm', '7bm', '8id', '20bm', '29id', '32id']
+        },
+    'n-move': {
+        'default': 16,
+        'type': int,
+        'help': "Number of PVs that will be used in move interpolation; 32id=16, 2bm=16",
+        },
+    'n-pos': {
+        'default': 40,
+        'type': int,
+        'help': "Number of PVs that will be used to store motor position; 32id=40, 2bm=3",
         },
     }
 

@@ -9,7 +9,7 @@ from energy import pvs
 # OpenShutterValue  = 1
 # CloseShutterValue = 0
 
-def aps2bm(pos_energy_select, params):
+def motors(pos_energy_select, params):
 
     move_status = False
     log.info('Moving motors to: %s %s' % (params.mode, pos_energy_select))
@@ -64,10 +64,11 @@ def aps2bm(pos_energy_select, params):
         epics_pvs['energy'].put(energy, wait=True)
 
     log.info('energy: waiting on motion to complete')
-    while True:
-        time.sleep(.3)
-        if epics_pvs['AllDoneA'].get() and epics_pvs['AllDoneB'].get():
-            break
+    if params.beamline == '2bm':
+        while True:
+            time.sleep(.3)
+            if epics_pvs['AllDoneA'].get() and epics_pvs['AllDoneB'].get():
+                break
     log.info('motion completed')
     log.info('open shutter')
     if params.testing:
