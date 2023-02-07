@@ -10,8 +10,7 @@ setup(
     packages=find_namespace_packages(where="src"),
     package_dir={"": "src"},
     include_package_data=True,
-    scripts=['src/energy/energycli.py'],  
-    entry_points={'console_scripts':['energy = energycli:main'],},
+    scripts=['bin/energy'],
     description='ops',
     zip_safe=False,
 )
