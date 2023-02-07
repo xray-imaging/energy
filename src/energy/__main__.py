@@ -169,7 +169,6 @@ def main():
 
     init_params = config.INIT_PARAMS    
     mono_params = config.MONO_PARAMS    
-    pink_params = config.PINK_PARAMS    
     
     cmd_parsers = [
         ('init',        init,           init_params,  "Usage: energy init                - Create configuration file and restore the original preset energy calibration file"),

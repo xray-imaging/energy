@@ -84,7 +84,6 @@ SECTIONS['init'] = {
     }
 
 MONO_PARAMS = ('init','energy', )
-PINK_PARAMS = ('init','energy',)
 INIT_PARAMS = ('init', )
 
 NICE_NAMES = ('General', 'Energy', 'Init')
