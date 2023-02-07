@@ -182,11 +182,7 @@ def main():
         cmd_parser.set_defaults(_func=func)
 
     args = config.parse_known_args(parser, subparser=True)
-    print('***************************')
-    print('***************************')
-    print(args)
-    print('***************************')
-    print('***************************')
+
     # create logger
     logs_home = args.logs_home
 
