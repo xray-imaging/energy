@@ -39,7 +39,11 @@
             "energy_pos_shakerfrequency": 8.0,
             "energy_pos_shakertimeperpoint": 6.25e-05,
             "energy_pos_shakeraampmult": 2.8,
-            "energy_pos_shakeraampoffset": 0.0
+            "energy_pos_shakeraampoffset": 0.0,
+            "energy_pos_phase_ring_xm": 6.292791999999994,
+            "energy_pos_ccd_camera_rot": 0.44,
+            "energy_pos_crl_yaw_samplez": 27.53989999999999,
+            "energy_pos_cond_yaw": 0.31642000000000003
         }
     },
     "Pink": {
