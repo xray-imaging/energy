@@ -30,6 +30,8 @@ def load_preset(args):
 
 def reset_default_to_local_preset(args):
 
+    print(args)
+
     run_time_data_file     = pathlib.Path(DATA_PATH_LOCAL, 'energy' + args.beamline + '.json')
     install_time_data_file = pathlib.Path(DATA_PATH,       'energy' + args.beamline + '.json')
 

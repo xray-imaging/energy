@@ -27,79 +27,83 @@ from importlib.resources import files
 def init(args):
     if not os.path.exists(str(args.config)):
         config.write(args.config)
-        # dataio.init_preset(args)
+        dataio.init_preset(args)
     else:
         log.error("{0} already exists".format(args.config))
 
 def set_mono(args):
 
     config.log_values(args)
-    args.mode = "Mono"
+    # args.mode = "Mono"
     energy_select = np.around(args.energy, decimals=3) 
     energy_lookup = dataio.load_preset(args)
     energy_list = []
 
-    for key in energy_lookup['Mono']:
+    for key in energy_lookup[args.mode]:
         energy_list.append(key)
 
     log.info('Selected energy: %4.3f keV'  %  energy_select)
     log.info('Pre-calibrated energies: %s keV' %  energy_list)
 
-    pos_energy_select = {}
-
-    if "{:.3f}".format(energy_select) in energy_list:
-        pos_energy_select["{:.3f}".format(energy_select)] = energy_lookup['Mono']["{:.3f}".format(energy_select)]
-        log.info('Energy %s keV is a pre-calibrated energy, using lookup table positions' % energy_select)
-        if move.motors(pos_energy_select, args):
-            config.save_params_to_config(args)
-    elif energy_select == -1:
-        log.error('Please use the --energy option to select an energy value to move to')
-        log.error('Example: energy mono --energy 22.5')
-    else:
-        log.warning('Energy %s keV is not a pre-calibrated energy, using interpolation' % energy_select)
-        energies_str = np.array(energy_list)
-        energies_flt = [float(i) for i in  energies_str]
-        energy_max = np.max(energies_flt)
-        energy_min = np.min(energies_flt)
-
-        if energy_select < energy_max and energy_select >= energy_min:
-            energy_calibrated = util.find_nearest(energies_flt, energy_select)
-            
-            log.info('   ***   Selected energy %s keV; Nearest calibrated: %s keV' % (energy_select, energy_calibrated))
-
-            energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
-
-            if energy_select >= float(energy_calibrated):
-                energy_low  = np.around(float(energies_str[energy_closer_index]), decimals=3)
-                energy_high = np.around(float(energies_str[energy_closer_index+1]), decimals=3)
-            else:
-                energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=3)
-                energy_high = np.around(float(energies_str[energy_closer_index]), decimals=3)
-               
-            log.info("   ***   Calibrated range [%4.3f, %4.3f] keV" % (energy_low, energy_high))
-
-            pos_energy_start = {}
-            pos_energy_end = {}
-            pos_energy_start["{:.3f}".format(energy_low)] = energy_lookup['Mono']["{:.3f}".format(energy_low)]
-            pos_energy_end["{:.3f}".format(energy_high)] = energy_lookup['Mono']["{:.3f}".format(energy_high)]
-            pos_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
-      
-            interp_positions = util.interpolate(energy_select, pos_start_end_energies)
-            if move.motors(interp_positions, args):
+    if len(energy_list) == 0:
+        log.error('Pre-calibrated energies file: %s is missing or corrupted' %  ('energy' + args.beamline + '.json'))
+    elif len(energy_list) == 1:
+        log.warning('Pre-calibrated energies file: %s contains only one energy %s keV in %s mode' % (('energy' + args.beamline + '.json'), energy_list[0], args.mode))
+        pos_energy_select = {}
+        if "{:.3f}".format(energy_select) in energy_list:
+            pos_energy_select["{:.3f}".format(energy_select)] = energy_lookup[args.mode]["{:.3f}".format(energy_select)]
+            log.info('Energy %s keV is a pre-calibrated energy, using lookup table positions' % energy_select)
+            if move.motors(pos_energy_select, args):
                 config.save_params_to_config(args)
         else:
-            log.error('Error: energy selected %4.3f is outside the calibrated range [%4.3f, %4.3f]' %(energy_select, energy_min, energy_max))
+            log.error('Energy %s keV is a not a pre-calibrated energy. Iterpolation failed.' % energy_select)
+            log.error('Please use the --energy option to select an energy value.')
+            log.error('Example: energy set --energy 22.5')
+            return
+    else: # there are at least 2 energy entry in the lookup table. These will be used for interpolation 
+        pos_energy_select = {}
+        if "{:.3f}".format(energy_select) in energy_list:
+            pos_energy_select["{:.3f}".format(energy_select)] = energy_lookup[args.mode]["{:.3f}".format(energy_select)]
+            log.info('Energy %s keV is a pre-calibrated energy, using lookup table positions' % energy_select)
+            if move.motors(pos_energy_select, args):
+                config.save_params_to_config(args)
+        elif energy_select == -1:
+            log.error('Please use the --energy option to select an energy value to move to')
+            log.error('Example: energy set --energy 22.5')
+        else:
+            log.warning('Energy %s keV is not a pre-calibrated energy, using interpolation' % energy_select)
+            energies_str = np.array(energy_list)
+            energies_flt = [float(i) for i in  energies_str]
+            energy_max = np.max(energies_flt)
+            energy_min = np.min(energies_flt)
 
-def run_pink(args):
+            if energy_select < energy_max and energy_select >= energy_min:
+                energy_calibrated = util.find_nearest(energies_flt, energy_select)
+                
+                log.info('   ***   Selected energy %s keV; Nearest calibrated: %s keV' % (energy_select, energy_calibrated))
 
-    config.log_values(args)
-    args.mode = "Pink"
+                energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
 
-    energy_lookup = dataio.load_preset(args)
-    pos_energy_select = energy_lookup[args.mode]
+                if energy_select >= float(energy_calibrated):
+                    energy_low  = np.around(float(energies_str[energy_closer_index]), decimals=3)
+                    energy_high = np.around(float(energies_str[energy_closer_index+1]), decimals=3)
+                else:
+                    energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=3)
+                    energy_high = np.around(float(energies_str[energy_closer_index]), decimals=3)
+                   
+                log.info("   ***   Calibrated range [%4.3f, %4.3f] keV" % (energy_low, energy_high))
 
-    if move.motors(pos_energy_select, args):
-        config.save_params_to_config(args)
+                pos_energy_start = {}
+                pos_energy_end = {}
+                pos_energy_start["{:.3f}".format(energy_low)] = energy_lookup[args.mode]["{:.3f}".format(energy_low)]
+                pos_energy_end["{:.3f}".format(energy_high)] = energy_lookup[args.mode]["{:.3f}".format(energy_high)]
+                pos_start_end_energies = util.merge(pos_energy_start, pos_energy_end)
+          
+                interp_positions = util.interpolate(energy_select, pos_start_end_energies)
+                if move.motors(interp_positions, args):
+                    config.save_params_to_config(args)
+            else:
+                log.error('Error: energy selected %4.3f is outside the calibrated range [%4.3f, %4.3f]' %(energy_select, energy_min, energy_max))
 
 def run_restore(args):
 
@@ -160,13 +164,13 @@ def main():
     parser.add_argument('--version', action='version',
                         version='%(prog)s {}'.format(__version__))
 
+    init_params = config.INIT_PARAMS    
     mono_params = config.MONO_PARAMS    
     pink_params = config.PINK_PARAMS    
     
     cmd_parsers = [
-        ('init',        init,           (),           "Usage: energy init                - Create configuration file and restore the original preset energy calibration file"),
+        ('init',        init,           init_params,  "Usage: energy init                - Create configuration file and restore the original preset energy calibration file"),
         ('set',         set_mono,       mono_params,  "Usage: energy set    --energy 20  - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation point between the two closest calibrared values"),
-        ('pink',        run_pink,       pink_params,  "Usage: energy pink                - Set the beamline to pink mode "),
         ('add',         run_add,        mono_params,  "Usage: energy add    --energy 20  - Associate the current beamline positions to --energy value"),             
         ('delete',      run_delete,     mono_params,  "Usage: energy delete --energy 20  - Delete --energy value from the preset energy calibration file"),             
         ('restore',     run_restore,    mono_params,  "Usage: energy restore             - Restore original preset energy calibration file. "),

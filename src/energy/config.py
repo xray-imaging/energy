@@ -46,6 +46,12 @@ SECTIONS['general'] = {
     }
 
 SECTIONS['energy'] = {
+    'mode': {
+        'default': 'Mono',
+        'type': str,
+        'help': "beamline energy mode",
+        'choices': ['Mono','Pink']
+        },
     'energy': {
         'default': -1,
         'type': float,
@@ -55,17 +61,6 @@ SECTIONS['energy'] = {
 
 
 SECTIONS['settings'] = {
-    'energyioc-prefix':{
-        'default': '32id:TXMOptics:',
-        'type': str,
-        'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "
-        },
-    'beamline': {
-        'default': '32id',
-        'type': str,
-        'help': "This parameter is used to select the energy---.json file, e.g. energy2bm.json. This file must be created in the DATA_PATH_LOCAL directory",
-        'choices': ['None','2bm', '7bm', '8id', '20bm', '29id', '32id']
-        },
     'n-move': {
         'default': 16,
         'type': int,
@@ -78,10 +73,25 @@ SECTIONS['settings'] = {
         },
     }
 
-MONO_PARAMS = ('energy', 'settings')
-PINK_PARAMS = ('settings', )
+SECTIONS['init'] = {
+    'beamline': {
+        'default': '32id',
+        'type': str,
+        'help': "This parameter is used to select the energy---.json file, e.g. energy2bm.json. This file must be created in the DATA_PATH_LOCAL directory",
+        'choices': ['None','2bm', '7bm', '8id', '20bm', '29id', '32id']
+        },
+    'energyioc-prefix':{
+        'default': '32id:TXMOptics:',
+        'type': str,
+        'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "
+        },
+    }
 
-NICE_NAMES = ('General', 'Energy', 'Settings')
+MONO_PARAMS = ('init','energy', 'settings')
+PINK_PARAMS = ('init','energy','settings', )
+INIT_PARAMS = ('init', )
+
+NICE_NAMES = ('General', 'Energy', 'Settings', 'Init')
 
 def get_config_name():
     """Get the command line --config option."""
