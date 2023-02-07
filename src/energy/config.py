@@ -59,20 +59,6 @@ SECTIONS['energy'] = {
         },
     }
 
-
-SECTIONS['settings'] = {
-    'n-move': {
-        'default': 16,
-        'type': int,
-        'help': "Number of PVs that will be used in move interpolation; 32id=16, 2bm=16",
-        },
-    'n-pos': {
-        'default': 40,
-        'type': int,
-        'help': "Number of PVs that will be used to store motor position; 32id=40, 2bm=3",
-        },
-    }
-
 SECTIONS['init'] = {
     'beamline': {
         'default': '32id',
@@ -85,13 +71,23 @@ SECTIONS['init'] = {
         'type': str,
         'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "
         },
+    'n-move': {
+        'default': 16,
+        'type': int,
+        'help': "Number of PVs that will be used in move interpolation; 32id=16, 2bm=16",
+        },
+    'n-pos': {
+        'default': 40,
+        'type': int,
+        'help': "Number of PVs that will be used to store motor position; 32id=40, 2bm=3",
+        },
     }
 
-MONO_PARAMS = ('init','energy', 'settings')
-PINK_PARAMS = ('init','energy','settings', )
+MONO_PARAMS = ('init','energy', )
+PINK_PARAMS = ('init','energy',)
 INIT_PARAMS = ('init', )
 
-NICE_NAMES = ('General', 'Energy', 'Settings', 'Init')
+NICE_NAMES = ('General', 'Energy', 'Init')
 
 def get_config_name():
     """Get the command line --config option."""

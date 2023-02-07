@@ -26,7 +26,10 @@ from importlib.resources import files
 
 def init(args):
     if not os.path.exists(str(args.config)):
-        config.write(args.config)
+        sections = config.INIT_PARAMS
+        config.write(args.config, args=args, sections=sections)
+
+        # config.write(args.config)
         dataio.init_preset(args)
     else:
         log.error("{0} already exists".format(args.config))
