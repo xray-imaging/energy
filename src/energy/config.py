@@ -54,11 +54,11 @@ SECTIONS['energy'] = {
 
 SECTIONS['settings'] = {
     'energyioc-prefix':{
-        'default': '2bm:MCTOptics:',
+        'default': '32id:TXMOptics:',
         'type': str,
         'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "},
     'beamline': {
-        'default': '2bm',
+        'default': '32id',
         'type': str,
         'help': "This parameter is used to select the energy---.json file, e.g. energy2bm.json. This file must be created in the DATA_PATH_LOCAL directory",
         'choices': ['None','2bm', '7bm', '8id', '20bm', '29id', '32id']

@@ -18,7 +18,7 @@ def init(params):
     epics_move_pvs = init_pvs(params, 'EnergyMove', 'energy move ', n=16)
     # $(P)$(R)EnergyPosXPVName (X=0, 1 ...) hosting the PV name of motors that will NOT be used to move to interpolated positions
     # These motors will move only when a pre-calibrated energy is selected
-    epics_pos_pvs  = init_pvs(params, 'EnergyPos',  'energy pos ',  n=3)
+    epics_pos_pvs  = init_pvs(params, 'EnergyPos',  'energy pos ',  n=40)
 
     epics_pvs = {**epics_move_pvs, **epics_pos_pvs}
 
@@ -66,6 +66,7 @@ def init_pvs(params, pv_prefix='EnergyMove', label='energy move ', n=16):
                     del a_list[0]
                     s = s.join(a_list)
                     pv_key = util.clean(label + s)
+                    s = ''
                 else:
                     pv_key = util.clean(label + pv_desc)
                 log.info('>>> %s connected to PV: %s' % (pv_key, pv_name))

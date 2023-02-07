@@ -1,0 +1,62 @@
+{
+    "Mono": {
+        "8.000": {
+            "energy_move_ccd_camera_z": 3300.0,
+            "energy_move_zp_x": -2.7180590000000096,
+            "energy_move_zp_y": 7.1,
+            "energy_move_zp_z": 59.174,
+            "energy_pos_sample_top_x": 0.0,
+            "energy_pos_sample_top_z": 0.0,
+            "energy_pos_sample_x": -8585.41,
+            "energy_pos_sample_y": -1.2163631999999893,
+            "energy_pos_rotation": 180.34083686440678,
+            "energy_pos_crlx_samx": -5.270000000000003,
+            "energy_pos_crly_samy": -0.12999999999997414,
+            "energy_pos_crl_pitch": -0.6805624999999793,
+            "energy_pos_75x_scint_yaw": 43.0,
+            "energy_pos_focus_75x": -1.1809140624999994,
+            "energy_pos_beamstop_x": -1.9952850000000002,
+            "energy_pos_pinhole_x": -27.39000000000007,
+            "energy_pos_phase_ring_x": 460.0,
+            "energy_pos_phase_ring_y": -6.0,
+            "energy_pos_flight_tubez": 118.26,
+            "energy_pos_cond_pitch": -0.962,
+            "energy_pos_cond_x": 4.922899999999987,
+            "energy_pos_cond_z": -287.0,
+            "energy_pos_fb4": 0.078,
+            "energy_pos_fb3": 0.65,
+            "energy_pos_focus_10x": -22.995437500000005,
+            "energy_pos_zp_x": -2.7180590000000096,
+            "energy_pos_heaterxpowder": 41.82034999999999,
+            "energy_pos_heatery": 18.927349999999997,
+            "energy_pos_heaterz": -3.6999999999999957,
+            "energy_pos_bpm_x": 40.49999999999999,
+            "energy_pos_bpm_y": 64.90000000000002,
+            "energy_pos_pzt1_arcsec": -25.761502733722864,
+            "energy_pos_pzt2_arcsec": 23.088627414522044,
+            "energy_pos_pzt2_volts": 1.4924910383495418,
+            "energy_pos_pzt1_volts": -1.6652705799356209,
+            "energy_pos_shakerfrequency": 8.0,
+            "energy_pos_shakertimeperpoint": 6.25e-05,
+            "energy_pos_shakeraampmult": 2.8,
+            "energy_pos_shakeraampoffset": 0.0
+        }
+    },
+    "Pink": {
+        "30.000": {
+            "energy_move_m1angl": 2.657,
+            "energy_move_m1avg": -0.40000000000000013,
+            "energy_move_dmm_usx": 51.0,
+            "energy_move_dmm_dsx": 51.0,
+            "energy_move_dmm_usy_ob": -10.0,
+            "energy_move_dmm_usy_ib": -10.0,
+            "energy_move_dmm_dsy": -10.0,
+            "energy_move_dmm_us_arm": 1.33,
+            "energy_move_dmm_ds_arm": 1.4002999999999552,
+            "energy_move_dmm_m2_y": 17.390000000000036,
+            "energy_move_table3y": -0.7400000000000002,
+            "energy_move_flag": 3.0,
+            "energy_pos_fltr1select": 3
+        }
+    }
+}
