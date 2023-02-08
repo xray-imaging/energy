@@ -80,11 +80,11 @@ To set the beamline energy to 20 keV::
 If the selected energy is not included in the pre-calibrated energy list, **energy** will interpolate all motor positions using the values
 of the closest calibrated energies.
 
-To set pink beam:
+To set the beamline for pink beam with 30keV cut off:
 
 ::
 
-    $ energy pink
+    $ energy --mode Pink --energy 30
 
 Add energy
 ----------
@@ -131,15 +131,14 @@ To list of all available options::
         init         Usage: energy init - Create configuration file and restore the original preset energy calibration file
         set          Usage: energy set --energy 20 - Set the beamline to the --energy value using a precalibrated list or, if missing,
                      a linear interpolation point between the two closest calibrared values
-        pink         Usage: energy pink - Set the beamline to pink mode
         add          Usage: energy add --energy 20 - Associate the current beamline positions to --energy value
         delete       Usage: energy delete --energy 20 - Remove --energy value from the preset energy calibration file
         restore      Usage: energy restore - Restore original preset energy calibration file.
         status       Usage: energy status - Show status
 
-to list of all **energy add** options::
+to list of all **energy set** options::
 
-    $ energy add -h
+    $ energy set -h
 
 
 Testing mode
