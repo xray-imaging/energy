@@ -34,7 +34,7 @@ def init(args):
     else:
         log.error("{0} already exists".format(args.config))
 
-def set_mono(args):
+def run_set(args):
 
     config.log_values(args)
     # args.mode = "Mono"
@@ -172,7 +172,7 @@ def main():
     
     cmd_parsers = [
         ('init',        init,           init_params,  "Usage: energy init                - Create configuration file and restore the original preset energy calibration file"),
-        ('set',         set_mono,       mono_params,  "Usage: energy set    --energy 20  - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation point between the two closest calibrared values"),
+        ('set',         run_set,       mono_params,  "Usage: energy set    --energy 20  - Set the beamline to the --energy value using a precalibrated list or, if missing, a linear interpolation point between the two closest calibrared values"),
         ('add',         run_add,        mono_params,  "Usage: energy add    --energy 20  - Associate the current beamline positions to --energy value"),             
         ('delete',      run_delete,     mono_params,  "Usage: energy delete --energy 20  - Delete --energy value from the preset energy calibration file"),             
         ('restore',     run_restore,    mono_params,  "Usage: energy restore             - Restore original preset energy calibration file. "),
