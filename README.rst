@@ -86,17 +86,17 @@ To set pink beam:
 
     $ energy pink
 
-Save energy
------------
+Add energy
+----------
 
 To save the beamline motor positions and associate them to an energy to be used at a later time::
 
-    $ energy save --energy 28.32
+    $ energy add --energy 28.32
 
 The above will add 28.32 to the pre-calibrated energy list or, if already exists, update the beamline motor positions. 
 To restore it::
 
-    $ energy mono --energy 28.32 
+    $ energy set --energy 28.32 
 
 
 Add/Remove precalibrated energies
@@ -137,9 +137,9 @@ To list of all available options::
         restore      Usage: energy restore - Restore original preset energy calibration file.
         status       Usage: energy status - Show status
 
-to list of all **energy save** options::
+to list of all **energy add** options::
 
-    $ energy save -h
+    $ energy add -h
 
 
 Testing mode
@@ -160,4 +160,4 @@ The energy status is stored in **~/logs/energy.conf**. You can create a template
 **~/logs/energy.conf** is constantly updated to keep track of the last stored parameters, as initalized by **init** or modified by setting a new option value. 
 For example to set the beamline to the last energy configuration ::
 
-    $ energy mono
+    $ energy set
