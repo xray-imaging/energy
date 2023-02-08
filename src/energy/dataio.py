@@ -90,6 +90,7 @@ def delete_energy_from_local_preset(args):
 
 def add_pos_to_local_preset(args):
 
+
     if args.energy <= 0:
         log.error('Please use the --energy option to associate an energy value to the current motors position')
         log.error('Example: energy add --energy 22.5')
@@ -103,15 +104,15 @@ def add_pos_to_local_preset(args):
     log.warning('add current beamline positions to local preset: %s:' % run_time_data_file)
     
     pos_energy_select = {}
-    pos_energy_select['Mono'] = {}
-    pos_energy_select['Mono'][energy] = {}
+    pos_energy_select[args.mode] = {}
+    pos_energy_select[args.mode][energy] = {}
 
     for key in epics_pvs:
         if 'energy_move' in key or 'energy_pos' in key:
             if args.testing:
-                pos_energy_select['Mono'][energy][key] = 0.0 
+                pos_energy_select[args.mode][energy][key] = 0.0 
             else:
-                pos_energy_select['Mono'][energy][key] = epics_pvs[key].get() 
+                pos_energy_select[args.mode][energy][key] = epics_pvs[key].get() 
 
     log.info('save energy positions: %s' % pos_energy_select)
 
@@ -119,7 +120,7 @@ def add_pos_to_local_preset(args):
 
     energy_list = []
 
-    for key in energy_lookup['Mono']:
+    for key in energy_lookup[args.mode]:
         energy_list.append(key)
 
     if energy in energy_list:
@@ -127,17 +128,22 @@ def add_pos_to_local_preset(args):
     else:
         log.info('Energy %s keV is not a pre-calibrated energy, add energy positions' % energy)
 
-    energy_lookup['Mono'][energy] = pos_energy_select['Mono'][energy]
+    energy_lookup[args.mode][energy] = pos_energy_select[args.mode][energy]
 
-    sorted_list = list(map(float, list(energy_lookup['Mono'].keys())))
+    sorted_list = list(map(float, list(energy_lookup[args.mode].keys())))
     sorted_numbers = sorted(sorted_list)
     sorted_strings = ['{:.3f}'.format(x) for x in sorted_numbers]
 
     energy_lookup_sorted = {}
-    energy_lookup_sorted['Mono'] = {i: energy_lookup['Mono'][i] for i in sorted_strings}
-    energy_lookup_sorted['Pink'] = {}
-    energy_lookup_sorted['Pink']['30.000'] = energy_lookup['Pink']['30.000']
-     
+
+    for key in energy_lookup:
+        if key == args.mode:
+            energy_lookup_sorted[args.mode] = {i: energy_lookup[args.mode][i] for i in sorted_strings}
+        else:
+            energy_lookup_sorted[key] = {}
+            for key1 in energy_lookup[key]:
+                energy_lookup_sorted[key][key1] = energy_lookup[key][key1]
+
     log.info('Update local preset file: %s' % run_time_data_file)
     with open(run_time_data_file, "w") as outfile:
         json.dump(energy_lookup_sorted, outfile, indent=4)        
