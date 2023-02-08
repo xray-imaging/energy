@@ -160,8 +160,10 @@
             "energy_move_dmm_us_arm": 1.33,
             "energy_move_dmm_ds_arm": 1.4002999999999552,
             "energy_move_dmm_m2_y": 17.390000000000036,
-            "energy_move_table3y": -0.7400000000000002,
+            "energy_move_table3y": 0.9599999999999996,
             "energy_move_flag": 3.0,
+            "energy_move_b_slit_y_bot": 0.15000000000000302,
+            "energy_move_b_slit_y_top": 2.1500000000000057,
             "energy_pos_fltr1select": 3
         }
     }
