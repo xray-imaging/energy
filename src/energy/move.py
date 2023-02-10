@@ -137,17 +137,13 @@ def close_frontend_shutter(epics_pvs):
 
     - Checks if we are in testing mode. If we are, do nothing else closes the shutter.
     """
-    if epics_pvs['Testing'].get():
-        log.warning('In testing mode, so not opening shutters.')
-    else:
-        # Close shutter
-        if not epics_pvs['CloseShutter'] is None:
-            pv = epics_pvs['CloseShutter']
-            value = epics_pvs['CloseShutterValue'].get(as_string=True)
-            status = epics_pvs['ShutterStatus'].get(as_string=True)
-            log.info('shutter status: %s'% status)
-            log.info('close shutter: %s, value: %s'% (pv, value))
-            epics_pvs['CloseShutter'].put(value, wait=True)
-            util.wait_pv(epics_pvs['ShutterStatus'], 0)
-            status = epics_pvs['ShutterStatus'].get(as_string=True)
-            log.info('shutter status: %s' % status)
+    if not epics_pvs['CloseShutter'] is None:
+        pv = epics_pvs['CloseShutter']
+        value = epics_pvs['CloseShutterValue'].get(as_string=True)
+        status = epics_pvs['ShutterStatus'].get(as_string=True)
+        log.info('shutter status: %s'% status)
+        log.info('close shutter: %s, value: %s'% (pv, value))
+        epics_pvs['CloseShutter'].put(value, wait=True)
+        util.wait_pv(epics_pvs['ShutterStatus'], 0)
+        status = epics_pvs['ShutterStatus'].get(as_string=True)
+        log.info('shutter status: %s' % status)
