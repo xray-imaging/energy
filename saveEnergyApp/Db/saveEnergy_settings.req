@@ -7,6 +7,11 @@
 # but they are used by txmoptics.  
 # These PVs are not saved in the txmoptics configuration file.
 
+##################################
+# Energy status via Channel Access
+##################################
+#controlPV $(P)$(R)EnergyStatus
+#controlPV $(P)$(R)Watchdog
 
 ####################
 # Energy information

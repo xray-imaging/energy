@@ -1,6 +1,35 @@
 # Database for EPICS PVS for txm optics control
 # This database contains all of the PVs used by the txmoptics base class.
 
+##################################
+# ENERGY status via Channel Access
+##################################
+
+record(waveform,"$(P)$(R)EnergyStatus") 
+{
+   field(FTVL, "UCHAR")
+   field(NELM, "256")
+}
+
+record(calcout, "$(P)$(R)Watchdog")
+{
+   field(SCAN, "1 second")
+   field(INPA, "$(P)$(R)Watchdog.VAL NPP")
+   field(CALC, "A-1")
+   field(OCAL, "A>0?1:0")
+   field(OOPT, "On Change")
+   field(DOPT, "Use OCAL")
+   field(OUT,  "$(P)$(R)ServerRunning PP")
+}
+
+record(bi, "$(P)$(R)ServerRunning")
+{
+   field(ZNAM, "Stopped")
+   field(ZSV,  "MAJOR")
+   field(ONAM, "Running")
+   field(OSV,  "NO_ALARM")
+}
+
 
 ####################
 # Energy information
