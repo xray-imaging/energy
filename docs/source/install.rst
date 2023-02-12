@@ -2,6 +2,9 @@
 Install directions
 ==================
 
+EPICS Server
+============
+
 Build EPICS base
 ----------------
 
@@ -87,5 +90,30 @@ Testing the installation
     $ start_IOC
     $ start_medm
 
+
+Python Server
+=============
+
+**energy-cli** a commad-line-interface that allows to move a set of motors using a list of preselected/calibrated positions stored in a lookup table. The list of motor positions is labeled with an energy value. When the enegy selected is not in the list of calibrated positions a subset of motors can be moved to interplatate positions.
+
+Installation
+------------
+
+::
+
+    $ git clone https://github.com/xray-imaging/energy.git
+    $ cd energy
+    $ pip install .
+
+in a prepared virtualenv or as root for system-wide installation.
+
+
+Testing the installation
+------------------------
+
+- Start python server with::
+
+    $ cd ~/epics/synApps/support/energy/iocBoot/iocEnergy
+    $ python -i start_energy.py
 
 
