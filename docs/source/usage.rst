@@ -93,8 +93,6 @@ For example to set the beamline to the last energy configuration ::
 
     $ energy set
 
-
-
 GUI
 ===
 
