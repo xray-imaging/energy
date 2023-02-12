@@ -2,4 +2,4 @@
 energy
 ======
 
-Docs: https://xenergy.readthedocs.io/
+Docs: https://xray-energy.readthedocs.io
