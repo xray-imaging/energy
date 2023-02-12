@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams2/FAST/epics/synApps/support/energy/saveEnergyApp/op/adl/saveEnergyEPICS_PVs.adl"
+	name="/home/beams/FAST/epics/synApps/support/energy/energyApp/op/adl/energyMovePVsMore.adl"
 	version=030111
 }
 display {
 	object {
-		x=1389
-		y=607
+		x=469
+		y=1412
 		width=1375
-		height=725
+		height=545
 	}
 	clr=14
 	bclr=4
@@ -89,508 +89,8 @@ display {
 }
 rectangle {
 	object {
-		x=5
-		y=10
-		width=445
-		height=24
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=5
-		y=11
-		width=445
-		height=25
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="Energy Move Process Variables"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=5
-		y=40
-		width=445
-		height=505
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-	}
-}
-text {
-	object {
-		x=10
-		y=70
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  1"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=45
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  0"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=45
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove0PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=70
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove1PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=95
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  2"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=120
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  3"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=95
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove2PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=120
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove3PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=145
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  4"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=170
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  5"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=195
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  6"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=220
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  7"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=220
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove7PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=195
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove6PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=170
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove5PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=145
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove4PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=245
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  8"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=270
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV  9"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=295
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV 10"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=320
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV 11"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=320
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove11PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=295
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove10PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=270
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove9PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=245
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove8PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=345
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV 12"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=345
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove12PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=420
-		width=201
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV 15"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=420
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove15PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=395
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV 14"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=395
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove14PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=370
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV 13"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=370
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove13PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-rectangle {
-	object {
 		x=690
-		y=10
+		y=5
 		width=445
 		height=24
 	}
@@ -601,7 +101,7 @@ rectangle {
 text {
 	object {
 		x=690
-		y=11
+		y=6
 		width=445
 		height=25
 	}
@@ -614,38 +114,38 @@ text {
 text {
 	object {
 		x=695
-		y=70
+		y=65
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Energy Pos PV  1"
+	textix="Energy Pos PV 21"
 	align="horiz. right"
 }
 text {
 	object {
 		x=695
-		y=45
+		y=40
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Energy Pos PV  0"
+	textix="Energy Pos PV 20"
 	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=905
-		y=45
+		y=40
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyPos0PVName"
+		chan="$(P)$(R)EnergyPos20PVName"
 		clr=14
 		bclr=51
 	}
@@ -656,12 +156,12 @@ text {
 "text entry" {
 	object {
 		x=905
-		y=70
+		y=65
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyPos1PVName"
+		chan="$(P)$(R)EnergyPos21PVName"
 		clr=14
 		bclr=51
 	}
@@ -672,25 +172,155 @@ text {
 text {
 	object {
 		x=695
-		y=95
+		y=90
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Energy Pos PV  2"
+	textix="Energy Pos PV 22"
 	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=905
-		y=95
+		y=90
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyPos2PVName"
+		chan="$(P)$(R)EnergyPos22PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=690
+		y=35
+		width=445
+		height=505
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=40
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos20PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=65
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos21PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=90
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos22PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=1135
+		y=35
+		width=235
+		height=505
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+	}
+}
+text {
+	object {
+		x=695
+		y=140
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 24"
+	align="horiz. right"
+}
+text {
+	object {
+		x=695
+		y=115
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 23"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=115
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos23PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=905
+		y=140
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos24PVName"
 		clr=14
 		bclr=51
 	}
@@ -700,26 +330,26 @@ text {
 }
 text {
 	object {
-		x=10
-		y=615
+		x=695
+		y=165
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Open shutter value"
+	textix="Energy Pos PV 25"
 	align="horiz. right"
 }
 "text entry" {
 	object {
-		x=220
-		y=615
+		x=905
+		y=165
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)OpenShutterValue"
+		chan="$(P)$(R)EnergyPos25PVName"
 		clr=14
 		bclr=51
 	}
@@ -727,15 +357,15 @@ text {
 	limits {
 	}
 }
-"text entry" {
+"text update" {
 	object {
-		x=220
-		y=640
+		x=1140
+		y=115
 		width=225
 		height=20
 	}
-	control {
-		chan="$(P)$(R)CloseShutterPVName"
+	monitor {
+		chan="$(P)$(R)EnergyPos23PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -743,41 +373,31 @@ text {
 	limits {
 	}
 }
-text {
+"text update" {
 	object {
-		x=10
-		y=640
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Close shutter PV"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=590
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Open shutter PV"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=590
+		x=1140
+		y=140
 		width=225
 		height=20
 	}
-	control {
-		chan="$(P)$(R)OpenShutterPVName"
+	monitor {
+		chan="$(P)$(R)EnergyPos24PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=165
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos25PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -787,26 +407,627 @@ text {
 }
 text {
 	object {
-		x=10
-		y=665
+		x=695
+		y=215
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Close shutter value"
+	textix="Energy Pos PV 27"
+	align="horiz. right"
+}
+text {
+	object {
+		x=695
+		y=190
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 26"
 	align="horiz. right"
 }
 "text entry" {
 	object {
-		x=220
-		y=665
+		x=905
+		y=190
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)CloseShutterValue"
+		chan="$(P)$(R)EnergyPos26PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=905
+		y=215
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos27PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=240
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 28"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=240
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos28PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=190
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos26PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=215
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos27PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=240
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos28PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=290
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 30"
+	align="horiz. right"
+}
+text {
+	object {
+		x=695
+		y=265
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 29"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=265
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos29PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=905
+		y=290
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos30PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=315
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 31"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=315
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos31PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=265
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos29PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=290
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos30PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=315
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos31PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=365
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 33"
+	align="horiz. right"
+}
+text {
+	object {
+		x=695
+		y=340
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 32"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=340
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos32PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=905
+		y=365
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos33PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=390
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 34"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=390
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos34PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=340
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos32PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=365
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos33PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=390
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos34PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=415
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 35"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=415
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos35PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=415
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos35PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=465
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 37"
+	align="horiz. right"
+}
+text {
+	object {
+		x=695
+		y=440
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 36"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=440
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos36PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=905
+		y=465
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos37PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=490
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 38"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=490
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos38PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=440
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos36PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=465
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos37PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=490
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos38PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=695
+		y=515
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Pos PV 39"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=905
+		y=515
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyPos39PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1140
+		y=515
+		width=225
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyPos39PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -817,7 +1038,7 @@ text {
 rectangle {
 	object {
 		x=5
-		y=555
+		y=5
 		width=445
 		height=24
 	}
@@ -828,20 +1049,20 @@ rectangle {
 text {
 	object {
 		x=5
-		y=555
+		y=6
 		width=445
 		height=25
 	}
 	"basic attribute" {
 		clr=54
 	}
-	textix="Shutter Control Process Variables"
+	textix="Energy Move Process Variables"
 	align="horiz. centered"
 }
 rectangle {
 	object {
-		x=690
-		y=40
+		x=5
+		y=35
 		width=445
 		height=505
 	}
@@ -850,27 +1071,463 @@ rectangle {
 		fill="outline"
 	}
 }
-rectangle {
+text {
 	object {
-		x=5
-		y=585
-		width=445
-		height=130
+		x=10
+		y=65
+		width=200
+		height=20
 	}
 	"basic attribute" {
 		clr=14
-		fill="outline"
 	}
+	textix="Energy Move PV 21"
+	align="horiz. right"
 }
-"text update" {
+text {
 	object {
-		x=455
-		y=45
+		x=10
+		y=40
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 20"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=40
 		width=225
 		height=20
 	}
-	monitor {
-		chan="$(P)$(R)EnergyMove0PVDesc"
+	control {
+		chan="$(P)$(R)EnergyMove20PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=65
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove21PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=90
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 22"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=115
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 23"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=90
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove22PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=115
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove23PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=140
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 24"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=165
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 25"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=190
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 26"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=215
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 27"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=215
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove27PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=190
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove26PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=165
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove25PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=140
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove24PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=240
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 28"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=265
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 29"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=290
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 30"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=315
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 31"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=315
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove31PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=290
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove30PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=265
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove29PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=240
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove28PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=340
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 32"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=340
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove32PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=415
+		width=201
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 35"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=415
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove35PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=390
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 34"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=390
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove34PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=365
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 33"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=365
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMove33PVName"
 		clr=14
 		bclr=51
 	}
@@ -881,12 +1538,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=70
+		y=40
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove1PVDesc"
+		chan="$(P)$(R)EnergyMove20PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -897,12 +1554,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=95
+		y=65
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove2PVDesc"
+		chan="$(P)$(R)EnergyMove21PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -913,12 +1570,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=120
+		y=90
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove3PVDesc"
+		chan="$(P)$(R)EnergyMove22PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -929,12 +1586,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=145
+		y=115
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove4PVDesc"
+		chan="$(P)$(R)EnergyMove23PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -945,12 +1602,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=170
+		y=140
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove5PVDesc"
+		chan="$(P)$(R)EnergyMove24PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -961,12 +1618,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=195
+		y=165
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove6PVDesc"
+		chan="$(P)$(R)EnergyMove25PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -977,12 +1634,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=220
+		y=190
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove7PVDesc"
+		chan="$(P)$(R)EnergyMove26PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -993,12 +1650,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=245
+		y=215
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove8PVDesc"
+		chan="$(P)$(R)EnergyMove27PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1009,12 +1666,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=270
+		y=240
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove9PVDesc"
+		chan="$(P)$(R)EnergyMove28PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1025,12 +1682,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=295
+		y=265
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove10PVDesc"
+		chan="$(P)$(R)EnergyMove29PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1041,12 +1698,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=320
+		y=290
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove11PVDesc"
+		chan="$(P)$(R)EnergyMove30PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1057,12 +1714,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=345
+		y=315
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove12PVDesc"
+		chan="$(P)$(R)EnergyMove31PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1073,12 +1730,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=370
+		y=340
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove13PVDesc"
+		chan="$(P)$(R)EnergyMove32PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1089,12 +1746,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=395
+		y=365
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove14PVDesc"
+		chan="$(P)$(R)EnergyMove33PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1105,12 +1762,12 @@ rectangle {
 "text update" {
 	object {
 		x=455
-		y=420
+		y=390
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove15PVDesc"
+		chan="$(P)$(R)EnergyMove34PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1120,45 +1777,13 @@ rectangle {
 }
 "text update" {
 	object {
-		x=1140
-		y=45
+		x=455
+		y=415
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyPos0PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=70
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos1PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=95
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos2PVDesc"
+		chan="$(P)$(R)EnergyMove35PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -1169,7 +1794,7 @@ rectangle {
 rectangle {
 	object {
 		x=450
-		y=40
+		y=35
 		width=235
 		height=505
 	}
@@ -1178,879 +1803,41 @@ rectangle {
 		fill="outline"
 	}
 }
-rectangle {
-	object {
-		x=1135
-		y=40
-		width=235
-		height=505
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-	}
-}
-"message button" {
-	object {
-		x=460
-		y=695
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMoveSet"
-		clr=14
-		bclr=15
-	}
-	label="Set"
-	press_msg="1"
-	release_msg="0"
-}
 text {
 	object {
 		x=10
-		y=690
+		y=440
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Shutter Status PV"
+	textix="Energy Move PV 36"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=465
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy Move PV 37"
 	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=220
-		y=690
+		y=465
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)ShutterStatusPVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=145
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV  4"
-	align="horiz. right"
-}
-text {
-	object {
-		x=695
-		y=120
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV  3"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=120
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos3PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=905
-		y=145
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos4PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=170
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV  5"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=170
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos5PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=120
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos3PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=145
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos4PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=170
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos5PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=220
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV  7"
-	align="horiz. right"
-}
-text {
-	object {
-		x=695
-		y=195
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV  6"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=195
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos6PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=905
-		y=220
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos7PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=245
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV  8"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=245
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos8PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=195
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos6PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=220
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos7PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=245
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos8PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=295
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 10"
-	align="horiz. right"
-}
-text {
-	object {
-		x=695
-		y=270
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV  9"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=270
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos9PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=905
-		y=295
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos10PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=320
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 11"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=320
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos11PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=270
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos9PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=295
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos10PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=320
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos11PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=370
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 13"
-	align="horiz. right"
-}
-text {
-	object {
-		x=695
-		y=345
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 12"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=345
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos12PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=905
-		y=370
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos13PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=395
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 14"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=395
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos14PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=345
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos12PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=370
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos13PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=395
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos14PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=420
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 15"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=420
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos15PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=420
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos15PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"related display" {
-	object {
-		x=460
-		y=666
-		width=100
-		height=20
-	}
-	display[0] {
-		label="Energy Change More"
-		name="saveEnergyEPICS_PVsMore.adl"
-		args="P=$(P), R=$(R)"
-	}
-	clr=14
-	bclr=51
-	label="More"
-}
-text {
-	object {
-		x=695
-		y=470
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 17"
-	align="horiz. right"
-}
-text {
-	object {
-		x=695
-		y=445
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 16"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=445
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos16PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=905
-		y=470
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos17PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=495
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 18"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=495
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos18PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=445
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos16PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=470
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos17PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=495
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos18PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=695
-		y=520
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Pos PV 19"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=905
-		y=520
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyPos19PVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1140
-		y=520
-		width=225
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)EnergyPos19PVDesc"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=445
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV 16"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=470
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy Move PV 17"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=470
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMove17PVName"
+		chan="$(P)$(R)EnergyMove37PVName"
 		clr=14
 		bclr=51
 	}
@@ -2061,12 +1848,12 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=445
+		y=440
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyMove16PVName"
+		chan="$(P)$(R)EnergyMove36PVName"
 		clr=14
 		bclr=51
 	}
@@ -2077,38 +1864,38 @@ text {
 text {
 	object {
 		x=10
-		y=495
+		y=490
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Energy Move PV 18"
+	textix="Energy Move PV 38"
 	align="horiz. right"
 }
 text {
 	object {
 		x=10
-		y=520
+		y=515
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Energy Move PV 19"
+	textix="Energy Move PV 39"
 	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=220
-		y=520
+		y=515
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyMove19PVName"
+		chan="$(P)$(R)EnergyMove39PVName"
 		clr=14
 		bclr=51
 	}
@@ -2119,12 +1906,12 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=495
+		y=490
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyMove18PVName"
+		chan="$(P)$(R)EnergyMove38PVName"
 		clr=14
 		bclr=51
 	}
@@ -2135,12 +1922,12 @@ text {
 "text update" {
 	object {
 		x=455
-		y=445
+		y=440
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove16PVDesc"
+		chan="$(P)$(R)EnergyMove36PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -2151,12 +1938,12 @@ text {
 "text update" {
 	object {
 		x=455
-		y=470
+		y=465
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove17PVDesc"
+		chan="$(P)$(R)EnergyMove37PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -2167,12 +1954,12 @@ text {
 "text update" {
 	object {
 		x=455
-		y=495
+		y=490
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove18PVDesc"
+		chan="$(P)$(R)EnergyMove38PVDesc"
 		clr=14
 		bclr=51
 	}
@@ -2183,12 +1970,12 @@ text {
 "text update" {
 	object {
 		x=455
-		y=520
+		y=515
 		width=225
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMove19PVDesc"
+		chan="$(P)$(R)EnergyMove39PVDesc"
 		clr=14
 		bclr=51
 	}

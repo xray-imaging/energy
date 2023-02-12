@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams2/FAST/epics/synApps/support/energy/saveEnergyApp/op/adl/saveEnergy.adl"
+	name="/home/beams2/FAST/epics/synApps/support/energy/energyApp/op/adl/energy.adl"
 	version=030111
 }
 display {
@@ -512,7 +512,7 @@ text {
 	}
 	display[0] {
 		label="EnergyUpdate"
-		name="saveEnergyUpdate.adl"
+		name="energyUpdate.adl"
 		args="P=$(P),R=$(R)"
 	}
 	clr=14
@@ -561,7 +561,7 @@ composite {
 			}
 			display[0] {
 				label="Epics PV Names"
-				name="saveEnergyEPICS_PVs.adl"
+				name="energyEPICS_PVs.adl"
 				args="P=$(P), R=$(R)"
 			}
 			clr=14

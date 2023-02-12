@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams2/FAST/epics/synApps/support/energy/saveEnergyApp/op/adl/energyUpdate.adl"
+	name="/home/beams2/FAST/epics/synApps/support/energy/energyApp/op/adl/energyUpdate.adl"
 	version=030111
 }
 display {

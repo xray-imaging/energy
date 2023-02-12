@@ -1,5 +1,5 @@
 ==========
-saveEnergy
+energy
 ==========
 
 Content
@@ -11,4 +11,4 @@ Content
    about
    usage
    install
-   saveEnergyApp
+   energyApp

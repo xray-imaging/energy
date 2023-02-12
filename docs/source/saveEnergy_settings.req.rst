@@ -1,3 +1,3 @@
-saveEnergy_settings.req
+energy_settings.req
 =======================
-.. literalinclude:: ../../saveEnergyApp/Db/saveEnergy_settings.req
+.. literalinclude:: ../../energyApp/Db/energy_settings.req

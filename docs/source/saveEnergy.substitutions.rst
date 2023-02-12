@@ -1,3 +1,3 @@
-saveEnergy.substitutions
+energy.substitutions
 ========================
-.. literalinclude:: ../../iocBoot/iocSaveEnergy/saveEnergy.substitutions
+.. literalinclude:: ../../iocBoot/iocEnergy/energy.substitutions
