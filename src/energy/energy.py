@@ -2,7 +2,7 @@
 
    Classes
    -------
-   SaveEnergy
+   Energy
      Base class for energy save with EPICS.
 """
 import time

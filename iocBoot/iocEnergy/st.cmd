@@ -5,13 +5,13 @@ epicsEnvSet("R", "Energy:")
 
 ## Register all support components
 
-# Use these lines to run the locally built saveEnergyApp
-dbLoadDatabase "../../dbd/saveEnergyApp.dbd"
-saveEnergyApp_registerRecordDeviceDriver pdbbase
+# Use these lines to run the locally built energyApp
+dbLoadDatabase "../../dbd/energyApp.dbd"
+energyApp_registerRecordDeviceDriver pdbbase
 
 
 
-dbLoadTemplate("saveEnergy.substitutions")
+dbLoadTemplate("energy.substitutions")
 
 < save_restore.cmd
 save_restoreSet_status_prefix($(P))

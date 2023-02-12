@@ -1,4 +1,4 @@
-file "$(TOP)/db/saveEnergy.template"
+file "$(TOP)/db/energy.template"
 {
 pattern
 {  P,      R,     

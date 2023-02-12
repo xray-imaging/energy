@@ -19,4 +19,4 @@ setenv EPICS_DISPLAY_PATH $EPICS_DISPLAY_PATH':'$EPICS_APP_AD/ADApp/op/adl
 setenv EPICS_DISPLAY_PATH $EPICS_DISPLAY_PATH':'$SUPPORT/all_adl
 setenv EPICS_DISPLAY_PATH $EPICS_DISPLAY_PATH':'$EPICS_APP_2BMTS/tomoScanApp/op/adl
 
-medm -x -macro "P=2bm:,R=Energy:,P1=2bmb:,M12=m3,M13=m4,M14=m5,M15=m7,M16=m8,M10=m1,TS=2bmb:,TS_R=TomoScan:" ../../saveEnergyApp/op/adl/saveEnergy.adl &
+medm -x -macro "P=2bm:,R=Energy:,P1=2bmb:,M12=m3,M13=m4,M14=m5,M15=m7,M16=m8,M10=m1,TS=2bmb:,TS_R=TomoScan:" ../../energyApp/op/adl/energy.adl &

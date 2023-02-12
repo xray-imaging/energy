@@ -1,3 +1,3 @@
-saveEnergy.template
+energy.template
 ===================
-.. literalinclude:: ../../saveEnergyApp/Db/saveEnergy.template
+.. literalinclude:: ../../energyApp/Db/energy.template

@@ -1,59 +1,59 @@
 ===============================
-saveEnergyApp EPICS application
+energyApp EPICS application
 ===============================
 
 .. 
    toctree::
    :hidden:
 
-   saveEnergy.template
-   saveEnergy_settings.req
-   saveEnergy.substitutions
+   energy.template
+   energy_settings.req
+   energy.substitutions
 
 
-saveEnergy includes a complete example EPICS application, including:
+energy includes a complete example EPICS application, including:
 
-- A database file and corresponding autosave request file that contain the PVs required by the saveEnergy.py base class.
+- A database file and corresponding autosave request file that contain the PVs required by the energy.py base class.
 - OPI screens for medm
 - An example IOC application that can be used to run the above databases.
   The databases are loaded in the IOC with the example substitutions file, 
-  :doc:`saveEnergy.substitutions`.
+  :doc:`energy.substitutions`.
 
 
 Base class files
 ================
-The following tables list all of the records in the saveEnergy.template file.
-These records are used by the saveEnergy base class and so are required.
+The following tables list all of the records in the energy.template file.
+These records are used by the energy base class and so are required.
 
-saveEnergy.template
+energy.template
 -------------------
 
-This is the database file that contains only the PVs required by the saveEnergy.py base class
-:doc:`saveEnergy.template`.
+This is the database file that contains only the PVs required by the energy.py base class
+:doc:`energy.template`.
 
 
     
 medm files
 ----------
 
-saveEnergy.adl
+energy.adl
 ^^^^^^^^^^^^^^
 
-The following is the MEDM screen :download:`saveEnergy.adl <../../saveEnergyApp/op/adl/saveEnergy.adl>` during a scan. 
+The following is the MEDM screen :download:`energy.adl <../../energyApp/op/adl/energy.adl>` during a scan. 
 The status information is updating.
 
 .. image:: img/energy_01.png
     :width: 75%
     :align: center
 
-saveEnergyEPICS_PVs.adl
+energyEPICS_PVs.adl
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The following is the MEDM screen :download:`saveEnergyEPICS_PVs.adl <../../saveEnergyApp/op/adl/saveEnergyEPICS_PVs.adl>`. 
+The following is the MEDM screen :download:`energyEPICS_PVs.adl <../../energyApp/op/adl/energyEPICS_PVs.adl>`. 
 
 If these PVs are changed tomoscan must be restarted.
 
-.. image:: img/saveEnergyEPICS_PVs.png
+.. image:: img/energyEPICS_PVs.png
     :width: 75%
     :align: center
 
