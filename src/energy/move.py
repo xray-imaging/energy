@@ -50,10 +50,8 @@ def motors(pos_energy_select, params):
                 else:
                     move_status = True
                     log.info('move command: epics_pvs[%s].put(%s) sent to motor' % (key, pos))
-                    # commented for testing
-                    epics_pvs[key].put(pos)
+                    epics_pvs[key].put(pos) # comment when testing
                     time.sleep(.1) 
-
         except KeyError: 
             log.error('PV associated to motor: %s is missing from the pre-set positon. This motor will not moved' % epics_pvs[key].pvname)
     
@@ -72,21 +70,20 @@ def motors(pos_energy_select, params):
     log.info('motion completed')
     log.info('open shutter')
     if params.testing:
-        log.warning('     *** testing mode: A-shutter will be open at the end of the energy change')
+        log.warning('     *** testing mode: shutter will be open at the end of the energy change')
     else:
-        log.warning('opening A-shutter')
+        log.warning('opening shutter')
         open_frontend_shutter(epics_pvs)
 
     return move_status
 
 
 def open_frontend_shutter(epics_pvs):
-    """Opens the shutters to collect flat fields or projections.
+    """Opens the shutters.
 
     This does the following:
 
-    - Checks if we are in testing mode. If we are, do nothing else opens the 2-BM front-end shutter.
-
+    - Checks if we are in testing mode. If we are, do nothing else opens the shutter.
     """
     if not epics_pvs['OpenShutter'] is None:
         pv = epics_pvs['OpenShutter']
@@ -112,15 +109,7 @@ def wait_frontend_shutter_open(epics_pvs, timeout=-1):
     ----------
     timeout : float
         The maximum number of seconds to wait before raising a ShutterTimeoutError exception.
-
-    Raises
-    ------
-    ScanAbortError
-        If ``abort_scan()`` is called
-    ShutterTimeoutError
-        If the open shutter has not completed within timeout value.
     """
-
     start_time = time.time()
     pv = epics_pvs['OpenShutter']
     value = epics_pvs['OpenShutterValue'].get(as_string=True)
@@ -143,26 +132,18 @@ def wait_frontend_shutter_open(epics_pvs, timeout=-1):
                exit()
 
 def close_frontend_shutter(epics_pvs):
-    """Closes the shutters to collect dark fields.
+    """Closes the shutters.
     This does the following:
 
-    - Closes the 2-BM front-end shutter.
-
+    - Checks if we are in testing mode. If we are, do nothing else closes the shutter.
     """
-    # if epics_pvs['Testing'].get():
-    #     log.warning('In testing mode, so not opening shutters.')
-    # else:
-    if 1==1:
-        # Close 2-BM front-end shutter
-        if not epics_pvs['CloseShutter'] is None:
-            pv = epics_pvs['CloseShutter']
-            value = epics_pvs['CloseShutterValue'].get(as_string=True)
-            status = epics_pvs['ShutterStatus'].get(as_string=True)
-            log.info('shutter status: %s'% status)
-            log.info('close shutter: %s, value: %s'% (pv, value))
-            epics_pvs['CloseShutter'].put(value, wait=True)
-            util.wait_pv(epics_pvs['ShutterStatus'], 0)
-            status = epics_pvs['ShutterStatus'].get(as_string=True)
-            log.info('shutter status: %s' % status)
-
-
+    if not epics_pvs['CloseShutter'] is None:
+        pv = epics_pvs['CloseShutter']
+        value = epics_pvs['CloseShutterValue'].get(as_string=True)
+        status = epics_pvs['ShutterStatus'].get(as_string=True)
+        log.info('shutter status: %s'% status)
+        log.info('close shutter: %s, value: %s'% (pv, value))
+        epics_pvs['CloseShutter'].put(value, wait=True)
+        util.wait_pv(epics_pvs['ShutterStatus'], 0)
+        status = epics_pvs['ShutterStatus'].get(as_string=True)
+        log.info('shutter status: %s' % status)

@@ -36,9 +36,9 @@ def init(params):
     epics_pvs['energy_mode']              = PV(params.energyioc_prefix + 'EnergyMode.VAL')
 
 
-    # These are optional PV to store the motion all done. 
+    # These are optional PV for the motion all done. 
     # These are only used before the open_frontend_shutter() to confirm all motors are done moving
-    # Temporary hardcoded. 
+    # Temporary hardcoded per beamline. 
     if params.beamline == '2bm':
         epics_pvs['AllDoneA']                 = PV('2bma:alldone')
         epics_pvs['AllDoneB']                 = PV('2bmb:alldone')

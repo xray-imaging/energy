@@ -28,8 +28,6 @@ def init(args):
     if not os.path.exists(str(args.config)):
         sections = config.INIT_PARAMS
         config.write(args.config, args=args, sections=sections)
-
-        # config.write(args.config)
         dataio.init_preset(args)
     else:
         log.error("{0} already exists".format(args.config))
@@ -37,7 +35,6 @@ def init(args):
 def run_set(args):
 
     config.log_values(args)
-    # args.mode = "Mono"
     energy_select = np.around(args.energy, decimals=3) 
     energy_lookup = dataio.load_preset(args)
     energy_list = []
