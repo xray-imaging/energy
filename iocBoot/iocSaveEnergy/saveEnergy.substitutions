@@ -1,0 +1,12 @@
+file "$(TOP)/db/saveEnergy.template"
+{
+pattern
+{  P,      R,     
+ENERGY_M0,   ENERGY_M1, ENERGY_M2, ENERGY_M3, ENERGY_M4, ENERGY_M5, ENERGY_M6, ENERGY_M7, ENERGY_M8, ENERGY_M9,  ENERGY_M10,  ENERGY_M11,     
+POS_M0,             
+CLOSE_SHUTTER,        CLOSE_VALUE,        OPEN_SHUTTER,            OPEN_VALUE,      SHUTTER_STATUS}
+{2bm:, Energy:,    
+2bma:M1angl, 2bma:M1avg, 2bma:m25,   2bma:m28, 2bma:m26,   2bma:m27, 2bma:m29,   2bma:m30, 2bma:m31,   2bma:m32, 2bmb:table3.Y, 2bma:m44,   
+2bma:fltr1:select, 
+2bma:A_shutter:close.VAL,      1,         2bma:A_shutter:open.VAL,        1,        PA:02BM:STA_A_FES_OPEN_PL}
+}
