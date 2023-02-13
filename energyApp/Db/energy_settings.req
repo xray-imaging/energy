@@ -23,10 +23,11 @@ $(P)$(R)Filters
 ###############
 # Energy change
 ###############
+$(P)$(R)EnergyArbitrary
 $(P)$(R)EnergyChoice
 $(P)$(R)EnergyInRange
 $(P)$(R)EnergyCalibrationUse
-$(P)$(R)EnergySet
+$(P)$(R)EnergyMove
 $(P)$(R)EnergyTesting
 $(P)$(R)EnergyBusy
 

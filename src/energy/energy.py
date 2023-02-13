@@ -34,9 +34,9 @@ class Energy():
         # Wait 1 second for all PVs to connect
         time.sleep(1)
 
-        for epics_pv in ('EnergySet', 'EnergyMoveSet', 'Energy'):
+        for epics_pv in ('EnergyMove', 'EnergyMoveSet', 'EnergyArbitrary'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
-        for epics_pv in ('EnergySet', 'EnergyMoveSet', 'EnergyBusy'):
+        for epics_pv in ('EnergyMove', 'EnergyMoveSet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
 
         # Start the watchdog timer thread
@@ -54,13 +54,13 @@ class Energy():
         """
 
         print('pv_callback pvName=%s, value=%s, char_value=%s' % (pvname, value, char_value))
-        if (pvname.find('EnergySet') != -1) and (value == 1):
+        if (pvname.find('EnergyMove') != -1) and (value == 1):
             thread = threading.Thread(target=self.energy_change, args=())
             thread.start()       
         elif (pvname.find('EnergyMoveSet') != -1) and (value == 1):
-            thread = threading.Thread(target=self.energy_move_change, args=())
+            thread = threading.Thread(target=self.energy_move_set, args=())
             thread.start()       
-        elif (pvname.find('Energy') != -1):
+        elif (pvname.find('EnergyArbitrary') != -1):
             thread = threading.Thread(target=self.energy_in_range, args=())
             thread.start()
 
@@ -69,7 +69,11 @@ class Energy():
         if self.epics_pvs['EnergyStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
             return
             
-        self.epics_pvs['EnergyStatus'].put('Changing energy')
+        if (self.epics_pvs["EnergyTesting"].get()):
+            self.epics_pvs['EnergyStatus'].put('Changing energy testing')
+        else:
+            self.epics_pvs['EnergyStatus'].put('Changing energy')
+
         self.epics_pvs['EnergyBusy'].put(1)
 
         energy_choice_min = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.ONST').get().split(' ')[1])
@@ -97,13 +101,13 @@ class Energy():
                 time.sleep(2) # for testing
                 self.epics_pvs['EnergyStatus'].put('Done')
                 self.epics_pvs['EnergyBusy'].put(0)   
-                self.epics_pvs['EnergySet'].put(0)
+                self.epics_pvs['EnergyMove'].put(0)
                 return
         if (self.epics_pvs["EnergyTesting"].get()):
             command =  command + ' --testing' 
         
         log.error(command)
-        # subprocess.Popen(command, shell=True)        
+        subprocess.Popen(command, shell=True)        
 
         time.sleep(10)
         log.info('Energy: waiting on motion to complete')
@@ -116,9 +120,9 @@ class Energy():
         time.sleep(2) # for testing
         self.epics_pvs['EnergyStatus'].put('Done')
         self.epics_pvs['EnergyBusy'].put(0)   
-        self.epics_pvs['EnergySet'].put(0)   
+        self.epics_pvs['EnergyMove'].put(0)   
 
-    def energy_move_change(self):
+    def energy_move_set(self):
 
         if self.epics_pvs['EnergyStatus'].get(as_string=True) != 'Done':
             return
@@ -152,7 +156,7 @@ class Energy():
         time.sleep(2) # for testing
         self.epics_pvs['EnergyStatus'].put('Done')
         self.epics_pvs['EnergyBusy'].put(0)   
-        self.epics_pvs['EnergySet'].put(0)   
+        self.epics_pvs['EnergyMove'].put(0)   
 
     def reset_watchdog(self):
         """Sets the watchdog timer to 5 every 3 seconds"""
