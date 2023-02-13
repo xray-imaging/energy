@@ -1,1 +1,1 @@
-medm -x -macro "P=32id:,R=Energy:" ../../energyApp/op/adl/energy.adl &
+medm -x -macro "P=32id:,R=Energy:" ../../energyApp/op/adl/energy_32ID.adl &

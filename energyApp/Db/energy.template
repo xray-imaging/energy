@@ -52,11 +52,6 @@ record(mbbo, "$(P)$(R)EnergyMode")
    field(TWST, "White")
 }
 
-record(stringout, "$(P)$(R)Filters")
-{
-   field(VAL,  "Unknown")
-}
-
 ###############
 # Energy change
 ###############
@@ -66,30 +61,6 @@ record(ao, "$(P)$(R)EnergyArbitrary")
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
     field(PREC, 2)
-}
-
-record(mbbo, "$(P)$(R)EnergyChoice")
-{
-   field(ZRVL, "0")
-   field(ZRST, "Pink 30.00")
-   field(ONVL, "1")
-   field(ONST, "Mono 11.10")
-   field(TWVL, "2")
-   field(TWST, "Mono 14.30")
-   field(THVL, "3")
-   field(THST, "Mono 17.04")
-   field(FRVL, "4")
-   field(FRST, "Mono 18.00")
-   field(FVVL, "5")
-   field(FVST, "Mono 20.00")
-   field(SXVL, "6")
-   field(SXST, "Mono 25.51")
-   field(SVVL, "7")
-   field(SVST, "Mono 30.00")
-   field(EIVL, "8")
-   field(EIST, "Mono 33.1")
-   field(NIVL, "9")
-   field(NIST, "Mono 33.2")
 }
 
 record(bo, "$(P)$(R)EnergyInRange")

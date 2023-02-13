@@ -8,5 +8,15 @@ CLOSE_SHUTTER,        CLOSE_VALUE,        OPEN_SHUTTER,            OPEN_VALUE,  
 {2bm:, Energy:,    
 2bma:M1angl, 2bma:M1avg, 2bma:m25,   2bma:m28, 2bma:m26,   2bma:m27, 2bma:m29,   2bma:m30, 2bma:m31,   2bma:m32, 2bmb:table3.Y, 2bma:m44,   
 2bma:fltr1:select, 
-2bma:A_shutter:close.VAL,      1,         2bma:A_shutter:open.VAL,        1,        PA:02BM:STA_A_FES_OPEN_PL}
+2bma:A_shutter:close.VAL,      1,         2bma:A_shutter:open.VAL,        1,        PA:02BM:STA_A_FES_OPEN_PL
+}
+}
+
+file "$(TOP)/db/energy_2BM.template"
+{
+pattern
+{  P,      R, 
+}
+{32id:, Energy:
+}
 }

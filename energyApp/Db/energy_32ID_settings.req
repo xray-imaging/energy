@@ -1,0 +1,14 @@
+# This file is used by autosave to determine what PVs to save
+# It is also used by txmOptics to determine what PVs to create
+
+# This file contains all of the PVs used by the txmoptics base class.
+
+# Lines that begin with #controlPV are not saved by autosave,
+# but they are used by txmoptics.  
+# These PVs are not saved in the txmoptics configuration file.
+
+###############
+# Energy change
+###############
+
+$(P)$(R)EnergyChoice
