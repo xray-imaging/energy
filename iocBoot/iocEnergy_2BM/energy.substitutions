@@ -17,6 +17,6 @@ file "$(TOP)/db/energy_2BM.template"
 pattern
 {  P,      R, 
 }
-{32id:, Energy:
+{2bm:, Energy:
 }
 }
