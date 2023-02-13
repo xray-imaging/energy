@@ -61,6 +61,13 @@ record(stringout, "$(P)$(R)Filters")
 # Energy change
 ###############
 
+record(ao, "$(P)$(R)EnergyArbitrary") 
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(PREC, 2)
+}
+
 record(mbbo, "$(P)$(R)EnergyChoice")
 {
    field(ZRVL, "0")
@@ -100,7 +107,7 @@ record(mbbo, "$(P)$(R)EnergyCalibrationUse") {
   field(ONST, "Interpolate")
 }
 
-record(busy,"$(P)$(R)EnergySet")
+record(busy,"$(P)$(R)EnergyMove")
 {
    field(ZNAM,"Done")
    field(ZSV, "NO_ALARM")

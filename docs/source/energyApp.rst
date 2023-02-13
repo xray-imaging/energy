@@ -93,7 +93,7 @@ Energy change
   * - $(P)$(R)EnergyCalibrationUse
     - mbbo
     - set to select use of Pre-set or interpolation
-  * - $(P)$(R)EnergySet
+  * - $(P)$(R)EnergyMove
     - busy
     - when set to 1 starts the energy move
   * - $(P)$(R)EnergyTesting
