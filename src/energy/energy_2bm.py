@@ -53,13 +53,13 @@ class Energy2BM(Energy):
             energy_choice_list  = energy_choice.split(' ')
             log.info("Energy: energy choice = %s" % energy_choice)
             if energy_choice_list[0] == 'Pink':
-                command = 'energy pink --force'
+                command = 'energy set --mode Pink --energy ' + energy_choice_list[1] + ' --force'
             else: # Mono
-                command = 'energy set --energy ' + energy_choice_list[1] + ' --force'
+                command = 'energy set --mode Mono --energy ' + energy_choice_list[1] + ' --force'
         else:
             energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
             if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
-                command = 'energy set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
+                command = 'energy set --mode Mono --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
                 self.epics_pvs['EnergyInRange'].put(1)
             else:
                 self.epics_pvs['EnergyStatus'].put('Error: energy out of range')
