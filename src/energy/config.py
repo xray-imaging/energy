@@ -67,9 +67,9 @@ SECTIONS['init'] = {
         'choices': ['None','2bm', '7bm', '8id', '20bm', '29id', '32id']
         },
     'energyioc-prefix':{
-        'default': '32id:TXMOptics:',
+        'default': '32id:Energy:',
         'type': str,
-        'help': "The epics IOC hosting the Energy PV, i.e.'2bm:MCTOptics:' "
+        'help': "The epics IOC hosting the Energy PV, i.e.'2bm:Energy:' "
         },
     'n-move': {
         'default': 16,

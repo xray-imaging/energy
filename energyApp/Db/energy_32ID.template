@@ -1,0 +1,14 @@
+# Database for EPICS PVS for txm optics control
+# This database contains all of the PVs used by the txmoptics base class.
+
+###############
+# Energy change
+###############
+
+record(mbbo, "$(P)$(R)EnergyChoice")
+{
+   field(ZRVL, "0")
+   field(ZRST, "Mono 8.000")
+   field(ONVL, "1")
+   field(ONST, "Mono 8.100")
+}

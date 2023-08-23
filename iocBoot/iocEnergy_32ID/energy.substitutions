@@ -27,3 +27,13 @@ POS_M35,       POS_M36,    POS_M37,   POS_M38,
 32idb:pzt1_volts,          32idcMC:shaker:frequency, 32idcMC:shaker:timePerPoint, 32idcMC:shaker:A:ampMult, 32idcMC:shaker:A:ampOffset, 
 32idcTXM:mcs:c0:m2,        32idc02:m11,              32idb:m27,                   32idcMCS2:c1:m5,
 }
+}
+
+file "$(TOP)/db/energy_32ID.template"
+{
+pattern
+{  P,      R
+}
+{32id:, Energy:
+}
+}

@@ -1,1 +1,3 @@
 file "energy_settings.req", P=$(P), R=$(R)
+file "energy_32ID_settings.req", P=$(P), R=$(R)
+

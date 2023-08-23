@@ -18,13 +18,11 @@
 ####################
 $(P)$(R)Energy
 $(P)$(R)EnergyMode
-$(P)$(R)Filters
 
 ###############
 # Energy change
 ###############
 $(P)$(R)EnergyArbitrary
-$(P)$(R)EnergyChoice
 $(P)$(R)EnergyInRange
 $(P)$(R)EnergyCalibrationUse
 $(P)$(R)EnergyMove
