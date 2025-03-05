@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams2/FAST/epics/synApps/support/energy/energyApp/op/adl/energyUpdate.adl"
+	name="/home/beams/2BMB/epics/synApps/support/energy/energyApp/op/adl/energyUpdate.adl"
 	version=030111
 }
 display {
@@ -109,7 +109,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@tomdet$"
 }
 text {
 	object {
@@ -145,7 +145,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@tomdet$"
 }
 text {
 	object {
@@ -169,7 +169,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@tomdet$"
 }
 text {
 	object {
@@ -193,7 +193,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@tomdet$"
 }
 text {
 	object {
@@ -205,7 +205,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="conda activate energy"
+	textix="conda activate ops"
 }
 text {
 	object {
@@ -229,7 +229,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@tomdet$"
 }
 text {
 	object {
