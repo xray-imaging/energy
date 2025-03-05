@@ -176,3 +176,5 @@ auto_positions.sav*
 #tomoScan products
 .loglogin
 .config
+
+.iocsh_history
