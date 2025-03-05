@@ -54,12 +54,8 @@ def init_pvs(params, pv_prefix='EnergyMove', label='energy move '):
     # These PV host 
     epics_pvs = {}
 
-    if pv_prefix=='EnergyMove':
-        n = params.n_move
-    else:
-        n = params.n_pos 
     s = ''
-    for i in range(n):
+    for i in range(40):
         pv_pv_desc = params.energyioc_prefix + pv_prefix + str(i) + 'PVDesc'
         pv_pv_name = params.energyioc_prefix + pv_prefix + str(i) + 'PVName'
         pv_name    = PV(pv_pv_name).get()

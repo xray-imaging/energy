@@ -1,22 +1,53 @@
 file "$(TOP)/db/energy.template"
 {
 pattern
-{  P,      R,     
-ENERGY_M0,   ENERGY_M1, ENERGY_M2, ENERGY_M3, ENERGY_M4, ENERGY_M5, ENERGY_M6, ENERGY_M7, ENERGY_M8, ENERGY_M9,  ENERGY_M10,  ENERGY_M11, ENERGY_M12, ENERGY_M13,     
-POS_M0,             
-CLOSE_SHUTTER,        CLOSE_VALUE,        OPEN_SHUTTER,            OPEN_VALUE,      SHUTTER_STATUS}
-{2bm:, Energy:,    
-2bma:M1angl, 2bma:M1avg, 2bma:m25,   2bma:m28, 2bma:m26,   2bma:m27, 2bma:m29,   2bma:m30, 2bma:m31,   2bma:m32, 2bmb:table3.Y, 2bma:m44,  2bma:m9, 2bma:m10, 
-2bma:fltr1:select, 
-2bma:A_shutter:close.VAL,      1,         2bma:A_shutter:open.VAL,        1,        PA:02BM:STA_A_FES_OPEN_PL
+{ P,     R,      
+CLOSE_SHUTTER, CLOSE_VALUE,        
+OPEN_SHUTTER,  OPEN_VALUE, SHUTTER_STATUS,        
+ENERGY_M0,  ENERGY_M1,  ENERGY_M2,  ENERGY_M3,  ENERGY_M4, 
+ENERGY_M5,  ENERGY_M6,  ENERGY_M7,  ENERGY_M8,  ENERGY_M9, 
+ENERGY_M10, ENERGY_M11, ENERGY_M12, ENERGY_M13, ENERGY_M14,
+ENERGY_M15, ENERGY_M16, ENERGY_M17, ENERGY_M18, ENERGY_M19,
+ENERGY_M20, ENERGY_M21, ENERGY_M22, ENERGY_M23, ENERGY_M24,
+ENERGY_M25, ENERGY_M26, ENERGY_M27, ENERGY_M28, ENERGY_M29,
+ENERGY_M30, ENERGY_M31, ENERGY_M32, ENERGY_M33, ENERGY_M34,
+ENERGY_M35, ENERGY_M36, ENERGY_M37, ENERGY_M38, ENERGY_M39, 
+
+POS_M0,  POS_M1,  POS_M2,  POS_M3,  POS_M4, 
+POS_M5,  POS_M6,  POS_M7,  POS_M8,  POS_M9, 
+POS_M10, POS_M11, POS_M12, POS_M13, POS_M14,
+POS_M15, POS_M16, POS_M17, POS_M18, POS_M19,
+POS_M20, POS_M21, POS_M22, POS_M23, POS_M24,
+POS_M25, POS_M26, POS_M27, POS_M28, POS_M29,
+POS_M30, POS_M31, POS_M32, POS_M33, POS_M34,
+POS_M35, POS_M36, POS_M37, POS_M38, POS_M39, 
+}
+{2bm:, Energy:,  
+2bma:A_shutter:close.VAL, 1,         
+2bma:A_shutter:open.VAL,  1, PA:02BM:STA_A_FES_OPEN_PL, 
+2bma:M1angl,   2bma:M1avg, 2bma:m25, 2bma:m28, 2bma:m26,
+2bma:m27,      2bma:m29,   2bma:m30, 2bma:m31, 2bma:m32,  
+2bmb:table3.Y, 2bma:m44,   2bma:m9,  2bma:m10, empty, 
+empty,         empty,      empty,    empty,    empty,
+empty,         empty,      empty,    empty,    empty,
+empty,         empty,      empty,    empty,    empty,
+empty,         empty,      empty,    empty,    empty,
+empty,         empty,      empty,    empty,    empty,
+
+2bma:fltr1:select, empty, empty, empty, empty,
+empty,             empty, empty, empty, empty,
+empty,             empty, empty, empty, empty,
+empty,             empty, empty, empty, empty,
+empty,             empty, empty, empty, empty,
+empty,             empty, empty, empty, empty,
+empty,             empty, empty, empty, empty,
+empty,             empty, empty, empty, empty,
 }
 }
 
 file "$(TOP)/db/energy_2BM.template"
 {
 pattern
-{  P,      R, 
-}
-{2bm:, Energy:
-}
+{  P,      R, }
+{2bm:,  Energy: }
 }
