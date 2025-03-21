@@ -59,7 +59,7 @@ def init_pvs(params, pv_prefix='EnergyMove', label='energy move '):
         pv_pv_desc = params.energyioc_prefix + pv_prefix + str(i) + 'PVDesc'
         pv_pv_name = params.energyioc_prefix + pv_prefix + str(i) + 'PVName'
         pv_name    = PV(pv_pv_name).get()
-        if (pv_name != '') and pv_name != None:
+        if (pv_name != '') and pv_name != None and pv_name != 'empty':
             pv_desc = PV(pv_name + '.DESC').get()
             if pv_desc != None:
                 if pv_desc == '' or 'table' in pv_name:

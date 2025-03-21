@@ -48,7 +48,7 @@ You can comment out all of the other modules (ALLENBRADLEY, ALIVE, etc.)
     $ cd ~/epics
     $ ./assemble_synApps.sh --dir=synApps --base=/home/beams/FAST/epics/epics-base
 
-.. warning:: replace /home/beams/FAST/ to the full path to your home directory
+.. warning:: Replace /home/beams/FAST/ to the full path to your home directory
 
 - This will create a synApps/support directory::
 
