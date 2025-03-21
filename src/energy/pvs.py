@@ -7,7 +7,7 @@ from energy import util
 
 def init(params):
 
-    log.info("Inizializing epics PVsxxxx")
+    log.info("Inizializing epics PVs")
     
 
     epics_pvs = {}
