@@ -198,7 +198,7 @@ energyEPICS_PVs.adl
 
 The following is the MEDM screen :download:`energyEPICS_PVs.adl <../../energyApp/op/adl/energyEPICS_PVs.adl>`. 
 
-If these PVs are changed tomoscan must be restarted.
+If these PVs are changed **energy** must be restarted.
 
 .. image:: img/energyEPICS_PVs.png
     :width: 75%
