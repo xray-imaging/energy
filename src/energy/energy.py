@@ -188,7 +188,7 @@ class Energy():
         print('')
         print('controlPVS:')
         for control_pv in self.control_pvs:
-            if self.control_pv[control_pv].connected:
+            if self.control_pvs[control_pv].connected:
                 print(control_pv, ':', self.control_pvs[control_pv].get(as_string=True))
 
         print('')
