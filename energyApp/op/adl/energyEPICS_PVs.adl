@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams2/FAST/epics/synApps/support/energy/energyApp/op/adl/energyEPICS_PVs.adl"
+	name="/home/beams/2BMB/epics/synApps/support/energy/energyApp/op/adl/energyEPICS_PVs.adl"
 	version=030111
 }
 display {
 	object {
-		x=1389
-		y=607
+		x=1379
+		y=599
 		width=1375
 		height=725
 	}
@@ -85,6 +85,17 @@ display {
 		3cb420,
 		289315,
 		1a7309,
+	}
+}
+rectangle {
+	object {
+		x=465
+		y=555
+		width=445
+		height=24
+	}
+	"basic attribute" {
+		clr=2
 	}
 }
 rectangle {
@@ -1192,7 +1203,7 @@ rectangle {
 }
 "message button" {
 	object {
-		x=460
+		x=930
 		y=695
 		width=100
 		height=20
@@ -1822,7 +1833,7 @@ text {
 }
 "related display" {
 	object {
-		x=460
+		x=930
 		y=666
 		width=100
 		height=20
@@ -2189,6 +2200,176 @@ text {
 	}
 	monitor {
 		chan="$(P)$(R)EnergyMove19PVDesc"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=470
+		y=615
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Sync to motor PV 1"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=680
+		y=615
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Sync1PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=680
+		y=640
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Sync2PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=470
+		y=640
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Sync to motor PV 2"
+	align="horiz. right"
+}
+text {
+	object {
+		x=470
+		y=590
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Sync to motor PV 0"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=680
+		y=590
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Sync0PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=470
+		y=665
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Sync to motor PV 3"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=680
+		y=665
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Sync3PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=465
+		y=555
+		width=445
+		height=25
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Sync to motors Process Variables"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=465
+		y=585
+		width=445
+		height=130
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+	}
+}
+text {
+	object {
+		x=470
+		y=690
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Sync to motor PV 4"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=680
+		y=690
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Sync4PVName"
 		clr=14
 		bclr=51
 	}

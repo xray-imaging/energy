@@ -68,6 +68,23 @@ def motors(pos_energy_select, params):
             if epics_pvs['AllDoneA'].get() and epics_pvs['AllDoneB'].get():
                 break
     log.info('motion completed')
+
+    # after motion is completed sync any virtual motor
+    log.info('sync to motors')
+    for key in epics_pvs:
+        if 'sync' in key:
+            if (params.testing):
+                log.warning('     ***  testing mode:  apply sync to motor: %s' % (epics_pvs[key].pvname))
+                time.sleep(.1) 
+            else:
+                log.info('apply sync to motor: %s' % (epics_pvs[key].pvname))
+                try:
+                    epics_pvs[key].put(1)
+                    log.info('>>> sync to motor: %s' % (epics_pvs[key].pvname))
+                except:
+                    log.error('>>> failed sync to motor: %s' % (key))
+                    log.error('>>> PV associated to sync to motor: %s is invalid' % epics_pvs[key].pvname)
+    log.info('sync to motors: done')
     log.info('open shutter')
     if params.testing:
         log.warning('     *** testing mode: shutter will be open at the end of the energy change')
