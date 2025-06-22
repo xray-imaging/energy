@@ -2,8 +2,8 @@
 About
 =====
 
-
 The **energy** is an EPICS IOC tool that allows users to select an X-ray energy and automatically adjust all relevant beamline components accordingly. It supports both pre-calibrated energy values and intermediate values located between two pre-calibrated points. For intermediate values, a subset of motors determines their positions through linear interpolation. Meanwhile, other components, such as filters or table positions, will move to pre-set positions without interpolation.
+
 
 The **energy** tool manages beamline component positioning by organizing motion control PVNames into two categories: "Move" and "Pos."
 

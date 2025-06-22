@@ -72,7 +72,7 @@ class Energy2BM(Energy):
         if (self.epics_pvs["EnergyTesting"].get()):
             command =  command + ' --testing' 
         
-        log.error(command)
+        log.waning(command)
         subprocess.Popen(command, shell=True)        
 
         time.sleep(10)
@@ -100,6 +100,9 @@ class Energy2BM(Energy):
         if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
             command = 'energy set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
             self.epics_pvs['EnergyInRange'].put(1)
+            # Disabled for now
+            # log.waning(command)
+            # subprocess.Popen(command, shell=True)    
         else:
             self.epics_pvs['EnergyStatus'].put('Error: energy out of range')
             self.epics_pvs['EnergyInRange'].put(0)

@@ -182,14 +182,17 @@ class Energy():
 
         print('configPVS:')
         for config_pv in self.config_pvs:
-            print(config_pv, ':', self.config_pvs[config_pv].get(as_string=True))
+            if self.config_pvs[config_pv].connected:
+                print(config_pv, ':', self.config_pvs[config_pv].get(as_string=True))
 
         print('')
         print('controlPVS:')
         for control_pv in self.control_pvs:
-            print(control_pv, ':', self.control_pvs[control_pv].get(as_string=True))
+            if self.control_pvs[control_pv].connected:
+                print(control_pv, ':', self.control_pvs[control_pv].get(as_string=True))
 
         print('')
         print('pv_prefixes:')
         for pv_prefix in self.pv_prefixes:
-            print(pv_prefix, ':', self.pv_prefixes[pv_prefix])
+            if self.pv_prefixes[config_pv].connected:
+                print(pv_prefix, ':', self.pv_prefixes[pv_prefix])

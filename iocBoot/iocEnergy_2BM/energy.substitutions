@@ -21,6 +21,8 @@ POS_M20, POS_M21, POS_M22, POS_M23, POS_M24,
 POS_M25, POS_M26, POS_M27, POS_M28, POS_M29,
 POS_M30, POS_M31, POS_M32, POS_M33, POS_M34,
 POS_M35, POS_M36, POS_M37, POS_M38, POS_M39, 
+
+SYNC_0, SYNC_1, SYNC_2, SYNC_3, SYNC_4,
 }
 {2bm:, Energy:,  
 2bma:A_shutter:close.VAL, 1,         
@@ -42,6 +44,8 @@ empty,             empty, empty, empty, empty,
 empty,             empty, empty, empty, empty,
 empty,             empty, empty, empty, empty,
 empty,             empty, empty, empty, empty,
+
+2bma:Slit2Vsync.PROC, empty, empty, empty, empty,
 }
 }
 

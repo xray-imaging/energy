@@ -9,7 +9,6 @@ def init(params):
 
     log.info("Inizializing epics PVs")
     
-
     epics_pvs = {}
     # This python tool box relies on the following EPICS PVs served by a different IOC:
     # $(P)$(R)EnergyMoveXPVName (X=0, 1 ...) hosting the PV name of motors that will be used to move to interpolated positions.
@@ -35,6 +34,22 @@ def init(params):
     epics_pvs['energy']                   = PV(params.energyioc_prefix + 'Energy.VAL')
     epics_pvs['energy_mode']              = PV(params.energyioc_prefix + 'EnergyMode.VAL')
 
+    # PV hosting sync to motors PV names. These should be defined for all motors moved directly during an energy change that are also 
+    # accessible from a virtual motor. For example slits motor position.
+    for i in range(5):
+        pv_prefix = 'Sync'
+        pv_pv_name = params.energyioc_prefix + pv_prefix + str(i) + 'PVName'
+        pv_name    = PV(pv_pv_name).get()
+        if (pv_name != '') and pv_name != None and pv_name != 'empty':
+            pv_key = 'sync_' + str(i)
+            pv_val = PV(pv_name)
+            epics_pvs[pv_key] = pv_val
+            log.info('>>> %s connected to PV: %s' % (pv_key, pv_name))
+        else:
+            if pv_name == '':
+                log.warning('>>> PV %s: is not set' % (pv_pv_name))
+            else:
+                log.error('>>> Cannot connect to: %s: %s' % (pv_pv_name, pv_name))
 
     # These are optional PV for the motion all done. 
     # These are only used before the open_frontend_shutter() to confirm all motors are done moving

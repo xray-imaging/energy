@@ -866,3 +866,31 @@ record(stringout, "$(P)$(R)EnergyPos38PVDesc")
 record(stringout, "$(P)$(R)EnergyPos39PVDesc")
 {
 }
+
+###############
+# Sync PV Names
+###############
+record(stringout, "$(P)$(R)Sync0PVName")
+{
+   field(VAL,  "$(SYNC_0)")
+}
+
+record(stringout, "$(P)$(R)Sync1PVName")
+{
+   field(VAL,  "$(SYNC_1)")
+}
+
+record(stringout, "$(P)$(R)Sync2PVName")
+{
+   field(VAL,  "$(SYNC_2)")
+}
+
+record(stringout, "$(P)$(R)Sync3PVName")
+{
+   field(VAL,  "$(SYNC_3)")
+}
+
+record(stringout, "$(P)$(R)Sync4PVName")
+{
+   field(VAL,  "$(SYNC_4)")
+}
