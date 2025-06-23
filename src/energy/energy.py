@@ -86,7 +86,7 @@ class Energy():
         command = 'energy status'
         log.error(command)
         # comment for safe testing
-        # subprocess.Popen(command, shell=True)     
+        subprocess.Popen(command, shell=True)     
         time.sleep(2) # for testing
         self.epics_pvs['EnergyStatus'].put('Done')
         self.epics_pvs['EnergyMoveSet'].put(0)   
