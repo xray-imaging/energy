@@ -73,7 +73,8 @@ class Energy2BM(Energy):
             command =  command + ' --testing' 
         
         log.waning(command)
-        subprocess.Popen(command, shell=True)        
+        # comment for safe testing
+        # subprocess.Popen(command, shell=Trufe)        
 
         time.sleep(10)
         log.info('Energy: waiting on motion to complete')
