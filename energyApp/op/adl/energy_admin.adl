@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams0/2BMB/epics/synApps/support/energy/energyApp/op/adl/energy.adl"
+	name="/home/beams0/2BMB/epics/synApps/support/energy/energyApp/op/adl/energy_admin.adl"
 	version=030111
 }
 display {
 	object {
-		x=1161
-		y=207
+		x=1778
+		y=156
 		width=430
-		height=290
+		height=350
 	}
 	clr=14
 	bclr=4
@@ -89,13 +89,67 @@ display {
 }
 rectangle {
 	object {
-		x=300
-		y=195
-		width=40
+		x=5
+		y=5
+		width=420
+		height=340
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
+	}
+}
+"text entry" {
+	object {
+		x=157
+		y=250
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyArbitrary"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=42
+		y=250
+		width=110
 		height=20
 	}
 	"basic attribute" {
-		clr=20
+		clr=14
+	}
+	textix="Energy"
+	align="horiz. right"
+}
+text {
+	object {
+		x=262
+		y=250
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="keV"
+}
+rectangle {
+	object {
+		x=15
+		y=240
+		width=400
+		height=35
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
 		width=5
 	}
 	"dynamic attribute" {
@@ -104,23 +158,26 @@ rectangle {
 		chan="$(P)$(R)EnergyCalibrationUse.VAL"
 	}
 }
-rectangle {
+"message button" {
 	object {
-		x=5
-		y=5
-		width=420
-		height=280
+		x=315
+		y=315
+		width=100
+		height=20
 	}
-	"basic attribute" {
+	control {
+		chan="$(P)$(R)EnergyMove"
 		clr=14
-		fill="outline"
-		width=5
+		bclr=15
 	}
+	label="Move"
+	press_msg="1"
+	release_msg="0"
 }
 text {
 	object {
-		x=236
-		y=250
+		x=242
+		y=315
 		width=60
 		height=20
 	}
@@ -146,7 +203,6 @@ text {
 		clr=14
 	}
 	textix="Status"
-	align="horiz. right"
 }
 text {
 	object {
@@ -195,7 +251,7 @@ text {
 "text entry" {
 	object {
 		x=157
-		y=140
+		y=135
 		width=200
 		height=20
 	}
@@ -211,20 +267,20 @@ text {
 text {
 	object {
 		x=42
-		y=140
+		y=135
 		width=110
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Manual Filters"
+	textix="Filters"
 	align="horiz. right"
 }
 text {
 	object {
 		x=41
-		y=165
+		y=158
 		width=108
 		height=20
 	}
@@ -237,7 +293,7 @@ text {
 menu {
 	object {
 		x=157
-		y=165
+		y=158
 		width=100
 		height=20
 	}
@@ -247,10 +303,37 @@ menu {
 		bclr=51
 	}
 }
+"choice button" {
+	object {
+		x=157
+		y=180
+		width=250
+		height=25
+	}
+	control {
+		chan="$(P)$(R)EnergyCalibrationUse"
+		clr=14
+		bclr=51
+	}
+	stacking="column"
+}
+text {
+	object {
+		x=42
+		y=183
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Use"
+	align="horiz. right"
+}
 menu {
 	object {
 		x=157
-		y=195
+		y=215
 		width=100
 		height=20
 	}
@@ -262,13 +345,14 @@ menu {
 }
 rectangle {
 	object {
-		x=300
-		y=195
-		width=40
-		height=20
+		x=15
+		y=205
+		width=400
+		height=35
 	}
 	"basic attribute" {
 		clr=62
+		fill="outline"
 		width=5
 	}
 	"dynamic attribute" {
@@ -280,7 +364,7 @@ rectangle {
 text {
 	object {
 		x=42
-		y=195
+		y=215
 		width=110
 		height=20
 	}
@@ -289,6 +373,54 @@ text {
 	}
 	textix="Energy"
 	align="horiz. right"
+}
+text {
+	object {
+		x=262
+		y=215
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="keV"
+}
+text {
+	object {
+		x=307
+		y=250
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=15
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(R)EnergyInRange"
+	}
+	textix="OK"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=307
+		y=250
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(R)EnergyInRange"
+	}
+	textix="Bad"
+	align="horiz. centered"
 }
 "text update" {
 	object {
@@ -310,7 +442,7 @@ text {
 "text update" {
 	object {
 		x=80
-		y=50
+		y=56
 		width=335
 		height=20
 	}
@@ -326,7 +458,7 @@ text {
 text {
 	object {
 		x=15
-		y=50
+		y=56
 		width=60
 		height=20
 	}
@@ -402,7 +534,7 @@ text {
 text {
 	object {
 		x=15
-		y=250
+		y=315
 		width=140
 		height=20
 	}
@@ -414,7 +546,7 @@ text {
 "related display" {
 	object {
 		x=170
-		y=250
+		y=315
 		width=50
 		height=20
 	}
@@ -429,7 +561,7 @@ text {
 rectangle {
 	object {
 		x=15
-		y=225
+		y=290
 		width=205
 		height=20
 	}
@@ -440,7 +572,7 @@ rectangle {
 text {
 	object {
 		x=160
-		y=225
+		y=290
 		width=50
 		height=20
 	}
@@ -450,65 +582,19 @@ text {
 	textix="Setup"
 	align="horiz. centered"
 }
-text {
-	object {
-		x=262
-		y=195
-		width=45
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="keV"
-}
 "message button" {
 	object {
 		x=315
-		y=250
+		y=290
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyMove"
+		chan="$(P)$(R)EnergyMoveSet"
 		clr=14
 		bclr=15
 	}
-	label="Move"
+	label="Set"
 	press_msg="1"
 	release_msg="0"
-}
-rectangle {
-	object {
-		x=300
-		y=165
-		width=40
-		height=20
-	}
-	"basic attribute" {
-		clr=62
-		width=5
-	}
-	"dynamic attribute" {
-		vis="calc"
-		calc="A==1"
-		chan="$(P)$(R)EnergyTesting.VAL"
-	}
-}
-rectangle {
-	object {
-		x=300
-		y=165
-		width=40
-		height=20
-	}
-	"basic attribute" {
-		clr=20
-		width=5
-	}
-	"dynamic attribute" {
-		vis="calc"
-		calc="A==0"
-		chan="$(P)$(R)EnergyTesting.VAL"
-	}
 }
