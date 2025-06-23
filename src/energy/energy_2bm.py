@@ -75,7 +75,7 @@ class Energy2BM(Energy):
         
         log.warning(command)
         # comment for safe testing
-        subprocess.Popen(command, shell=Trufe)        
+        subprocess.Popen(command, shell=True)        
 
         # remove sleep this is just for --testing option
         time.sleep(5)
