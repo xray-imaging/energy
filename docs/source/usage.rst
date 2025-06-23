@@ -96,17 +96,54 @@ For example to set the beamline to the last energy configuration ::
 GUI
 ===
 
-The beamline x-ray energy change is managed by the `energy cli <https://github.com/xray-imaging/energy>`_ python library. 
+X-ray energy changes at the beamline are managed using the `energy cli <https://github.com/xray-imaging/energy>`_ tool. The user interface offers two modes for adjusting the energy: Pre-set and Interpolate.
 
-.. image:: img/energy_01.png 
+**User Control Screen – Pre-set Mode**
+
+The default Pre-set mode lets you move the beamline to a pre-calibrated energy value:
+
+.. figure:: img/energy_01.png 
    :width: 256px
    :align: center
    :alt: tomo_user
 
-The energy change operates in two modes. The first uses pre-stored energy calibration files. To select this mode select use "Pre-set". Then you can select any available energy from the drop down list.
+   User control screen
 
-Once the desired energy is selected press the "Set" button to move the beamline to the pre-calibrated locations.
+#. Select an energy from the drop-down list.
+#. Click Move to initiate the energy change.
 
-The second mode **interpolate** allows the enter an arbitrary energy value. In this case the new position for all the PVs listed in the **Energy Move** list will be calculated by interpolation between the two closest pre-calibrated positions. The PVs listed in the **Energy Position** list will not be used by the interpolation and these motors will not move.
+This mode ensures all relevant components move to positions corresponding to a pre-defined energy configuration.
+
+
+**Admin Control Screen – Interpolate Mode**
+
+The Interpolate mode, available from the admin control screen, allows you to enter an arbitrary energy value not found in the pre-set list. In this mode:
+
+- Positions for all Process Variables (PVs) listed in the **Energy Move** list are calculated by linear interpolation between the two closest calibrated energy points.
+- PVs in the **Energy Position** list are excluded from the interpolation and will not be moved.
+
+.. figure:: img/energy_02.png
+    :width: 40%
+    :align: center
+
+    Admin control screen
+
+**Configuration Screen**
+
+A separate configuration screen allows administrators to manage which PVs are affected during an energy change:
+
+- You can add or remove PVs from the Energy Move list.
+- Shutter control PVs can be configured.
+- The **Sync to Motor** list allows you to define virtual motors that will automatically synchronize after each energy change.
+
+.. figure:: img/energy_03.png
+    :width: 75%
+    :align: center
+
+    Setup configuration screen
+
+.. warning:: If the above PVs are changed **energy** python server must be restarted.
+
+
 
 

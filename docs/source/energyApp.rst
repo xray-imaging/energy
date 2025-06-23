@@ -194,28 +194,34 @@ Sync PV Names
     - stringout
     - Contains the name of the sync to motor PV that will be set to 1 at the end of an energy change.
 
-medm files
-----------
+GUI
+===
 
-energyEPICS_PVs.adl
-^^^^^^^^^^^^^^^^^^^
+The following are MEDM screens to interact with the energy EPICS IOC:
 
-.. figure:: img/energyEPICS_PVs.png
-    :width: 75%
-    :align: center
-
-    Energy change configuration screen
-
-
-.. warning:: If the above PVs are changed **energy** python server must be restarted.
-
-
-energy.adl
-^^^^^^^^^^
 
 .. figure:: img/energy_01.png
     :width: 40%
     :align: center
 
-    Energy change medm screen
+    User control screen
+
+
+.. figure:: img/energy_02.png
+    :width: 40%
+    :align: center
+
+    Admin control screen
+
+.. figure:: img/energy_03.png
+    :width: 75%
+    :align: center
+
+    Setup configuration screen
+
+.. warning:: If the above PVs are changed **energy** python server must be restarted.
+
+
+
+
 
