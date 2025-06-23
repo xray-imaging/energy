@@ -53,7 +53,7 @@ def motors(pos_energy_select, params):
                     epics_pvs[key].put(pos) # comment when testing
                     time.sleep(.1) 
         except KeyError: 
-            log.error('PV associated to motor: %s is missing from the pre-set positon. This motor will not moved' % epics_pvs[key].pvname)
+            log.error('PV associated to motor: %s is missing from the pre-set positon. This motor will not be moved' % epics_pvs[key].pvname)
     
     log.info('     *** all move commands sent to motors')
 

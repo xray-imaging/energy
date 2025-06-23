@@ -72,7 +72,7 @@ def interpolate(energy_select, energies):
                  temp_dict[key] = energies[energy[0]][key] + ((energy_select - energy_low) / (energy_high - energy_low) * (energies[energy[1]][key] - energies[energy[0]][key]))
     
         except KeyError: 
-            log.error('PV associated to motor: %s is missing from the pre-set positon. This motor will not moved' % key)
+            log.error('PV associated to motor: %s is missing from the pre-set positon. This motor will not be moved' % key)
 
     interp_energy_dict["{:.3f}".format(energy_select)] = temp_dict
 
