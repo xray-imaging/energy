@@ -179,28 +179,49 @@ Energy Pos PV Names
     - stringout
     - It is used to store the PV description. If available this will be derived from the EnergyMove0PVName description if not it will be created using the EnergyMove0PVName itself. These PVs will be used as key entry in the dictionary storing the pre-calibrated position for each motor.
 
+Sync PV Names
+~~~~~~~~~~~~~
 
-medm files
-----------
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
 
-energy.adl
-^^^^^^^^^^
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Sync0PVName
+    - stringout
+    - Contains the name of the sync to motor PV that will be set to 1 at the end of an energy change.
 
-The following is the MEDM screen :download:`energy.adl <../../energyApp/op/adl/energy.adl>` during a scan. 
-The status information is updating.
+GUI
+===
 
-.. image:: img/energy_01.png
+The following are MEDM screens to interact with the energy EPICS IOC:
+
+
+.. figure:: img/energy_01.png
+    :width: 40%
+    :align: center
+
+    User control screen
+
+
+.. figure:: img/energy_02.png
+    :width: 40%
+    :align: center
+
+    Admin control screen
+
+.. figure:: img/energy_03.png
     :width: 75%
     :align: center
 
-energyEPICS_PVs.adl
-^^^^^^^^^^^^^^^^^^^
+    Setup configuration screen
 
-The following is the MEDM screen :download:`energyEPICS_PVs.adl <../../energyApp/op/adl/energyEPICS_PVs.adl>`. 
+.. warning:: If the above PVs are changed **energy** python server must be restarted.
 
-If these PVs are changed **energy** must be restarted.
 
-.. image:: img/energyEPICS_PVs.png
-    :width: 75%
-    :align: center
+
+
 
