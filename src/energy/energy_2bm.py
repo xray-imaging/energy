@@ -31,7 +31,6 @@ class Energy2BM(Energy):
         super().__init__(pv_files, macros)
 
     def energy_change(self):
-
         if self.epics_pvs['EnergyStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
             return
             
@@ -41,9 +40,6 @@ class Energy2BM(Energy):
             self.epics_pvs['EnergyStatus'].put('Changing energy')
 
         self.epics_pvs['EnergyBusy'].put(1)
-
-        energy_choice_min = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.ONST').get().split(' ')[1])
-        energy_choice_max = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.NIST').get().split(' ')[1])
 
         if self.epics_pvs["EnergyCalibrationUse"].get(as_string=True) == "Pre-set":
             self.epics_pvs['EnergyStatus'].put('Changing energy: using presets')
@@ -57,6 +53,11 @@ class Energy2BM(Energy):
             else: # Mono
                 command = 'energy set --mode Mono --energy ' + energy_choice_list[1] + ' --force'
         else:
+            # Important: you must adjust the energy_choice_max to match the cardinal location of the last energy listed
+            # in the drop box list e.g. FRST = 4th; NIST = 9th
+            energy_choice_min = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.ONST').get().split(' ')[1])
+            energy_choice_max = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.FRST').get().split(' ')[1])
+
             energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
             if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
                 command = 'energy set --mode Mono --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
@@ -72,11 +73,12 @@ class Energy2BM(Energy):
         if (self.epics_pvs["EnergyTesting"].get()):
             command =  command + ' --testing' 
         
-        log.waning(command)
+        log.warning(command)
         # comment for safe testing
         # subprocess.Popen(command, shell=Trufe)        
 
-        time.sleep(10)
+        # remove sleep this is just for --testing option
+        time.sleep(5)
         log.info('Energy: waiting on motion to complete')
         while True:
             time.sleep(.3)
@@ -84,7 +86,7 @@ class Energy2BM(Energy):
                 break
         log.info('motion completed')
 
-        time.sleep(2) # for testing
+        # time.sleep(2) # for testing
         self.epics_pvs['EnergyStatus'].put('Done')
         self.epics_pvs['EnergyBusy'].put(0)   
         self.epics_pvs['EnergyMove'].put(0)   

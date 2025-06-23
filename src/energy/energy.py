@@ -32,7 +32,7 @@ class Energy():
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
         # Wait 1 second for all PVs to connect
-        time.sleep(1)
+        time.sleep(2)
 
         for epics_pv in ('EnergyMove', 'EnergyMoveSet', 'EnergyArbitrary'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
@@ -46,14 +46,14 @@ class Energy():
         self.epics_pvs['EnergyStatus'].put('Done')
 
         log.setup_custom_logger("./energy.log")
-        print("./energy.log")
+        log.warning("./energy.log")
 
 
     def pv_callback(self, pvname=None, value=None, char_value=None, **kw):
         """Callback function that is called by pyEpics when certain EPICS PVs are changed
         """
 
-        print('pv_callback pvName=%s, value=%s, char_value=%s' % (pvname, value, char_value))
+        log.warning('pv_callback pvName=%s, value=%s, char_value=%s' % (pvname, value, char_value))
         if (pvname.find('EnergyMove') != -1) and (value == 1):
             thread = threading.Thread(target=self.energy_change, args=())
             thread.start()       
@@ -67,6 +67,8 @@ class Energy():
     def energy_change(self):
 
         if self.epics_pvs['EnergyStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
+            log.error('A0')
+
             return
             
         time.sleep(2) # for testing
