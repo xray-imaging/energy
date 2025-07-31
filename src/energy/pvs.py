@@ -51,6 +51,22 @@ def init(params):
             else:
                 log.error('>>> Cannot connect to: %s: %s' % (pv_pv_name, pv_name))
 
+    # PV hosting values you want to store in the energy change json file. These values are not use for any type of motion.
+    for i in range(5):
+        pv_prefix = 'Store'
+        pv_pv_name = params.energyioc_prefix + pv_prefix + str(i) + 'PVName'
+        pv_name    = PV(pv_pv_name).get()
+        if (pv_name != '') and pv_name != None and pv_name != 'empty':
+            pv_key = 'store_' + str(i)
+            pv_val = PV(pv_name)
+            epics_pvs[pv_key] = pv_val
+            log.info('>>> %s connected to PV: %s' % (pv_key, pv_name))
+        else:
+            if pv_name == '':
+                log.warning('>>> PV %s: is not set' % (pv_pv_name))
+            else:
+                log.error('>>> Cannot connect to: %s: %s' % (pv_pv_name, pv_name))
+
     # These are optional PV for the motion all done. 
     # These are only used before the open_frontend_shutter() to confirm all motors are done moving
     # Temporary hardcoded per beamline. 

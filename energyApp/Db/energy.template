@@ -894,3 +894,31 @@ record(stringout, "$(P)$(R)Sync4PVName")
 {
    field(VAL,  "$(SYNC_4)")
 }
+
+################
+# Store PV Names
+################
+record(stringout, "$(P)$(R)Store0PVName")
+{
+   field(VAL,  "$(STORE_0)")
+}
+
+record(stringout, "$(P)$(R)Store1PVName")
+{
+   field(VAL,  "$(STORE_1)")
+}
+
+record(stringout, "$(P)$(R)Store2PVName")
+{
+   field(VAL,  "$(STORE_2)")
+}
+
+record(stringout, "$(P)$(R)Store3PVName")
+{
+   field(VAL,  "$(STORE_3)")
+}
+
+record(stringout, "$(P)$(R)Store4PVName")
+{
+   field(VAL,  "$(STORE_4)")
+}
