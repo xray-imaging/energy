@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams/2BMB/epics/synApps/support/energy/energyApp/op/adl/energyUpdate.adl"
+	name="/home/beams0/2BMB/epics/synApps/support/energy/energyApp/op/adl/energyUpdate.adl"
 	version=030111
 }
 display {
 	object {
-		x=1179
-		y=1322
+		x=1705
+		y=669
 		width=1000
 		height=265
 	}
@@ -101,7 +101,7 @@ text {
 }
 text {
 	object {
-		x=15
+		x=27
 		y=235
 		width=220
 		height=25
@@ -109,7 +109,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="2bmb@tomdet$"
+	textix="(ops) 2bmb@arcturus ~ $"
 }
 text {
 	object {
@@ -125,7 +125,7 @@ text {
 }
 text {
 	object {
-		x=250
+		x=319
 		y=235
 		width=200
 		height=25
@@ -145,7 +145,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="2bmb@tomdet$"
+	textix="[2bmb@arcturus ~]$ "
 }
 text {
 	object {
@@ -161,19 +161,19 @@ text {
 }
 text {
 	object {
-		x=15
-		y=105
+		x=27
+		y=108
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="2bmb@tomdet$"
+	textix="(ops) 2bmb@arcturus ~ $"
 }
 text {
 	object {
-		x=250
+		x=321
 		y=105
 		width=380
 		height=25
@@ -193,11 +193,11 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="2bmb@tomdet$"
+	textix="(base) 2bmb@arcturus ~ $"
 }
 text {
 	object {
-		x=250
+		x=324
 		y=75
 		width=200
 		height=25
@@ -209,31 +209,31 @@ text {
 }
 text {
 	object {
-		x=250
-		y=165
+		x=319
+		y=133
 		width=200
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="energy set --energy 17.00"
+	textix="energy add --mode Mono --energy 20.00"
 }
 text {
 	object {
-		x=15
-		y=165
+		x=27
+		y=136
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="2bmb@tomdet$"
+	textix="(ops) 2bmb@arcturus ~ $"
 }
 text {
 	object {
-		x=641
+		x=715
 		y=106
 		width=170
 		height=25
@@ -245,13 +245,25 @@ text {
 }
 text {
 	object {
-		x=15
-		y=135
+		x=27
+		y=165
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="select in ~/logs the energy configuration file you want to use"
+	textix="(ops) 2bmb@arcturus ~ $"
+}
+text {
+	object {
+		x=319
+		y=162
+		width=200
+		height=25
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="energy set --mode Mono --energy 20.00"
 }
