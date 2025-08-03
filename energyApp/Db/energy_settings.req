@@ -222,3 +222,21 @@ $(P)$(R)EnergyPos36PVDesc
 $(P)$(R)EnergyPos37PVDesc
 $(P)$(R)EnergyPos38PVDesc
 $(P)$(R)EnergyPos39PVDesc
+
+###############
+# Sync PV Names
+###############
+$(P)$(R)Sync0PVName
+$(P)$(R)Sync1PVName
+$(P)$(R)Sync2PVName
+$(P)$(R)Sync3PVName
+$(P)$(R)Sync4PVName
+
+################
+# Store PV Names
+################
+$(P)$(R)Store0PVName
+$(P)$(R)Store1PVName
+$(P)$(R)Store2PVName
+$(P)$(R)Store3PVName
+$(P)$(R)Store4PVName

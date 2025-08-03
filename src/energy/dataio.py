@@ -106,7 +106,7 @@ def add_pos_to_local_preset(args):
     pos_energy_select[args.mode][energy] = {}
 
     for key in epics_pvs:
-        if 'energy_move' in key or 'energy_pos' in key:
+        if 'energy_move' in key or 'energy_pos' in key or 'store' in key:
             if args.testing:
                 pos_energy_select[args.mode][energy][key] = 0.0 
             else:

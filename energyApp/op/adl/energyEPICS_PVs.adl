@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=1369
-		y=591
+		x=1359
+		y=583
 		width=1375
 		height=725
 	}
@@ -1817,8 +1817,8 @@ text {
 }
 "related display" {
 	object {
-		x=930
-		y=695
+		x=1254
+		y=8
 		width=100
 		height=20
 	}
@@ -2354,6 +2354,187 @@ text {
 	}
 	control {
 		chan="$(P)$(R)Sync4PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=922
+		y=555
+		width=445
+		height=24
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=927
+		y=615
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Store PV 1"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1137
+		y=615
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Store1PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1137
+		y=640
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Store2PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=927
+		y=640
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Store PV 2"
+	align="horiz. right"
+}
+text {
+	object {
+		x=927
+		y=590
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Store PV 0"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1137
+		y=590
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Store0PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=927
+		y=665
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Store PV 3"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1137
+		y=665
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Store3PVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=922
+		y=555
+		width=445
+		height=25
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Store Process Variables"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=922
+		y=585
+		width=445
+		height=130
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+	}
+}
+text {
+	object {
+		x=927
+		y=690
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Store PV 4"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1137
+		y=690
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Store4PVName"
 		clr=14
 		bclr=51
 	}
