@@ -89,8 +89,8 @@ def motors(pos_energy_select, params):
     if params.testing:
         log.warning('     *** testing mode: shutter will be open at the end of the energy change')
     else:
-        log.warning('opening shutter')
-        open_frontend_shutter(epics_pvs)
+        log.warning('opening shutter after energy change has been disabled')
+        # open_frontend_shutter(epics_pvs)
 
     return move_status
 
